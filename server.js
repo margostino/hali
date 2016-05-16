@@ -1,9 +1,12 @@
 var TelegramBot = require('node-telegram-bot-api'),
 	ip = require('ip'),
   config = require('./config'),
+  _ = require('underscore'),
   multiline = require('multiline');
 
-var about_me = multiline(function(){/*
+const Wit = require('node-wit').Wit;
+
+const ABOUT_ME = multiline(function(){/*
 Hola, ¿como estás?...
 Mi nombre es Hali!, la primer asistente de la UTN para personas de la UTN.
 Fui contruida por el Grupo de Proyecto Final G501 en el año 2016.
@@ -18,12 +21,116 @@ Cuando te recibas vamos a tomar unas cervezas!!!
 
 */});
 
-var TOKEN = config.token;
-var USER = config.user;
+const NOT_STORY = 'What?!!, Estoy en pleno entrenamiento de tu idioma!, banca un rato o enseñame!!!';
+const TOKEN_TG = config.token_tg;
+const TOKEN_WIT = config.token_wit;
+const USER = config.user;
+
+var response = '';
+
+const firstEntityValue = (entities, entity) => {
+  const val = entities && entities[entity] &&
+    Array.isArray(entities[entity]) &&
+    entities[entity].length > 0 &&
+    entities[entity][0].value
+  ;
+  if (!val) {
+    return null;
+  }
+  return typeof val === 'object' ? val.value : val;
+};
+
+const getIntentValue = (entities, value) => {
+  const val = firstEntityValue(entities, 'intent');
+  return val === value ? val : null;
+};
+
+const updateContext = (context, entities, value) => {
+  const context_value = getIntentValue(entities, value);
+  if (context_value){
+      context[value] = context_value;
+      delete context["not_story"]; 
+  }else{
+      delete context[value];
+      context["not_story"] = NOT_STORY;
+  }
+
+  return context;
+};
+
+const actions = {
+  say(sessionId, context, message, cb) {
+    console.log('boca campeon ' + message);
+    response = message
+    console.log(message);
+    cb();
+  },
+  merge(sessionId, context, entities, message, cb) {    
+    const aula = firstEntityValue(entities, 'aula');
+    if (aula)
+      context.aula = aula;
+    else
+      delete context.aula;
+    
+    context = updateContext(context, entities, "search_departamento");
+    context = updateContext(context, entities, "who");
+    context = updateContext(context, entities, "insulto");
+    context = updateContext(context, entities, "greeting");
+    context = updateContext(context, entities, "greeting_how");
+    context = updateContext(context, entities, "sent_positivo");
+    context = updateContext(context, entities, "sent_negativo");
+    context = updateContext(context, entities, "aula");
+    context = updateContext(context, entities, "query_availability");    
+
+    //console.log("context:  " + JSON.stringify(context));
+    //console.log("entities:  " + JSON.stringify(entities));
+
+    cb(context);
+  },
+  error(sessionId, context, error) {
+    console.log(error.message);
+  },
+  ['isAvailable'](sessionId, context, cb) {
+    // Here should go the api call, e.g.:
+    // context.forecast = apiCall(context.loc)
+    context.availability = 'El aula esta disponible :)';
+    cb(context);
+  },
+  ['fetch-departamento'](sessionId, context, cb) {
+    // Here should go the api call, e.g.:
+    // context.forecast = apiCall(context.loc)
+    context.oficina = '422';
+    cb(context);
+  },
+  ['fetch-curso'](sessionId, context, cb) {
+    // Here should go the api call, e.g.:
+    // context.forecast = apiCall(context.loc)
+    context.aula = '615';
+    cb(context);
+  },
+  ['get-aboutMe'](sessionId, context, cb) {
+    // Here should go the api call, e.g.:
+    // context.forecast = apiCall(context.loc)
+    context.about_me = ABOUT_ME;
+    cb(context);
+  },        
+};
+
+const session = 'hali-session';
+const client = new Wit(TOKEN_WIT, actions);
+const context = {};
+
+/*client.message('hola', context, (error, data) => {
+  if (error) {
+    console.log('Oops! Got an error: ' + error);
+  } else {
+    console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
+  }
+});*/
 
 // Setup polling way
 //var bot = new TelegramBot(TOKEN, {polling: true});
-var bot = new TelegramBot(TOKEN, {polling: {timeout: 1, interval: 100}});
+var bot = new TelegramBot(TOKEN_TG, {polling: {timeout: 1, interval: 100}});
 
 var opts = {
   reply_markup: JSON.stringify(
@@ -43,6 +150,22 @@ console.log("Server [" + ip.address() + "] listening...");
     });
 });*/
 
+/*client.converse(session, "Hola", {}, (error, data) => {
+    if (error) {
+      console.log('Oops! Got an error: ' + error);
+    } else {
+      console.log('Yay, got Wit.ai response dTaaa: ' + JSON.stringify(data));
+    }
+   });*/
+
+/*client.message('Hola', context, (error, data) => {
+  if (error) {
+    console.log('Oops! Got an error: ' + error);
+  } else {
+    console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
+  }
+});*/
+
 // Matches /echo [whatever]
 bot.onText(/\/echo (.+)/, function (msg, match) {
   var fromId = msg.from.id;
@@ -52,8 +175,20 @@ bot.onText(/\/echo (.+)/, function (msg, match) {
 
 // Any kind of message
 bot.on('message', function (msg) {
-  //console.log("Any kind of message");
   var chatId = msg.chat.id;
+  var text = msg.text;
   //console.log(msg);
-  bot.sendMessage(chatId, about_me);
+  //bot.sendMessage(chatId, ABOUT_ME);
+
+  client.runActions(session, text, context, (e, context1) => {
+    if (e) {
+      console.log('Oops! Got an error: ' + e);
+      return;
+    }    
+    //console.log('The session state is now: ' + JSON.stringify(context1));
+    bot.sendMessage(chatId, response);
+  });
+
+
+
 });

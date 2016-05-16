@@ -1,7 +1,7 @@
 {
   "name": "hali",
   "version": "1.0.0",
-  "description": "Hali",  
+  "description": "Hali",
   "main": "server.js",
   "keywords": [
     "wit",
@@ -11,14 +11,15 @@
     "bots",
     "nlp",
     "automation"
-  ],  
+  ],
   "dependencies": {
     "ip": "^1.1.2",
-    "node-telegram-bot-api": "^0.21.1",
     "multiline": "^1.0.2",
     "node-fetch": "^1.5.1",
+    "node-telegram-bot-api": "^0.21.1",
     "node-uuid": "^1.4.7",
-    "underscore": "^1.8.3"    
+    "node-wit": "^3.3.0",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {},
   "scripts": {
