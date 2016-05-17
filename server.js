@@ -60,7 +60,6 @@ const updateContext = (context, entities, value) => {
 
 const actions = {
   say(sessionId, context, message, cb) {
-    console.log('boca campeon ' + message);
     response = message
     console.log(message);
     cb();
