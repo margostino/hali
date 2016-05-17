@@ -47,13 +47,10 @@ const getIntentValue = (entities, value) => {
 
 const updateContext = (context, entities, value) => {
   const context_value = getIntentValue(entities, value);
-  if (context_value){
-      context[value] = context_value;
-      delete context["not_story"]; 
-  }else{
+  if (context_value)
+      context[value] = context_value;      
+  else
       delete context[value];
-      context["not_story"] = NOT_STORY;
-  }
 
   return context;
 };
@@ -61,7 +58,7 @@ const updateContext = (context, entities, value) => {
 const actions = {
   say(sessionId, context, message, cb) {
     response = message
-    console.log(message);
+    //console.log(message);
     cb();
   },
   merge(sessionId, context, entities, message, cb) {    
@@ -81,8 +78,13 @@ const actions = {
     context = updateContext(context, entities, "aula");
     context = updateContext(context, entities, "query_availability");    
 
-    //console.log("context:  " + JSON.stringify(context));
-    //console.log("entities:  " + JSON.stringify(entities));
+    console.log("context:  " + JSON.stringify(context));
+    console.log("entities:  " + JSON.stringify(entities));
+
+    if (Object.keys(context).length>1)
+      delete context["not_story"];
+    else
+      context["not_story"] = NOT_STORY;
 
     cb(context);
   },
