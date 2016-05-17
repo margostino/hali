@@ -91,7 +91,7 @@ const actions = {
   error(sessionId, context, error) {
     console.log(error.message);
   },
-  ['isAvailable'](sessionId, context, cb) {
+  ['get-availability'](sessionId, context, cb) {
     // Here should go the api call, e.g.:
     // context.forecast = apiCall(context.loc)
     context.availability = 'El aula esta disponible :)';
