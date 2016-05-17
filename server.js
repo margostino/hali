@@ -178,7 +178,7 @@ bot.onText(/\/echo (.+)/, function (msg, match) {
 bot.on('message', function (msg) {
   var chatId = msg.chat.id;
   var text = msg.text;
-  //console.log(msg);
+  console.log("Mensaje: " + msg.text);
   //bot.sendMessage(chatId, ABOUT_ME);
 
   client.runActions(session, text, context, (e, context1) => {
