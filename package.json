@@ -18,7 +18,6 @@
     "emojize": "^0.2.0",
     "google": "^2.0.0",
     "ip": "^1.1.2",
-    "is-emoji-keyword": "^1.0.1",
     "is-standard-emoji": "^1.0.0",
     "multiline": "^1.0.2",
     "node-datetime": "^1.0.0",
