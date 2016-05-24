@@ -1,9 +1,10 @@
 var TelegramBot = require('node-telegram-bot-api'),
+	_ = require('underscore'),
 	app_cfg = require('../config/app'),
 	logger_wit = require('node-wit').Logger;
 	levels = require('node-wit').logLevels;
 	node_wit = require('node-wit').Wit,
-	emojize = require('emojize');
+	emojize = require('emojize').emojize;
 
 /*var opts = {
   reply_markup: JSON.stringify(

@@ -5,9 +5,11 @@ var _ = require('underscore'),
 	logger_wit = require('node-wit').Logger;
 	levels = require('node-wit').logLevels;
 	Wit = require('node-wit').Wit,
-	logger = require('./logger');
+	logger = require('./logger'),
+	hash = require('object-hash');  
 
 const TOKEN = app_cfg.token_wit;
+const context = {};
 const client = (actions) =>{
 		return new Wit(TOKEN, actions)
 };
@@ -26,7 +28,10 @@ const matchContext = (context) => {
 	  return hit;
 };
 
+const session = hash(app_cfg.session);
+
 var wit = {	
+	session: session,
 	logger: new logger_wit(levels.DEBUG),
 	interactive: (actions) => {
 		client(actions).interactive();
@@ -88,15 +93,10 @@ var wit = {
 
 	  return context;
 	},			
-	runActions: (chatId, message) => {
+	runActions: (actions, chatId, message, fn) => {
 	  console.log("Ejecuta Wit.ai");
-	  CLIENT.runActions(session_wit, message, context, (error, context1) => {
-	        if (error) {
-	          console.log('Oops! Got an error: ' + error);          
-	          bot.sendMessage(chatId, entity.NOT_STORY);  
-	        } else {
-	          bot.sendMessage(chatId, response);
-	        }
+	  client(actions).runActions(session, message, context, (error, context1) => {
+	  		fn(error, context1);
 	  });
 	}	
 }

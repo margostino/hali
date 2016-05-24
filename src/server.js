@@ -9,11 +9,9 @@ var ip = require('ip'),
   weather = require('weather-js'),
   isSEmoji = require('is-standard-emoji'),
   unicode = require("emoji-unicode-map"),
-  emoji = require("emoji-dictionary"),
-  hash = require('object-hash'),  
+  emoji = require("emoji-dictionary"),  
   google = require('google');  
 
-var session_wit = hash(app_cfg.session);
 var response = '';
 
 const actions = {
@@ -88,7 +86,7 @@ const actions = {
 };
 
 console.log("Server [" + ip.address() + "] listening...");
-console.log("Session: " + session_wit);
+console.log("Session Wit: " + wit.session);
 
 // Any kind of message
 telegram.on(function (msg) {
@@ -107,7 +105,14 @@ telegram.on(function (msg) {
     message_sanitized = telegram.sanitizeMessage(message);
 
     if (message_sanitized)
-      wit.runActions(chatId, message_sanitized);
+      wit.runActions(actions, chatId, message_sanitized, function(error, context){
+          if (error) {
+            console.log('Oops! Got an error: ' + error);          
+            telegram.sendMessage(chatId, entity.NOT_STORY);  
+          } else {
+            telegram.sendMessage(chatId, response);
+          }        
+      });
     else
       telegram.sendMessage(chatId, message);
 
