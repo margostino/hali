@@ -6,6 +6,7 @@ var ip = require('ip'),
   utils = require('./utils'),
   telegram = require('./telegram'),
   _ = require('underscore'),  
+  logger = require('./logger'),
   weather = require('weather-js'),
   isSEmoji = require('is-standard-emoji'),
   unicode = require("emoji-unicode-map"),
@@ -15,29 +16,30 @@ var ip = require('ip'),
 var response = '';
 
 const actions = {
-  say(sessionId, context, message, cb) {    
+  say(sessionId, context, message, cb) {   
     response = message;    
     cb();
   },
   merge(sessionId, context, entities, message, cb) {  
-
-    console.log("Previous Context:  " + JSON.stringify(context));
+    var chatId = _.has(context, 'chat')? context.chat.id : 'test';    
+    logger.session.info("<Pre> " + logger.genMerge(chatId, context));
+    //console.log("Previous Context:  " + JSON.stringify(context));    
     //Validar pre-contexto con contextos posibles.
     context = wit.validatePreContext(context);    
     //Merge de entidades y contexto actual.
     var current = wit.mergeEntities(entities);
     //Merge pre-contexto con el contexto actual.  
     var pre = wit.mergePreContext(current, context); 
-
-    console.log("Current:  " + JSON.stringify(current));
-    console.log("Merge PreContext:  " + JSON.stringify(pre));
+    //console.log("Current:  " + JSON.stringify(current));
+    //console.log("Merge PreContext:  " + JSON.stringify(pre));
     //Actualizar contexto según match. 
     //Si contexto previo merge con actual match OK, entonces toma ese. Si no verifica match el actual.
     //Caso negativo es un contexto no entrenado 
     context = wit.updateContext(current, pre);
     context["msg_request"] = message; 
-    console.log("New Context:  " + JSON.stringify(context));
-    console.log("Entities:  " + JSON.stringify(entities));       
+    //console.log("New Context:  " + JSON.stringify(context));
+    //console.log("Entities:  " + JSON.stringify(entities));          
+    logger.session.info("<New> " + logger.genMerge(chatId, context));        
     cb(context);
   },
   error(sessionId, context, error) {
@@ -88,6 +90,15 @@ const actions = {
 console.log("Server [" + ip.address() + "] listening...");
 console.log("Session Wit: " + wit.session);
 
+//telegram.sendBroadcast(app_cfg.users, entity_cfg.TESTME, telegram.opts);
+  /*.then(function (sended) {
+    var chatId = sended.chat.id;
+    var messageId = sended.message_id;
+    bot.onReplyToMessage(chatId, messageId, function (message) {
+      console.log('User is %s years old', message.text);
+    });
+});*/
+
 // Any kind of message
 telegram.on(function (msg) {
   var chatId = msg.chat.id;
@@ -98,14 +109,16 @@ telegram.on(function (msg) {
   console.log("Mensaje ID: " + messageId);
   console.log("From: " + from);
   console.log("Chat ID: " + chatId);
-  
+
   if(isSEmoji(message))
     telegram.sendMessage(chatId, message);
   else{
     message_sanitized = telegram.sanitizeMessage(message);
+    var chat = {id:chatId, name:msg.from.first_name};
+    //logger.session.info(logger.genInitial(chat, message_sanitized));
 
     if (message_sanitized)
-      wit.runActions(actions, chatId, message_sanitized, function(error, context){
+      wit.runActions(actions, chat, message_sanitized, function(error, context){
           if (error) {
             console.log('Oops! Got an error: ' + error);          
             telegram.sendMessage(chatId, entity.NOT_STORY);  
@@ -115,7 +128,6 @@ telegram.on(function (msg) {
       });
     else
       telegram.sendMessage(chatId, message);
-
   }
 });
 

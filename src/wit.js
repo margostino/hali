@@ -28,7 +28,7 @@ const matchContext = (context) => {
 	  return hit;
 };
 
-const session = hash(app_cfg.session);
+const session = hash(app_cfg.session, app_cfg.hash);
 
 var wit = {	
 	session: session,
@@ -86,15 +86,16 @@ var wit = {
 	    else if(matchContext(current))
 	          context = current;
 	    else{	      
-	      logger.info("Contexto no entrenado: " + JSON.stringify(current));	      
+	      logger.app.info("Contexto no entrenado: " + JSON.stringify(current));	      
 	      context = {};
 	      context['not_story'] = entity.NOT_STORY;
 	    }
 
 	  return context;
 	},			
-	runActions: (actions, chatId, message, fn) => {
-	  console.log("Ejecuta Wit.ai");
+	runActions: (actions, chat, message, fn) => {
+	  console.log("Ejecuta Wit.ai");	 	  
+	  context['chat']=chat;		  
 	  client(actions).runActions(session, message, context, (error, context1) => {
 	  		fn(error, context1);
 	  });

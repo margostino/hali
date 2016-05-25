@@ -34,6 +34,13 @@ var entity = {
 		Ejemplo: Decime "¿Está disponible el aula Hola cómo estás?", no tiene ningún sentido. 
 	*/}),
 
+	TESTME: multiline(function(){/*
+		Hola crack!!, Ya estoy online de nuevo con algo más de entrenamiento.
+		Cuando tengas tiempo libre testeame. 
+		Y si funciono mal no te quejes que estamos arrancando.
+		Abrazo.
+	*/}),
+
 	GOOGLE_IT: "https://www.google.com.ar/#q=",
 	START: 'Bienvenido!',
 	STOP: 'Hasta pronto!'

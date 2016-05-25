@@ -1,9 +1,6 @@
 var TelegramBot = require('node-telegram-bot-api'),
 	_ = require('underscore'),
 	app_cfg = require('../config/app'),
-	logger_wit = require('node-wit').Logger;
-	levels = require('node-wit').logLevels;
-	node_wit = require('node-wit').Wit,
 	emojize = require('emojize').emojize;
 
 /*var opts = {
@@ -15,12 +12,23 @@ var TelegramBot = require('node-telegram-bot-api'),
 var regEx = new RegExp('(<span class=\"emoji [_]([0-9]*[a-zA-Z]*[0-9]*)*\"><\/span>)*','g');
 const TOKEN = app_cfg.token_tg;
 const bot = new TelegramBot(TOKEN, {polling: {timeout: 1, interval: 100}});
-var telegram = {	
+var telegram = {
+	opts: {
+		reply_markup: JSON.stringify(
+		    {
+		      force_reply: true
+		    })
+	},	
 	on: (fn) => {
 		return bot.on('message', fn);
 	},
-	sendMessage: (chatId, message) => {
-		bot.sendMessage(chatId, message);
+	sendBroadcast: (users, message) => {		
+		_.each(users, function(u){
+			bot.sendMessage(u.id, message);
+		});		
+	},	
+	sendMessage: (user, message) => {		
+		return bot.sendMessage(user, message);
 	},
 	sanitizeMessage: (message) => {
 	  var message_sanitized = message;
