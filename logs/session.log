@@ -1,124 +1,28 @@
-[2016-05-25 16:54:40.191] [INFO] session - 211613276,Martín,hola
-[2016-05-25 16:54:41.663] [INFO] session - <Pre> 211613276:{}
-[2016-05-25 16:54:41.666] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 16:55:00.650] [INFO] session - 211613276,Martín,cuantos años tenes?
-[2016-05-25 16:55:01.697] [INFO] session - <Pre> 211613276:{}
-[2016-05-25 16:55:01.699] [INFO] session - <New> 211613276:{"hali_age":"hali_age","msg_request":"cuantos años tenes?"}
-[2016-05-25 16:57:38.597] [INFO] session - 211613276,Martín,hola
-[2016-05-25 16:57:48.533] [INFO] session - 211613276,Martín,hola
-[2016-05-25 16:57:49.349] [INFO] session - <Pre> 211613276:{}
-[2016-05-25 16:57:49.352] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 16:59:32.238] [INFO] session - 211613276,Martín,hola
-[2016-05-25 16:59:33.110] [INFO] session - <Pre> 211613276:{}
-[2016-05-25 16:59:33.113] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:00:49.227] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:01:00.326] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:01:01.196] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:01:01.198] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:01:38.122] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:01:43.133] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:01:50.211] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:02:00.961] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:02:01.815] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:02:01.817] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:02:13.072] [INFO] session - 211613276,Martín,cuantos años tenes?
-[2016-05-25 17:02:13.710] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:02:13.714] [INFO] session - <New> 211613276:{"not_story":"\t\tHistoria no entrenada. \n\t\tAlgunas preguntas o comentarios no los entiendo todavia, o quizas si,\n\t\tpero esta fuera de contexto y necesito información adicional para entenderte.\n\t\tVerifica que tu consulta se encuentre dentro del contexto correcto.\n\t\tEjemplo: Decime \"¿Está disponible el aula Hola cómo estás?\", no tiene ningún sentido. ","msg_request":"cuantos años tenes?"}
-[2016-05-25 17:07:01.262] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:17:11.624] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:17:49.188] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:17:50.471] [INFO] session - <Pre> 211613276:{"not_story":"\t\tHistoria no entrenada. \n\t\tAlgunas preguntas o comentarios no los entiendo todavia, o quizas si,\n\t\tpero esta fuera de contexto y necesito información adicional para entenderte.\n\t\tVerifica que tu consulta se encuentre dentro del contexto correcto.\n\t\tEjemplo: Decime \"¿Está disponible el aula Hola cómo estás?\", no tiene ningún sentido. ","msg_request":"cuantos años tenes?"}
-[2016-05-25 17:17:50.473] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:18:15.559] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:18:16.838] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:18:16.840] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:21:53.847] [INFO] session - 211613276,Martín,cuantos años tenes?
-[2016-05-25 17:21:54.962] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:21:54.965] [INFO] session - <New> 211613276:{"not_story":"\t\tHistoria no entrenada.","msg_request":"cuantos años tenes?"}
-[2016-05-25 17:23:03.218] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:23:04.868] [INFO] session - <Pre> 211613276:{"not_story":"\t\tHistoria no entrenada.","msg_request":"cuantos años tenes?"}
-[2016-05-25 17:23:04.870] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:23:32.848] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:23:34.493] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:23:34.495] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:23:45.321] [INFO] session - 211613276,Martín,cuantos años tenes?
-[2016-05-25 17:23:46.468] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:23:46.473] [INFO] session - <New> 211613276:{"not_story":"Historia no entrenada.","msg_request":"cuantos años tenes?"}
-[2016-05-25 17:33:55.179] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:33:56.579] [INFO] session - <Pre> 211613276:{"not_story":"Historia no entrenada.","msg_request":"cuantos años tenes?"}
-[2016-05-25 17:33:56.582] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:34:40.397] [INFO] session - 211613276,Martín,cuantos años tenes?
-[2016-05-25 17:34:41.380] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:34:41.385] [INFO] session - <New> 211613276:{"not_story":"Historia no entrenada.","msg_request":"cuantos años tenes?"}
-[2016-05-25 17:40:51.858] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:41:02.983] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:44:33.406] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:45:29.269] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:45:39.557] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:45:40.596] [INFO] session - <Pre> 211613276:{"not_story":"Historia no entrenada.","msg_request":"cuantos años tenes?"}
-[2016-05-25 17:45:40.599] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:47:55.024] [INFO] session - 211613276,Martín,chau
-[2016-05-25 17:47:55.753] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:47:55.758] [INFO] session - <New> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 17:55:54.270] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:55:55.711] [INFO] session - <Pre> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 17:55:55.714] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:56:06.764] [INFO] session - 211613276,Martín,chau
-[2016-05-25 17:56:07.755] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:56:07.759] [INFO] session - <New> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 17:56:39.069] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:56:40.485] [INFO] session - <Pre> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 17:56:40.488] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:56:44.824] [INFO] session - 211613276,Martín,chau
-[2016-05-25 17:56:45.824] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:56:45.828] [INFO] session - <New> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 17:59:38.938] [INFO] session - 211613276,Martín,hola
-[2016-05-25 17:59:39.792] [INFO] session - <Pre> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 17:59:39.795] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:59:44.941] [INFO] session - 211613276,Martín,chau
-[2016-05-25 17:59:45.593] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 17:59:45.597] [INFO] session - <New> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 18:10:26.428] [INFO] session - 211613276,Martín,hola
-[2016-05-25 18:10:44.433] [INFO] session - 211613276,Martín,chauhola
-[2016-05-25 18:10:49.867] [INFO] session - 211613276,Martín,hola
-[2016-05-25 18:11:23.457] [INFO] session - 211613276,Martín,hola
-[2016-05-25 18:11:24.345] [INFO] session - <Pre> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 18:11:24.348] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 18:14:13.952] [INFO] session - 211613276,Martín,chau
-[2016-05-25 18:14:14.579] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 18:14:14.586] [INFO] session - <New> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 18:16:48.924] [INFO] session - 211613276,Martín,hola
-[2016-05-25 18:16:50.341] [INFO] session - <Pre> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 18:16:50.344] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 18:16:56.668] [INFO] session - 211613276,Martín,chau
-[2016-05-25 18:16:57.797] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 18:16:57.801] [INFO] session - <New> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 18:20:14.652] [INFO] session - 211613276,Martín,hola
-[2016-05-25 18:20:45.129] [INFO] session - 211613276,Martín,hola
-[2016-05-25 18:20:46.192] [INFO] session - <Pre> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 18:20:46.194] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 18:20:54.631] [INFO] session - 211613276,Martín,chau
-[2016-05-25 18:20:55.499] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 18:20:55.506] [INFO] session - <New> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 18:21:26.909] [INFO] session - 211613276,Martín,hola
-[2016-05-25 18:21:27.950] [INFO] session - <Pre> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 18:21:27.952] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 18:21:36.706] [INFO] session - 211613276,Martín,chau
-[2016-05-25 18:21:37.582] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 18:21:37.588] [INFO] session - <New> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 18:24:43.624] [INFO] session - 211613276,Martín,hola
-[2016-05-25 18:24:44.865] [INFO] session - <Pre> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 18:25:25.264] [INFO] session - 211613276,Martín,hola
-[2016-05-25 18:25:26.102] [INFO] session - <Pre> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 18:25:26.106] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 18:25:30.299] [INFO] session - 211613276,Martín,chau
-[2016-05-25 18:25:30.968] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 18:25:30.972] [INFO] session - <New> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 18:28:25.032] [INFO] session - 211613276,Martín,hola
-[2016-05-25 18:32:43.528] [INFO] session - 211613276,Martín,chauhola
-[2016-05-25 18:34:40.020] [INFO] session - 211613276,Martín,hola
-[2016-05-25 18:34:41.445] [INFO] session - <Pre> 211613276:{"not_story":"Historia no entrenada.","msg_request":"chau"}
-[2016-05-25 18:34:41.448] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 18:34:49.391] [INFO] session - 211613276,Martín,chau
-[2016-05-25 18:34:50.577] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
-[2016-05-25 18:34:50.579] [INFO] session - <New> 211613276:{"bye":"bye","msg_request":"chau"}
+[2016-05-25 18:38:43.082] [INFO] session - 211613276,Martín,hola
+[2016-05-25 18:38:43.973] [INFO] session - 225743783,Damián,Cuantos años tenés?
+[2016-05-25 18:38:44.199] [INFO] session - <Pre> 225743783:{"who":"who","msg_request":"Quien sos"}
+[2016-05-25 18:38:44.202] [INFO] session - <New> 225743783:{"greeting":"greeting","msg_request":"hola"}
+[2016-05-25 18:38:44.817] [INFO] session - <Pre> 225743783:{"greeting":"greeting","msg_request":"hola"}
+[2016-05-25 18:38:44.820] [INFO] session - <New> 225743783:{"hali_age":"hali_age","msg_request":"Cuantos años tenés?"}
+[2016-05-25 18:49:15.877] [INFO] session - 211613276,Martín,hola
+[2016-05-25 18:49:17.544] [INFO] session - <Pre> :{}
+[2016-05-25 18:49:17.547] [INFO] session - <New> :{"greeting":"greeting","msg_request":"hola"}
+[2016-05-25 18:49:58.236] [INFO] session - 211613276,Martín,hola
+[2016-05-25 18:50:48.584] [INFO] session - 211613276,Martín,hola
+[2016-05-25 18:50:49.445] [INFO] session - <Pre> :{"greeting":"greeting","msg_request":"hola"}
+[2016-05-25 18:50:49.447] [INFO] session - <New> :{"greeting":"greeting","msg_request":"hola"}
+[2016-05-25 18:50:57.832] [INFO] session - 211613276,Martín,chau
+[2016-05-25 18:50:58.496] [INFO] session - <Pre> :{"greeting":"greeting","msg_request":"hola"}
+[2016-05-25 18:50:58.498] [INFO] session - <New> :{"bye":"bye","msg_request":"chau"}
+[2016-05-25 18:51:09.817] [INFO] session - 211613276,Martín,hola
+[2016-05-25 18:51:10.482] [INFO] session - <Pre> :{"bye":"bye","msg_request":"chau"}
+[2016-05-25 18:51:10.485] [INFO] session - <New> :{"greeting":"greeting","msg_request":"hola"}
+[2016-05-25 18:51:15.896] [INFO] session - 211613276,Martín,como estas?
+[2016-05-25 18:51:16.600] [INFO] session - <Pre> :{"greeting":"greeting","msg_request":"hola"}
+[2016-05-25 18:51:16.602] [INFO] session - <New> :{"greeting":"greeting","msg_request":"como estas?"}
+[2016-05-25 18:52:39.253] [INFO] session - 211613276,Martín,como estas
+[2016-05-25 18:52:39.936] [INFO] session - <Pre> :{"greeting":"greeting","msg_request":"como estas?"}
+[2016-05-25 18:52:39.937] [INFO] session - <New> :{"greeting_how":"greeting_how","msg_request":"como estas"}
+[2016-05-25 18:53:07.875] [INFO] session - 211613276,Martín,Hola como estas
+[2016-05-25 18:53:08.530] [INFO] session - <Pre> :{"greeting_how":"greeting_how","msg_request":"como estas"}
+[2016-05-25 18:53:08.532] [INFO] session - <New> :{"greeting":"greeting","greeting_how":"greeting_how","msg_request":"Hola como estas"}

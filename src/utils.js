@@ -25,6 +25,9 @@ var utils = {
             
       fn(temperature + "\r\n" + low + "\r\n" + high + "\r\n" + skytext);     
     });
+  },
+  getChatId: (session) => {
+    return session.split('==')[1];
   }
 }
 

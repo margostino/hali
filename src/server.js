@@ -24,7 +24,8 @@ const actions = {
     cb();
   },
   merge(sessionId, context, entities, message, cb) {  
-    var chatId = _.has(context, '_chat')? context._chat.id : 'test';    
+    
+    var chatId = utils.getChatId(sessionId)
         
     redis.get(chatId, function(err,value){
       if(value){
@@ -34,11 +35,9 @@ const actions = {
 
       logger.session.info("<Pre> " + logger.genMerge(chatId, context));      
       context = wit.validatePreContext(context);  
-      console.log('howaaa: ' + JSON.stringify(context));            
       var current = wit.mergeEntities(entities);  
       console.log("Current:  " + JSON.stringify(current));
       var pre = wit.mergePreContext(current, context);    
-      console.log("Current2:  " + JSON.stringify(current));  
       console.log("Merge PreContext:  " + JSON.stringify(pre));
       context = wit.updateContext(current, pre);
       context["msg_request"] = message; 
@@ -119,17 +118,15 @@ telegram.on(function (msg) {
   console.log("From: " + from);
   console.log("Chat ID: " + chatId);
 
-  var chat = {id:chatId, name:msg.from.first_name};
-  logger.session.info(logger.genInitial(chat, message));
+  logger.session.info(logger.genInitial({id:chatId, name:msg.from.first_name}, message));
   if(isSEmoji(message))
     telegram.sendMessage(chatId, message);
   else{
     message_sanitized = telegram.sanitizeMessage(message);    
     if (message_sanitized)
-      wit.runActions(actions, chat, message_sanitized, function(error, context){
+      wit.runActions(actions, chatId, message_sanitized, function(error, context){
           if (error) {
             console.log('Oops! Got an error: ' + error);
-            console.log('Session: ' + wit.session);             
             telegram.sendMessage(chatId, entity.NOT_STORY);  
           } else {
             telegram.sendMessage(chatId, response);

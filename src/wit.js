@@ -99,10 +99,9 @@ var wit = {
 
 	  return ctx;
 	},			
-	runActions: (actions, chat, message, fn) => {
-	  console.log("Ejecuta Wit.ai");	 	  
-	  context['_chat']=chat;	
-	  session = session + chat.id;	 
+	runActions: (actions, chatId, message, fn) => {
+	  console.log("Ejecuta Wit.ai");	 	  	
+	  session = session + chatId;	 
 	  client(actions).runActions(session, message, context, (error, context1) => {
 	  		fn(error, context1);
 	  });
