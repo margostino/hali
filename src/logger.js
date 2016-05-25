@@ -1,4 +1,5 @@
-var log4js = require('log4js');
+var log4js = require('log4js'),
+    _ = require('underscore');  
 
 const PATH = './logs/hali.log';
 const PATH_SESSION = './logs/session.log';
@@ -8,13 +9,11 @@ const SESSION = 'session';
 var logger = {
 	app: log4js.getLogger(APP),
 	session: log4js.getLogger('session'),
-  genInitial: (chat,message) => {
-    //hash,chatId,username,message
-    return chat.session + "," + chat.id + "," + chat.name + "," + message;
+  genInitial: (chat,message) => {    
+    return chat.id + "," + chat.name + "," + message;
   },
-  genMerge: (session,context) => {
-    //hash,chatId,username,message
-    return session + ":" + JSON.stringify(context);
+  genMerge: (session,context) => {   
+    return session + ":" + JSON.stringify(_.omit(context, '_chat'));
   }
 }
 

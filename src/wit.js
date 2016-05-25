@@ -8,6 +8,7 @@ var _ = require('underscore'),
 	logger = require('./logger'),
 	hash = require('object-hash');  
 
+const session = hash(app_cfg.session, app_cfg.hash);
 const TOKEN = app_cfg.token_wit;
 const context = {};
 const client = (actions) =>{
@@ -27,8 +28,6 @@ const matchContext = (context) => {
 	  
 	  return hit;
 };
-
-const session = hash(app_cfg.session, app_cfg.hash);
 
 var wit = {	
 	session: session,
@@ -52,50 +51,58 @@ var wit = {
 
 	  return val;
 	},	
+	//Merge de entidades y contexto actual.
 	mergeEntities: (entities) => {  
-	  var context = {};
+	  var ctx = {};
 	  var keys = _.keys(entities);
 	  _.each(keys, function(entity){      
 	      _.each(entities[entity], function(values){          
 	        if (entity=="intent")
-	          context[values.value] = values.value;
+	          ctx[values.value] = values.value;
 	        else
-	          context[entity] = values.value;          
+	          ctx[entity] = values.value;          
 	      });
 	  });
-	  return context;  
+	  return ctx;  
 	},
+	//Validar pre-contexto con contextos posibles.
 	validatePreContext: (context) => {
 	  if(!matchContext(context))
 	    context = {};
 
 	  return context;
 	},
-	mergePreContext: (current, pre) => {    
+	//Merge pre-contexto con el contexto actual.  
+	mergePreContext: (ctx, pre) => {
+		var current = JSON.parse(JSON.stringify(ctx));		
 	    _.each(_.keys(pre),function(k){
 	      if(k!="msg_request")
 	        current[k]=pre[k];
 	    });
-	       
-	    return current;
+	    return ctx;
 	},
+	/* Actualizar contexto según match. 
+       Si contexto previo merge con actual match OK, entonces toma ese. Si no verifica match el actual.
+       Caso negativo es un contexto no entrenado
+    */ 
 	updateContext: (current, pre) => {
-	    var context = {};
+	    var ctx = {};
 	    if(matchContext(pre))
-	          context = pre;
+	          ctx = pre;
 	    else if(matchContext(current))
-	          context = current;
+	          ctx = current;
 	    else{	      
 	      logger.app.info("Contexto no entrenado: " + JSON.stringify(current));	      
-	      context = {};
-	      context['not_story'] = entity.NOT_STORY;
+	      ctx = {};
+	      ctx['not_story'] = entity.NOT_STORY;
 	    }
 
-	  return context;
+	  return ctx;
 	},			
 	runActions: (actions, chat, message, fn) => {
 	  console.log("Ejecuta Wit.ai");	 	  
-	  context['chat']=chat;		  
+	  context['_chat']=chat;	
+	  session = session + chat.id;	 
 	  client(actions).runActions(session, message, context, (error, context1) => {
 	  		fn(error, context1);
 	  });
