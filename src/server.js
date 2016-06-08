@@ -166,6 +166,5 @@ console.log("Session Wit: " + wit.session);
       console.log('User is %s years old', message.text);
     });
 });*/
-
 //wit.interactive(actions);
 
