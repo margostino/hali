@@ -26,8 +26,12 @@ var utils = {
       fn(temperature + "\r\n" + low + "\r\n" + high + "\r\n" + skytext);     
     });
   },
-  getChatId: (session) => {
-    return session.split('==')[1];
+  getChatId: (session) => { 
+    var id = session.split('==')[1];
+    if(id=='' || _.isUndefined(id))
+        return 'test';
+    else
+        return id;
   }
 }
 

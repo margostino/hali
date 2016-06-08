@@ -23,10 +23,10 @@ const actions = {
     response = message;    
     cb();
   },
-  merge(sessionId, context, entities, message, cb) {  
+  merge(sessionId, context, entities, message, cb) {      
     
     var chatId = utils.getChatId(sessionId)
-        
+
     redis.get(chatId, function(err,value){
       if(value){
         console.log("Previous Context:  " + value); 
@@ -68,7 +68,7 @@ const actions = {
     cb(context);
   },
   ['get-aboutMe'](sessionId, context, cb) {    
-    context.about_me = ABOUT_ME;
+    context.about_me = entity_cfg.ABOUT_ME;
     cb(context);
   },
   ['get-skills'](sessionId, context, cb) {
@@ -84,7 +84,7 @@ const actions = {
     cb(context);
   }, 
   ['google-it'](sessionId, context, cb){    
-    context.results=GOOGLE_IT;
+    context.results = entity_cfg.GOOGLE_IT;
     cb(context);    
   },    
   ['get-weather'](sessionId, context, cb) {
@@ -92,7 +92,12 @@ const actions = {
       context.weather_today = w;
       cb(context);        
     });    
-  },  
+  },
+  ['start-auth'](sessionId, context, cb) {
+      var token = context['msg_request'].split(' ')[1];
+      context.status = 'OK';
+      cb(context);            
+  },    
 };
 
 redis.on("error", function (err) {
@@ -119,25 +124,38 @@ telegram.on(function (msg) {
   console.log("Chat ID: " + chatId);
 
   logger.session.info(logger.genInitial({id:chatId, name:msg.from.first_name}, message));
-  if(isSEmoji(message))
-    telegram.sendMessage(chatId, message);
-  else{
-    message_sanitized = telegram.sanitizeMessage(message);    
-    if (message_sanitized)
-      wit.runActions(actions, chatId, message_sanitized, function(error, context){
-          if (error) {
-            console.log('Oops! Got an error: ' + error);
-            telegram.sendMessage(chatId, entity.NOT_STORY);  
-          } else {
-            telegram.sendMessage(chatId, response);
-          }        
-      });
-    else
-      telegram.sendMessage(chatId, message);
-  }
+  var message_hash = hash({chatId:chatId, session:wit.session, message:message}, app_cfg.hash);
+
+  redis.get(message_hash, function(error,value){
+      if(value){
+          console.log('Response cached: ' + value);
+          telegram.sendMessage(chatId,value);
+      }else{
+        if(isSEmoji(message)){
+          telegram.sendMessage(chatId, message);
+          redis.set(message_hash,message);
+        }else{
+          message_sanitized = telegram.sanitizeMessage(message);    
+          if (message_sanitized)
+            wit.runActions(actions, chatId, message_sanitized, function(error, context){
+                if (error) {
+                  console.log('Oops! Got an error: ' + error);
+                  telegram.sendMessage(chatId, entity.NOT_STORY);  
+                } else {
+                  telegram.sendMessage(chatId, response);
+                  redis.set(message_hash,response);
+                }        
+            });
+          else{
+            telegram.sendMessage(chatId, message);
+            redis.set(message_hash,message);
+          }
+        }
+      }
+  });
 });  
 
-//console.log("Server [" + ip.address() + "] listening...");
+console.log("Server [" + ip.address() + "] listening...");
 console.log("Session Wit: " + wit.session);
 
 //telegram.sendBroadcast(app_cfg.users, entity_cfg.TESTME, telegram.opts);

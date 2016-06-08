@@ -8,7 +8,8 @@ var ctx = {
 		  ['who'],['sent_negativo'],['sent_positivo'],['insulto'],
 		  ['aula','query_availability'],['search_departamento','where'],
 		  ['hali_activity'],['about_it'],['google_it'], ['weather'],
-		  ['about_it','hali_activity'],['search_departamento', 'where','especialidad']
+		  ['about_it','hali_activity'],['search_departamento', 'where','especialidad'],
+		  ['start']
 	],
 	weather: {
 		area: 'Capital Federal, Buenos Aires',
