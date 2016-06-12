@@ -19,6 +19,7 @@
     "google": "^2.0.0",
     "ip": "^1.1.2",
     "is-standard-emoji": "^1.0.0",
+    "mocha": "^2.5.3",
     "multiline": "^1.0.2",
     "node-datetime": "^1.0.0",
     "node-fetch": "^1.5.1",
@@ -26,6 +27,7 @@
     "node-uuid": "^1.4.7",
     "node-wit": "^3.3.0",
     "object-hash": "^1.1.2",
+    "q": "^1.4.1",
     "queue": "^4.0.0",
     "random-js": "^1.0.8",
     "redis": "^2.6.0-2",
@@ -36,7 +38,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "find ./test -name 'test*.js' | xargs mocha -R spec",
     "start": "node server.js"
   },
   "author": "",

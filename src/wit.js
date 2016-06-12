@@ -1,4 +1,4 @@
-var _ = require('underscore'),	
+var _ = require('underscore'),
 	app_cfg = require('../config/app'),
 	ctx_cfg = require('../config/ctx'),
 	entity = require('../config/entity'),
@@ -6,7 +6,7 @@ var _ = require('underscore'),
 	levels = require('node-wit').logLevels;
 	Wit = require('node-wit').Wit,
 	logger = require('./logger'),
-	hash = require('object-hash');  
+	hash = require('object-hash');
 
 const session = hash(app_cfg.session, app_cfg.hash);
 const TOKEN = app_cfg.token_wit;
@@ -18,18 +18,18 @@ const client = (actions) =>{
 const matchContext = (context) => {
 	  var current = _.without(_.keys(context), 'msg_request');
 	  var hit = false;
-	  _.each(ctx_cfg.contexts, function(c){    
-		    var diff = _.difference(current, c);		    
-		    if (current.length==c.length && _.isEmpty(diff)){      
-		      hit = true;       
+	  _.each(ctx_cfg.contexts, function(c){
+		    var diff = _.difference(current, c);
+		    if (current.length==c.length && _.isEmpty(diff)){
+		      hit = true;
 		      return;
 		    }
 	  });
-	  
+
 	  return hit;
 };
 
-var wit = {	
+var wit = {
 	session: session,
 	logger: new logger_wit(levels.DEBUG),
 	interactive: (actions) => {
@@ -37,33 +37,33 @@ var wit = {
 	},
   	getWeather: (ss) => {
       console.log(ss);
-    },	
+    },
 	getIntentValue: (entities, value) => {
-	  val = null;    
-	  if (entities && entities["intent"] && 
+	  val = null;
+	  if (entities && entities["intent"] &&
 	      Array.isArray(entities["intent"]) &&
 	      entities["intent"].length > 0){
 
-	    var intent = _.findWhere(entities["intent"], {value:value});  
+	    var intent = _.findWhere(entities["intent"], {value:value});
 	    if (!_.isUndefined(intent))
 	      val = intent.value;
 	  }
 
 	  return val;
-	},	
+	},
 	//Merge de entidades y contexto actual.
-	mergeEntities: (entities) => {  
+	mergeEntities: (entities) => {
 	  var ctx = {};
 	  var keys = _.keys(entities);
-	  _.each(keys, function(entity){      
-	      _.each(entities[entity], function(values){          
+	  _.each(keys, function(entity){
+	      _.each(entities[entity], function(values){
 	        if (entity=="intent")
 	          ctx[values.value] = values.value;
 	        else
-	          ctx[entity] = values.value;          
+	          ctx[entity] = values.value;
 	      });
 	  });
-	  return ctx;  
+	  return ctx;
 	},
 	//Validar pre-contexto con contextos posibles.
 	validatePreContext: (context) => {
@@ -72,42 +72,41 @@ var wit = {
 
 	  return context;
 	},
-	//Merge pre-contexto con el contexto actual.  
+	//Merge pre-contexto con el contexto actual.
 	mergePreContext: (ctx, pre) => {
-		var current = JSON.parse(JSON.stringify(ctx));		
+		var current = JSON.parse(JSON.stringify(ctx));
 	    _.each(_.keys(pre),function(k){
 	      if(k!="msg_request")
 	        current[k]=pre[k];
 	    });
 	    return ctx;
 	},
-	/* Actualizar contexto según match. 
+	/* Actualizar contexto según match.
        Si contexto previo merge con actual match OK, entonces toma ese. Si no verifica match el actual.
        Caso negativo es un contexto no entrenado
-    */ 
+    */
 	updateContext: (current, pre) => {
 	    var ctx = {};
 	    if(matchContext(pre))
 	          ctx = pre;
 	    else if(matchContext(current))
 	          ctx = current;
-	    else{	      
-	      logger.app.info("Contexto no entrenado: " + JSON.stringify(current));	      
+	    else{
+	      logger.app.info("Contexto no entrenado: " + JSON.stringify(current));
 	      ctx = {};
 	      ctx['not_story'] = entity.NOT_STORY;
 	    }
 
 	  return ctx;
-	},			
-	runActions: (actions, chatId, message, fn) => {
-	  session = session + chatId;	
-	  console.log("Ejecuta Wit.ai");	 	  		  
-	  console.log('Wit User Session: ' + session); 
-	  client(actions).runActions(session, message, context, (error, context1) => {
+	},
+	runActions: (actions, chatId, message, fn) => {    
+    //session = session + chatId;
+	  console.log("Ejecuta Wit.ai");
+	  console.log('Wit User Session: ' + session);
+	  client(actions).runActions(session + chatId, message, context, (error, context1) => {
 	  		fn(error, context1);
 	  });
-	}	
+	}
 }
 
 module.exports = wit;
-

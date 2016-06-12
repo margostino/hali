@@ -18,31 +18,30 @@ var telegram = {
 		    {
 		      force_reply: true
 		    })
-	},	
-	on: (fn) => {
+	},
+	on: (fn) => {		
 		return bot.on('message', fn);
 	},
-	sendBroadcast: (users, message) => {		
+	sendBroadcast: (users, message) => {
 		_.each(users, function(u){
 			bot.sendMessage(u.id, message);
-		});		
-	},	
-	sendMessage: (user, message) => {		
+		});
+	},
+	sendMessage: (user, message) => {
 		return bot.sendMessage(user, message);
 	},
 	sanitizeMessage: (message) => {
 	  var message_sanitized = message;
 	  var message_converted = emojize(message);
-	  var span = message_converted.match(regEx); 
+	  var span = message_converted.match(regEx);
 	  span = _.filter(span, function(e){return e!=''});
-	  if (span.length>0){              
-	      for (var i = 0; i<span.length; i++)                
-	        message_converted = message_converted.replace(span[i], "").trim();                                
+	  if (span.length>0){
+	      for (var i = 0; i<span.length; i++)
+	        message_converted = message_converted.replace(span[i], "").trim();
 	      message_sanitized = message_converted;
-	  }  
-	  return message_sanitized;    
+	  }
+	  return message_sanitized;
 	}
 }
 
 module.exports = telegram;
-
