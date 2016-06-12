@@ -19,8 +19,11 @@ var telegram = {
 		      force_reply: true
 		    })
 	},
-	on: (fn) => {		
+	on: (fn) => {
 		return bot.on('message', fn);
+	},
+	sendChatAction: (user, message) => {
+		bot.sendChatAction(user, message);
 	},
 	sendBroadcast: (users, message) => {
 		_.each(users, function(u){

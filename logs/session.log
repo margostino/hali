@@ -314,3 +314,18 @@
 [2016-06-12 19:40:42.233] [INFO] session - 211613276,Martín,hola
 [2016-06-12 19:40:43.217] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
 [2016-06-12 19:40:43.219] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-06-12 20:26:55.618] [INFO] session - 211613276,Martín,hola
+[2016-06-12 20:28:44.296] [INFO] session - 211613276,Martín,hola
+[2016-06-12 20:28:45.302] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-06-12 20:28:45.305] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-06-12 20:28:50.951] [INFO] session - 211613276,Martín,hola
+[2016-06-12 20:29:08.570] [INFO] session - 211613276,Martín,hola
+[2016-06-12 20:29:12.155] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-06-12 20:29:12.158] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-06-12 20:29:46.917] [INFO] session - 211613276,Martín,hola
+[2016-06-12 20:29:47.772] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-06-12 20:29:47.775] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-06-12 20:30:03.313] [INFO] session - 211613276,Martín,hola
+[2016-06-12 20:31:25.215] [INFO] session - 211613276,Martín,hola
+[2016-06-12 20:31:26.112] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-06-12 20:31:26.114] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}

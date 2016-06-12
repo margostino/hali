@@ -133,6 +133,7 @@ function fn_bot (msg) {
   logger.session.info(logger.genInitial({id:chatId, name:msg.from.first_name}, message));
   var message_hash = hash({chatId:chatId, session:wit.session, message:message}, app_cfg.hash);
 
+  telegram.sendChatAction(chatId, "typing");
   redis.get(message_hash, function(error,value){
       if(value){
           console.log('Response cached: ' + value);
