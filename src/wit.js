@@ -99,7 +99,7 @@ var wit = {
 
 	  return ctx;
 	},
-	runActions: (actions, chatId, message, fn) => {    
+	runActions: (actions, chatId, message, fn) => {
     //session = session + chatId;
 	  console.log("Ejecuta Wit.ai");
 	  console.log('Wit User Session: ' + session);

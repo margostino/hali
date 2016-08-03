@@ -27,7 +27,6 @@ const actions = {
   merge(sessionId, context, entities, message, cb) {
 
     var chatId = utils.getChatId(sessionId)
-
     redis.get(chatId, function(err,value){
       if(value){
         console.log("Previous Context:  " + value);
@@ -57,6 +56,7 @@ const actions = {
   ['get-availability'](sessionId, context, cb) {
     // Here should go the api call, e.g.:
     // context.forecast = apiCall(context.loc)
+    console.log('vino por aca');
     context.availability = 'El aula esta disponible :)';
     cb(context);
   },
@@ -93,6 +93,10 @@ const actions = {
       context.weather_today = w;
       cb(context);
     });
+  },
+  ['get-info-final'](sessionId, context, cb) {    
+    context.when_where_final = "Lunes 22 de Agosto. 19hs Medrano";
+    cb(context);
   },
   ['start-auth'](sessionId, context, cb) {
       //Se recibe TOKEN de authenticación. Una opción es enviar el token al Sinap y validarlo

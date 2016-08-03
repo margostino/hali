@@ -9,7 +9,7 @@ var ctx = {
 		  ['aula','query_availability'],['search_departamento','where'],
 		  ['hali_activity'],['about_it'],['google_it'], ['weather'],
 		  ['about_it','hali_activity'],['search_departamento', 'where','especialidad'],
-		  ['start']
+		  ['start'],['info_final', 'materia']
 	],
 	weather: {
 		area: 'Capital Federal, Buenos Aires',
