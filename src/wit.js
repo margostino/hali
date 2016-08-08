@@ -29,6 +29,13 @@ const matchContext = (context) => {
 	  return hit;
 };
 
+const getNotStory = (context) => {
+	logger.app.info("Contexto no entrenado: " + JSON.stringify(context));
+	var ctx = {};
+	ctx['not_story'] = entity.NOT_STORY;
+	return ctx;
+};
+
 var wit = {
 	session: session,
 	logger: new logger_wit(levels.DEBUG),
@@ -73,13 +80,15 @@ var wit = {
 	  return context;
 	},
 	//Merge pre-contexto con el contexto actual.
+	//El objetivo es continuar flujos de las historias
 	mergePreContext: (ctx, pre) => {
 		var current = JSON.parse(JSON.stringify(ctx));
 	    _.each(_.keys(pre),function(k){
 	      if(k!="msg_request")
 	        current[k]=pre[k];
 	    });
-	    return ctx;
+
+	    return current;
 	},
 	/* Actualizar contexto según match.
        Si contexto previo merge con actual match OK, entonces toma ese. Si no verifica match el actual.
@@ -91,11 +100,8 @@ var wit = {
 	          ctx = pre;
 	    else if(matchContext(current))
 	          ctx = current;
-	    else{
-	      logger.app.info("Contexto no entrenado: " + JSON.stringify(current));
-	      ctx = {};
-	      ctx['not_story'] = entity.NOT_STORY;
-	    }
+	    else
+	      ctx = getNotStory(current);
 
 	  return ctx;
 	},

@@ -33,7 +33,7 @@ Arriba esas palmas!! Clap clap!
 	Ejemplo: Decime "¿Está disponible el aula Hola cómo estás?", no tiene ningún sentido.
 */
 	NOT_STORY: multiline(function(){/*
-Historia no entrenada.
+No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)
 	*/}),
 	TESTME: multiline(function(){/*
 Hola crack!!, Ya estoy online de nuevo con algo más de entrenamiento.
