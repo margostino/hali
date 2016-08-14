@@ -317,6 +317,7 @@ function fn_bot (msg) {
     var response = multiline(function(){/*
       Si. Podés contactarte con Jose Perez a jperez@utn.frba.edu.ar.
     */});
+    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
     case "El aula Magna esta disponible esta semana a partir de las 19hs?":
     var response = multiline(function(){/*
       Está diponible el Jueves todo el día. ¿Querés reservarla?.
@@ -343,12 +344,12 @@ function fn_bot (msg) {
       Claro, ya estan todos informados.
     */});
     sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Gracias Hali. Por otro lado recordales a todos los alumnos que el Sábado en Campus a las 10hs hay una charla de Big Data.":
+    case "Gracias Hali. Por otro lado recordales a todos los alumnos que el Sábado en Campus a las 10hs hay una charla de Big Data":
     var response = multiline(function(){/*
       Bien les informo. ¿Tienen que anotarse?
     */});
     sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Si. Podés anotarlos vos?":
+    case "Si. Podes anotarlos vos?":
     var response = multiline(function(){/*
       Por supuesto para eso estoy.
     */});
