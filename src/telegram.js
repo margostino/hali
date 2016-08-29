@@ -30,7 +30,7 @@ var telegram = {
 			bot.sendMessage(u.id, message);
 		});
 	},
-	sendMessage: (user, message) => {
+	sendMessage: (user, message) => {		
 		return bot.sendMessage(user, message);
 	},
 	sanitizeMessage: (message) => {

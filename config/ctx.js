@@ -8,8 +8,10 @@ var ctx = {
 		  ['who'],['sent_negativo'],['sent_positivo'],['insulto'],
 		  ['aula','query_availability'],['search_departamento','where'],
 		  ['hali_activity'],['about_it'],['google_it'], ['weather'],
-		  ['about_it','hali_activity'],['search_departamento', 'where','especialidad'],
-		  ['start'],['info_final', 'materia'],['wifi', 'what', 'password']
+		  ['about_it','hali_activity'],['search_departamento','where','especialidad'],
+		  ['start'],['info_final','materia'],['wifi', 'what', 'password'],
+			['property', 'what', 'who'],['where','university'],['send','to','message'],
+			['book','materia','what'],['book','query_availability', 'book_name']
 	],
 	weather: {
 		area: 'Capital Federal, Buenos Aires',

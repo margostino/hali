@@ -42,6 +42,11 @@ Y si funciono mal no te quejes que estamos arrancando.
 Abrazo.
 	*/}),
 
+	LOCATIONS: multiline(function(){/*
+		Medrano 951 (C1179AAQ) C.A.B.A - Tel: (54 11) 4867-7500.
+		Campus: Mozart 2300 (C1407IVT) C.A.B.A. - Tel: (54 11) 4867-7500.
+	*/}),
+
 	GOOGLE_IT: "https://www.google.com.ar/#q=",
 	START: 'Bienvenido!',
 	STOP: 'Hasta pronto!'

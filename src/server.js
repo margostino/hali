@@ -28,7 +28,8 @@ function processMerge(cb, id, context, entities, message){
 }
 
 function processMerge(cb, id, context, entities, message, cached_msg){
-
+console.log("merge entities: " + JSON.stringify(entities));
+console.log("merge message: " + message);
     if(redis){
       console.log("Previous Context:  " + cached_msg);
       context = JSON.parse(cached_msg);
@@ -83,8 +84,36 @@ const actions = {
     context.wifi_password = "invit@do";
     cb(context);
   },
+  get_books(sessionId, context, cb) {
+    context.books_list = "Los libros disponibles: William Stallings 5ta Edición, Abraham Silberschatz.";
+    cb(context);
+  },
+  get_book_status(sessionId, context, cb) {
+    context.book_status = "El libro esta disponible.";
+    cb(context);
+  },
   get_departamento(sessionId, context, cb) {
     context.oficina = "322";
+    cb(context);
+  },
+  get_info_contact(sessionId, context, cb) {
+    context.contact_info = "El mail es jperez@frba.utn.edu.ar";
+    cb(context);
+  },
+  get_info_class(sessionId, context, cb) {
+    context.class_info = "Cursas IA en aula 518 a las 19hs en Medrano.";
+    cb(context);
+  },
+  get_info_exams(sessionId, context, cb) {
+    context.exams_info = "Podes rendir en 2 de Diciembre a las 19hs Campus.";
+    cb(context);
+  },
+  get_locations(sessionId, context, cb) {
+    context.location_info = entity_cfg.LOCATIONS;
+    cb(context);
+  },
+  send_message(sessionId, context, cb) {
+    context.message = "ok";
     cb(context);
   },
   ['get-availability'](sessionId, context, cb) {
@@ -230,6 +259,7 @@ function fn_bot (msg) {
   var message = msg.text;
   var messageId = msg.message_id;
   var from = JSON.stringify(msg.from);
+
   console.log("Mensaje: " + message);
   console.log("Mensaje ID: " + messageId);
   console.log("From: " + from);
@@ -239,7 +269,7 @@ function fn_bot (msg) {
   var message_hash = hash({chatId:chatId, session:wit.session, message:message}, app_cfg.hash);
   telegram.sendChatAction(chatId, "typing");
 
-  /*if (app_cfg.cache_enable)
+  if (app_cfg.cache_enable)
     redis.get(message_hash, function(error,value){
         processMessage(chatId, message, value, message_hash)
           .then(deferred.resolve)
@@ -249,132 +279,7 @@ function fn_bot (msg) {
     processMessage(chatId, message)
       .then(deferred.resolve)
       .fail(deferred.reject);
-  }*/
-
-//Solo para el video
-  switch(message.trim()) {
-    case "Hola, como estás?":
-    sendMessage(chatId, "Hola Juan, estoy muy bien y vos?").then(function(m){deferred.resolve(m);});break;
-    case "Todo bien, quién sos?":
-    sendMessage(chatId, "Soy Hali, tu asistente universitario. ¿en que puedo ayudarte?").then(function(m){deferred.resolve(m);});break;
-    case "Cuando puedo rendir final de Inteligencia Artificial?":
-    sendMessage(chatId, "Juan, tenés 2 fechas disponibles: 3 y 10 de Diciembre").then(function(m){deferred.resolve(m);});break;
-    case "Ya puedo inscribirme?":
-    sendMessage(chatId, "Si. ¿Queres que te inscriba yo?").then(function(m){deferred.resolve(m);});break;
-    case "Si por favor!!!":
-    sendMessage(chatId, "OK. Estas preparado para la primer fecha?").then(function(m){deferred.resolve(m);});break;
-    case "mmm, si, voy a prepararme!!!":
-    sendMessage(chatId, "Perfecto. Ya estas anotado. El comprobante te lo envié a tu email. Recordá que es a las 19hs en Campus").then(function(m){deferred.resolve(m);});break;
-    case "Muchas Gracias":
-    sendMessage(chatId, "De nada. Muchos Éxitos!!!").then(function(m){deferred.resolve(m);});break;
-    case "En que aula es la clase de hoy?":
-    sendMessage(chatId, "Hoy cursas Teoría de Control en el laboratorio Azul. El profe me pidió que les recuerde que tienen parcialito del último tema en clase.").then(function(m){deferred.resolve(m);});break;
-    case "Que vieron la clase pasada?":
-    sendMessage(chatId, "Vieron Régimen transitorio, estabilidad absoluta y relativa.").then(function(m){deferred.resolve(m);});break;
-    case "Gracias por recordarme. Sabes cuándo es el primer parcial?":
-    sendMessage(chatId, "El primer parcial es el 10 de Octubre. Y entran los temas hasta Control de Procesos Dinámicos.").then(function(m){deferred.resolve(m);});break;
-    case "Ok. Que libros hay disponibles acerca de Teoría de Control?":
-    sendMessage(chatId, "Un libro recomendado y muy pedido es Ingeniería de Control de Bolton. ¿Lo reservo?").then(function(m){deferred.resolve(m);});break;
-    case "Si":
-    sendMessage(chatId, "Reservado. Podés retirarlo hasta mañana a las 21hs. Luego quedará disponible para otros interesados").then(function(m){deferred.resolve(m);});break;
-    case "Cómo hago para anotarme a PPS?":
-    sendMessage(chatId, "Tenés que enviar por email el formulario 0 completo a pps@utn.edu.ar y presertarlo en la oficina 318 en Medrano. Los encontrás en: http://sistemas.utn.frba/pps").then(function(m){deferred.resolve(m);});break;
-    case "Otra consulta, de que se trata la electiva de 5to llamada Arquitecturas Concurrentes?":
-    var response = multiline(function(){/*
-      Implementación de Arquitecturas de Software Concurrentes.
-      Distintos modelos y tecnologías que nos ayudan a diseñar aplicaciones concurrentes sin utilizar locking.
-      Paradigma de actores, mensajes asincrónicos, distribución, resiliencia, manejo de errores mediante jerarquías de supervisión, el teorema CAP.
-      OPINION PERSONAL: MUUUUY INTERESANTE.
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Hola Hali!":
-    var response = multiline(function(){/*
-      Hola Patricio! ¿en que puedo ayudarte?
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Podrías avisarle a mis alumnos que suspendo la clase de hoy?":
-    var response = multiline(function(){/*
-      Claro. Querés informar el motivo?
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Si, por supuesto. Estoy con un cuadro febril que me impide asistir":
-    var response = multiline(function(){/*
-      Muy bien Patricio. Ya estan todos informados. Espero que te mejores.
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Gracias. Agregale al mensaje que recuerden que dentro de 2 semanas tienen el examen y entrega de TP":
-    var response = multiline(function(){/*
-      Ok. Ya les recorde a todos.
-      Algunos alumnos quieren saber si en el parcial va a entrar el tema de Redes génicas.
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Si comentales que el tema entra":
-    var response = multiline(function(){/*
-      Ok. Informado.
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Me pasas el email de algún profesor de Inteligencia Artificial?":
-    var response = multiline(function(){/*
-      Si. Podés contactarte con Jose Perez a jperez@utn.frba.edu.ar.
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "El aula Magna esta disponible esta semana a partir de las 19hs?":
-    var response = multiline(function(){/*
-      Está diponible el Jueves todo el día. ¿Querés reservarla?.
-      Comentame el motivo que lo informo y te confirmo en menos de 6 horas.
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Si por favor, reservala con motivo de una charla para alumnos acerca de nuevas arquitecturas genéticas":
-    var response = multiline(function(){/*
-      Excelente. Ya está informado. En breve te confirmo.
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Muchas Gracias":
-    var response = multiline(function(){/*
-      De nada. Estoy para ayudar. Que tengas un buen día.
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Hola Hali":
-    var response = multiline(function(){/*
-      Hola Andrés!, ¿como estás?.
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Bien. Podrías informar a todos los alumnos de Medrano del día de la fecha que la facultad estará cerrada por problemas de energía?":
-    var response = multiline(function(){/*
-      Claro, ya estan todos informados.
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Gracias Hali. Por otro lado recordales a todos los alumnos que el Sábado en Campus a las 10hs hay una charla de Big Data":
-    var response = multiline(function(){/*
-      Bien les informo. ¿Tienen que anotarse?
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Si. Podes anotarlos vos?":
-    var response = multiline(function(){/*
-      Por supuesto para eso estoy.
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Bien. Saludos Hali":
-    var response = multiline(function(){/*
-      Saludos Andrés!
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Hola que tal":
-    var response = multiline(function(){/*
-      Hola Maria, buen día. ¿En que puedo ayudarte?
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Queria saber si en la facu hay actualmente algún equipo de Investigación de Inteligencia Artificial":
-    var response = multiline(function(){/*
-      Maria, en este momento un grupo de egresados tiene la intención de armar un grupo. ¿te interesa?
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    case "Si, podrías pasarme algún contacto?":
-    var response = multiline(function(){/*
-      Si podes contactarte con Matias: mgarcia@gmail.com. Exitos!
-    */});
-    sendMessage(chatId, response).then(function(m){deferred.resolve(m);});break;
-    }
+  }
 
   return deferred.promise;
 };

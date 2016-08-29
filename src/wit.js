@@ -10,6 +10,7 @@ var _ = require('underscore'),
 
 const session = hash(app_cfg.session, app_cfg.hash);
 const TOKEN = app_cfg.token_wit;
+//const TOKEN = app_cfg.token_wit_test;
 const context = {};
 const client = (actions) =>{
 		return new Wit(TOKEN, actions)

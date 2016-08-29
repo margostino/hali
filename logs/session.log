@@ -577,3 +577,365 @@
 [2016-08-08 21:13:39.884] [INFO] session - 211613276,Martín,Hola que tal
 [2016-08-08 21:14:20.328] [INFO] session - 211613276,Martín,Queria saber si en la facu hay actualmente algún equipo de Investigación de Inteligencia Artificial
 [2016-08-08 21:14:42.126] [INFO] session - 211613276,Martín,Si, podrías pasarme algún contacto?
+[2016-08-14 18:43:54.307] [INFO] session - 211613276,Martín,/start vCH1vGWJxfSeofSAs0K5PA
+[2016-08-14 18:44:00.031] [INFO] session - <Pre> 211613276:{}
+[2016-08-14 18:44:00.035] [INFO] session - <New> 211613276:{"start":"start","msg_request":"/start vCH1vGWJxfSeofSAs0K5PA"}
+[2016-08-14 18:44:04.837] [INFO] session - 211613276,Martín,hola
+[2016-08-14 18:44:05.489] [INFO] session - <Pre> 211613276:{"start":"start","msg_request":"/start vCH1vGWJxfSeofSAs0K5PA"}
+[2016-08-14 18:44:05.492] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-08-14 18:44:15.215] [INFO] session - 211613276,Martín,bien y vos?
+[2016-08-14 18:44:17.733] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-08-14 18:44:17.735] [INFO] session - <New> 211613276:{"greeting_how":"greeting_how","greeting":"greeting","msg_request":"bien y vos?"}
+[2016-08-14 18:45:49.179] [INFO] session - 211613276,Martín,esta diponible el aula magna?
+[2016-08-14 18:45:50.129] [INFO] session - <Pre> 211613276:{"greeting_how":"greeting_how","greeting":"greeting","msg_request":"bien y vos?"}
+[2016-08-14 18:45:50.131] [INFO] session - <New> 211613276:{"query_availability":"query_availability","aula":"magna","msg_request":"esta diponible el aula magna?"}
+[2016-08-14 18:46:03.599] [INFO] session - 211613276,Martín,que temperatura hace?
+[2016-08-14 18:46:04.306] [INFO] session - <Pre> 211613276:{"query_availability":"query_availability","aula":"magna","msg_request":"esta diponible el aula magna?"}
+[2016-08-14 18:46:04.310] [INFO] session - <New> 211613276:{"weather":"weather","msg_request":"que temperatura hace?"}
+[2016-08-14 18:46:12.191] [INFO] session - 211613276,Martín,cual es el clima?
+[2016-08-14 18:46:13.505] [INFO] session - <Pre> 211613276:{"weather":"weather","msg_request":"que temperatura hace?"}
+[2016-08-14 18:46:13.507] [INFO] session - <New> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"cual es el clima?"}
+[2016-08-14 18:52:00.109] [INFO] session - 211613276,Martín,esta disponible el aula audiovisuales?
+[2016-08-14 18:52:00.914] [INFO] session - <Pre> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"cual es el clima?"}
+[2016-08-14 18:52:00.916] [INFO] session - <New> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"esta disponible el aula audiovisuales?"}
+[2016-08-14 18:52:32.015] [INFO] session - 211613276,Martín,esta disponible el aula magna?
+[2016-08-14 18:52:32.751] [INFO] session - <Pre> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"esta disponible el aula audiovisuales?"}
+[2016-08-14 18:52:32.754] [INFO] session - <New> 211613276:{"query_availability":"query_availability","aula":"magna","msg_request":"esta disponible el aula magna?"}
+[2016-08-14 18:57:48.238] [INFO] session - 211613276,Martín,esta disponible el aula audiovisuales?
+[2016-08-14 18:58:07.223] [INFO] session - 211613276,Martín,esta disponible el aula audiovisuales?
+[2016-08-14 18:58:14.236] [INFO] session - 211613276,Martín,esta disponible el aula audiovisuales?
+[2016-08-14 18:58:15.484] [INFO] session - <Pre> 211613276:{"start":"start","msg_request":"/start vCH1vGWJxfSeofSAs0K5PA"}
+[2016-08-14 18:58:15.490] [INFO] session - <New> 211613276:{"query_availability":"query_availability","aula":"audiovisuales","msg_request":"esta disponible el aula audiovisuales?"}
+[2016-08-14 19:06:38.862] [INFO] session - 211613276,Martín,cual es la contraseña del wifi?
+[2016-08-14 19:06:40.051] [INFO] session - <Pre> 211613276:{"query_availability":"query_availability","aula":"audiovisuales","msg_request":"esta disponible el aula audiovisuales?"}
+[2016-08-14 19:06:40.055] [INFO] session - <New> 211613276:{"what":"what","password":"password","wifi":"wifi","msg_request":"cual es la contraseña del wifi?"}
+[2016-08-14 19:06:54.155] [INFO] session - 211613276,Martín,contraseña del wifi?
+[2016-08-14 19:06:55.140] [INFO] session - <Pre> 211613276:{"what":"what","password":"password","wifi":"wifi","msg_request":"cual es la contraseña del wifi?"}
+[2016-08-14 19:06:55.141] [INFO] session - <New> 211613276:{"password":"password","wifi":"wifi","what":"what","msg_request":"contraseña del wifi?"}
+[2016-08-14 19:28:38.385] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 19:28:53.313] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 19:29:00.289] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 19:29:04.124] [INFO] session - 211613276,Martín,hola
+[2016-08-14 19:29:17.016] [INFO] session - 211613276,Martín,hola
+[2016-08-14 19:29:25.068] [INFO] session - 211613276,Martín,hola
+[2016-08-14 19:29:26.278] [INFO] session - <Pre> 211613276:{"start":"start","msg_request":"/start vCH1vGWJxfSeofSAs0K5PA"}
+[2016-08-14 19:29:26.281] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-08-14 19:29:33.014] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 20:15:46.473] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 20:15:57.186] [INFO] session - 211613276,Martín,hola
+[2016-08-14 20:15:58.326] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-08-14 20:15:58.329] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-08-14 20:16:05.608] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 20:23:01.546] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 20:23:13.375] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 20:23:47.644] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 20:33:09.881] [INFO] session - 211613276,Martín,jajaaj djsndjsnjf
+[2016-08-14 20:33:10.807] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-08-14 20:33:10.812] [INFO] session - <New> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"jajaaj djsndjsnjf"}
+[2016-08-14 20:57:54.529] [INFO] session - 211613276,Martín,cual es la contraseña del wifi?
+[2016-08-14 20:57:55.249] [INFO] session - <Pre> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"jajaaj djsndjsnjf"}
+[2016-08-14 20:57:55.252] [INFO] session - <New> 211613276:{"what":"what","password":"password","wifi":"wifi","msg_request":"cual es la contraseña del wifi?"}
+[2016-08-14 20:58:10.525] [INFO] session - 211613276,Martín,cual es la contraseña del wifi?
+[2016-08-14 20:58:19.708] [INFO] session - 211613276,Martín,cual es la contraseña del wifi?
+[2016-08-14 20:58:29.104] [INFO] session - 211613276,Martín,cual es la contraseña del wifi?
+[2016-08-14 20:58:29.917] [INFO] session - <Pre> 211613276:{"what":"what","password":"password","wifi":"wifi","msg_request":"cual es la contraseña del wifi?"}
+[2016-08-14 20:58:29.920] [INFO] session - <New> 211613276:{"what":"what","password":"password","wifi":"wifi","msg_request":"cual es la contraseña del wifi?"}
+[2016-08-14 21:07:36.967] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 21:08:10.746] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 21:08:11.702] [INFO] session - <Pre> 211613276:{"what":"what","password":"password","wifi":"wifi","msg_request":"cual es la contraseña del wifi?"}
+[2016-08-14 21:08:11.707] [INFO] session - <New> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"cual es el email de Juan Perez?"}
+[2016-08-14 21:09:52.821] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 21:09:53.698] [INFO] session - <Pre> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"cual es el email de Juan Perez?"}
+[2016-08-14 21:09:53.702] [INFO] session - <New> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"cual es el email de Juan Perez?"}
+[2016-08-14 21:12:37.596] [INFO] session - 211613276,Martín,cual es la contraseña del wifi?
+[2016-08-14 21:12:38.468] [INFO] session - <Pre> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"cual es el email de Juan Perez?"}
+[2016-08-14 21:12:38.472] [INFO] session - <New> 211613276:{"what":"what","password":"password","wifi":"wifi","msg_request":"cual es la contraseña del wifi?"}
+[2016-08-14 21:12:59.257] [INFO] session - 211613276,Martín,cual es la contraseña del wifi?
+[2016-08-14 21:13:00.260] [INFO] session - <Pre> 211613276:{"what":"what","password":"password","wifi":"wifi","msg_request":"cual es la contraseña del wifi?"}
+[2016-08-14 21:13:00.263] [INFO] session - <New> 211613276:{"what":"what","password":"password","wifi":"wifi","msg_request":"cual es la contraseña del wifi?"}
+[2016-08-14 21:13:34.297] [INFO] session - 211613276,Martín,cual es la contraseña del wifi?
+[2016-08-14 21:13:35.181] [INFO] session - <Pre> 211613276:{"what":"what","password":"password","wifi":"wifi","msg_request":"cual es la contraseña del wifi?"}
+[2016-08-14 21:13:35.185] [INFO] session - <New> 211613276:{"what":"what","password":"password","wifi":"wifi","msg_request":"cual es la contraseña del wifi?"}
+[2016-08-14 21:17:04.795] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 21:30:49.788] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 21:31:50.547] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 21:32:14.790] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 21:32:15.640] [INFO] session - <Pre> 211613276:{"what":"what","password":"password","wifi":"wifi","msg_request":"cual es la contraseña del wifi?"}
+[2016-08-14 21:32:15.645] [INFO] session - <New> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"cual es el email de Juan Perez?"}
+[2016-08-14 21:36:59.119] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 21:37:13.709] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 21:37:14.843] [INFO] session - <Pre> 211613276:{"what":"what","password":"password","wifi":"wifi","msg_request":"cual es la contraseña del wifi?"}
+[2016-08-14 21:37:14.848] [INFO] session - <New> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"cual es el email de Juan Perez?"}
+[2016-08-14 21:37:38.743] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 21:37:39.587] [INFO] session - <Pre> 211613276:{"what":"what","password":"password","wifi":"wifi","msg_request":"cual es la contraseña del wifi?"}
+[2016-08-14 21:37:39.592] [INFO] session - <New> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"cual es el email de Juan Perez?"}
+[2016-08-14 21:38:20.723] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 21:38:31.367] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 21:38:37.365] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 21:38:38.353] [INFO] session - <Pre> 211613276:{"what":"what","password":"password","wifi":"wifi","msg_request":"cual es la contraseña del wifi?"}
+[2016-08-14 21:38:38.356] [INFO] session - <New> 211613276:{"what":"what","property":"email","who":"Juan Perez","msg_request":"cual es el email de Juan Perez?"}
+[2016-08-14 21:43:27.861] [INFO] session - 211613276,Martín,cual es la contraseña de wifi
+[2016-08-14 23:06:53.309] [INFO] session - 211613276,Martín,cual es la contraseña del wifi?
+[2016-08-14 23:06:54.231] [INFO] session - <Pre> 211613276:{}
+[2016-08-14 23:06:54.234] [INFO] session - <New> 211613276:{"what":"what","password":"password","wifi":"wifi","msg_request":"cual es la contraseña del wifi?"}
+[2016-08-14 23:07:01.775] [INFO] session - 211613276,Martín,cual es la contraseña del wifi?
+[2016-08-14 23:07:56.458] [INFO] session - 211613276,Martín,cual es el email de Juan Perez?
+[2016-08-14 23:07:57.648] [INFO] session - <Pre> 211613276:{"what":"what","password":"password","wifi":"wifi","msg_request":"cual es la contraseña del wifi?"}
+[2016-08-14 23:07:57.653] [INFO] session - <New> 211613276:{"what":"what","property":"email","who":"Juan Perez","msg_request":"cual es el email de Juan Perez?"}
+[2016-08-14 23:50:01.381] [INFO] session - 211613276,Martín,hola
+[2016-08-14 23:50:02.818] [INFO] session - <Pre> 211613276:{"what":"what","property":"email","who":"Juan Perez","msg_request":"cual es el email de Juan Perez?"}
+[2016-08-14 23:50:02.822] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-08-15 11:14:32.350] [INFO] session - 211613276,Martín,en que aula curso hoy?
+[2016-08-15 11:18:09.167] [INFO] session - 211613276,Martín,en que aula curso el lunes?
+[2016-08-15 11:22:02.984] [INFO] session - 211613276,Martín,cuando puedo rendir Inteligencia Artificial?
+[2016-08-15 11:22:25.106] [INFO] session - 211613276,Martín,cuando puedo rendir Inteligencia Artificial?
+[2016-08-15 14:01:40.492] [INFO] session - 211613276,Martín,Hola
+[2016-08-15 14:01:59.268] [INFO] session - 211613276,Martín,cuando es el final de Analisis Matematico?
+[2016-08-15 14:02:00.365] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-08-15 14:02:00.370] [INFO] session - <New> 211613276:{"info_final":"info_final","materia":"Analisis Matematico","msg_request":"cuando es el final de Analisis Matematico?"}
+[2016-08-15 14:02:13.984] [INFO] session - 211613276,Martín,cuando es el final de Analisis Matematico?
+[2016-08-15 14:43:23.721] [INFO] session - 211613276,Martín,donde esta la utn?
+[2016-08-15 14:43:25.184] [INFO] session - <Pre> 211613276:{"info_final":"info_final","materia":"Analisis Matematico","msg_request":"cuando es el final de Analisis Matematico?"}
+[2016-08-15 14:43:25.188] [INFO] session - <New> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"donde esta la utn?"}
+[2016-08-15 14:44:06.068] [INFO] session - 211613276,Martín,donde esta la UTN
+[2016-08-15 14:44:07.569] [INFO] session - <Pre> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"donde esta la utn?"}
+[2016-08-15 14:44:07.573] [INFO] session - <New> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"donde esta la UTN"}
+[2016-08-15 14:45:13.201] [INFO] session - 211613276,Martín,donde esta la utn
+[2016-08-15 14:45:14.402] [INFO] session - <Pre> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"donde esta la UTN"}
+[2016-08-15 14:45:14.404] [INFO] session - <New> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 14:45:47.074] [INFO] session - 211613276,Martín,donde esta la utn
+[2016-08-15 14:45:48.330] [INFO] session - <Pre> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 14:45:48.333] [INFO] session - <New> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 14:46:44.651] [INFO] session - 211613276,Martín,donde esta la utn
+[2016-08-15 14:46:45.881] [INFO] session - <Pre> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 14:46:45.885] [INFO] session - <New> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 14:47:15.452] [INFO] session - 211613276,Martín,donde esta la utn
+[2016-08-15 14:47:16.743] [INFO] session - <Pre> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 14:47:16.746] [INFO] session - <New> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 14:49:25.598] [INFO] session - 211613276,Martín,donde esta la utn
+[2016-08-15 14:49:38.417] [INFO] session - 211613276,Martín,donde esta la utn
+[2016-08-15 14:49:39.578] [INFO] session - <Pre> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 14:49:39.583] [INFO] session - <New> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 14:53:24.782] [INFO] session - 211613276,Martín,hola
+[2016-08-15 14:53:25.480] [INFO] session - <Pre> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 14:53:25.484] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-08-15 14:53:44.974] [INFO] session - 211613276,Martín,donde esta mi departamento?
+[2016-08-15 14:53:45.661] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-08-15 14:53:45.663] [INFO] session - <New> 211613276:{"where":"where","search_departamento":"search_departamento","msg_request":"donde esta mi departamento?"}
+[2016-08-15 14:53:51.736] [INFO] session - 211613276,Martín,sistema
+[2016-08-15 14:53:52.399] [INFO] session - <Pre> 211613276:{"where":"where","search_departamento":"search_departamento","msg_request":"donde esta mi departamento?"}
+[2016-08-15 14:53:52.401] [INFO] session - <New> 211613276:{"especialidad":"Sistemas","where":"where","search_departamento":"search_departamento","msg_request":"sistema"}
+[2016-08-15 14:57:55.369] [INFO] session - 211613276,Martín,donde esta la utn
+[2016-08-15 14:58:03.985] [INFO] session - 211613276,Martín,donde esta la utn
+[2016-08-15 14:58:04.944] [INFO] session - <Pre> 211613276:{"especialidad":"Sistemas","where":"where","search_departamento":"search_departamento","msg_request":"sistema"}
+[2016-08-15 14:58:04.948] [INFO] session - <New> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 14:58:37.407] [INFO] session - 211613276,Martín,donde esta la utn
+[2016-08-15 14:58:39.257] [INFO] session - <Pre> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 14:58:39.262] [INFO] session - <New> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 15:00:42.230] [INFO] session - 211613276,Martín,donde esta la utn
+[2016-08-15 15:00:50.499] [INFO] session - 211613276,Martín,donde esta la utn
+[2016-08-15 15:00:51.431] [INFO] session - <Pre> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 15:00:51.435] [INFO] session - <New> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 15:01:29.041] [INFO] session - 211613276,Martín,donde esta la utn
+[2016-08-15 15:01:29.950] [INFO] session - <Pre> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 15:01:29.953] [INFO] session - <New> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 15:02:39.819] [INFO] session - 211613276,Martín,donde esta la utn
+[2016-08-15 15:02:56.779] [INFO] session - 211613276,Martín,donde esta la utn
+[2016-08-15 15:03:22.074] [INFO] session - 211613276,Martín,donde esta la utn
+[2016-08-15 15:03:23.288] [INFO] session - <Pre> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 15:03:23.292] [INFO] session - <New> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 17:47:15.152] [INFO] session - 211613276,Martín,Donde esta la UTN?
+[2016-08-15 17:47:17.641] [INFO] session - <Pre> 211613276:{"where":"where","university":"university","msg_request":"donde esta la utn"}
+[2016-08-15 17:47:17.644] [INFO] session - <New> 211613276:{"where":"where","university":"university","msg_request":"Donde esta la UTN?"}
+[2016-08-15 17:51:48.962] [INFO] session - 211613276,Martín,Hola
+[2016-08-15 17:51:49.946] [INFO] session - <Pre> 211613276:{"where":"where","university":"university","msg_request":"Donde esta la UTN?"}
+[2016-08-15 17:51:49.950] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"Hola"}
+[2016-08-15 17:51:59.823] [INFO] session - 211613276,Martín,Bien y vos?
+[2016-08-15 17:52:01.885] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"Hola"}
+[2016-08-15 17:52:01.887] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"Bien y vos?"}
+[2016-08-15 17:52:21.823] [INFO] session - 211613276,Martín,Bien y vos?
+[2016-08-15 17:53:08.598] [INFO] session - 211613276,Martín,Como estas
+[2016-08-15 17:53:09.566] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"Bien y vos?"}
+[2016-08-15 17:53:09.570] [INFO] session - <New> 211613276:{"insulto":"insulto","msg_request":"Como estas"}
+[2016-08-15 17:53:20.172] [INFO] session - 211613276,Martín,Noooi
+[2016-08-15 17:53:21.148] [INFO] session - <Pre> 211613276:{"insulto":"insulto","msg_request":"Como estas"}
+[2016-08-15 17:53:21.150] [INFO] session - <New> 211613276:{"insulto":"insulto","msg_request":"Noooi"}
+[2016-08-15 17:55:39.746] [INFO] session - 211613276,Martín,Cuantos años tenés
+[2016-08-15 17:55:40.570] [INFO] session - <Pre> 211613276:{"insulto":"insulto","msg_request":"Noooi"}
+[2016-08-15 17:55:40.573] [INFO] session - <New> 211613276:{"hali_age":"hali_age","msg_request":"Cuantos años tenés"}
+[2016-08-15 17:56:49.483] [INFO] session - 211613276,Martín,Quien sos
+[2016-08-15 17:56:50.331] [INFO] session - <Pre> 211613276:{"hali_age":"hali_age","msg_request":"Cuantos años tenés"}
+[2016-08-15 17:56:50.332] [INFO] session - <New> 211613276:{"who":"who","msg_request":"Quien sos"}
+[2016-08-15 18:06:11.663] [INFO] session - 211613276,Martín,Hola
+[2016-08-15 21:17:11.250] [INFO] session - 211613276,Martín,como estas?
+[2016-08-15 21:17:12.342] [INFO] session - <Pre> 211613276:{"who":"who","msg_request":"Quien sos"}
+[2016-08-15 21:17:12.346] [INFO] session - <New> 211613276:{"greeting_how":"greeting_how","msg_request":"como estas?"}
+[2016-08-15 21:17:17.703] [INFO] session - 211613276,Martín,hola
+[2016-08-15 21:17:18.393] [INFO] session - <Pre> 211613276:{"greeting_how":"greeting_how","msg_request":"como estas?"}
+[2016-08-15 21:17:18.397] [INFO] session - <New> 211613276:{"greeting":"greeting","greeting_how":"greeting_how","msg_request":"hola"}
+[2016-08-15 21:17:23.191] [INFO] session - 211613276,Martín,bien y vos?
+[2016-08-15 21:17:23.890] [INFO] session - <Pre> 211613276:{"greeting":"greeting","greeting_how":"greeting_how","msg_request":"hola"}
+[2016-08-15 21:17:23.893] [INFO] session - <New> 211613276:{"greeting_how":"greeting_how","greeting":"greeting","msg_request":"bien y vos?"}
+[2016-08-15 21:22:17.316] [INFO] session - 211613276,Martín,enviale un mensaje a mis alumnos
+[2016-08-15 21:22:18.128] [INFO] session - <Pre> 211613276:{"greeting_how":"greeting_how","greeting":"greeting","msg_request":"bien y vos?"}
+[2016-08-15 21:22:18.131] [INFO] session - <New> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"enviale un mensaje a mis alumnos"}
+[2016-08-15 21:42:34.530] [INFO] session - 211613276,Martín,enviar mensaje a mis alumnos
+[2016-08-15 21:42:35.846] [INFO] session - <Pre> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"enviale un mensaje a mis alumnos"}
+[2016-08-15 21:42:35.850] [INFO] session - <New> 211613276:{"send":"send","message":"message","to":"a mis alumnos","msg_request":"enviar mensaje a mis alumnos"}
+[2016-08-15 21:42:46.877] [INFO] session - 211613276,Martín,se suspende la clase de hoy
+[2016-08-15 21:45:52.934] [INFO] session - 211613276,Martín,enviar mensaje a mis alumnos
+[2016-08-15 21:45:54.243] [INFO] session - <Pre> 211613276:{"send":"send","message":"message","to":"a mis alumnos","msg_request":"enviar mensaje a mis alumnos"}
+[2016-08-15 21:45:54.251] [INFO] session - <New> 211613276:{"send":"send","message":"message","to":"a mis alumnos","msg_request":"enviar mensaje a mis alumnos"}
+[2016-08-15 21:46:01.344] [INFO] session - 211613276,Martín,se suspende la clase
+[2016-08-15 21:51:28.886] [INFO] session - 211613276,Martín,enviar mensaje a mis alumnos
+[2016-08-15 21:51:30.092] [INFO] session - <Pre> 211613276:{"send":"send","message":"message","to":"a mis alumnos","msg_request":"enviar mensaje a mis alumnos"}
+[2016-08-15 21:51:30.096] [INFO] session - <New> 211613276:{"send":"send","message":"message","to":"a mis alumnos","msg_request":"enviar mensaje a mis alumnos"}
+[2016-08-15 21:51:36.415] [INFO] session - 211613276,Martín,se suspende la clae
+[2016-08-15 21:52:42.360] [INFO] session - 211613276,Martín,enviar mensaje a mis alumnos
+[2016-08-15 21:52:43.751] [INFO] session - <Pre> 211613276:{"send":"send","message":"message","to":"a mis alumnos","msg_request":"enviar mensaje a mis alumnos"}
+[2016-08-15 21:52:43.754] [INFO] session - <New> 211613276:{"send":"send","message":"message","to":"a mis alumnos","msg_request":"enviar mensaje a mis alumnos"}
+[2016-08-15 21:52:50.748] [INFO] session - 211613276,Martín,sdksnkdns
+[2016-08-15 21:56:19.572] [INFO] session - 211613276,Martín,enviar mensaje a mis alumnos
+[2016-08-15 21:56:20.724] [INFO] session - <Pre> 211613276:{"send":"send","message":"message","to":"a mis alumnos","msg_request":"enviar mensaje a mis alumnos"}
+[2016-08-15 21:56:20.730] [INFO] session - <New> 211613276:{"send":"send","message":"message","to":"a mis alumnos","msg_request":"enviar mensaje a mis alumnos"}
+[2016-08-15 21:56:26.167] [INFO] session - 211613276,Martín,dsdsds
+[2016-08-15 21:59:32.841] [INFO] session - 211613276,Martín,enviar mensaje a mis alumnos
+[2016-08-15 21:59:34.210] [INFO] session - <Pre> 211613276:{"send":"send","message":"message","to":"a mis alumnos","msg_request":"enviar mensaje a mis alumnos"}
+[2016-08-15 21:59:34.213] [INFO] session - <New> 211613276:{"send":"send","message":"message","to":"a mis alumnos","msg_request":"enviar mensaje a mis alumnos"}
+[2016-08-15 21:59:38.191] [INFO] session - 211613276,Martín,dsdsd
+[2016-08-15 22:00:04.176] [INFO] session - 211613276,Martín,enviar mensaje a mis alumnos
+[2016-08-15 22:00:05.337] [INFO] session - <Pre> 211613276:{"send":"send","message":"message","to":"a mis alumnos","msg_request":"enviar mensaje a mis alumnos"}
+[2016-08-15 22:00:05.340] [INFO] session - <New> 211613276:{"send":"send","message":"message","to":"a mis alumnos","msg_request":"enviar mensaje a mis alumnos"}
+[2016-08-15 22:00:08.753] [INFO] session - 211613276,Martín,dksdfdf
+[2016-08-15 23:55:20.938] [INFO] session - 211613276,Martín,enviar mensaje a mis alumnos
+[2016-08-15 23:55:35.992] [INFO] session - 211613276,Martín,enviar mensaje a mis alumnos
+[2016-08-15 23:55:37.300] [INFO] session - <Pre> 211613276:{"send":"send","message":"message","to":"a mis alumnos","msg_request":"enviar mensaje a mis alumnos"}
+[2016-08-15 23:55:37.304] [INFO] session - <New> 211613276:{"send":"send","message":"message","to":"a mis alumnos","msg_request":"enviar mensaje a mis alumnos"}
+[2016-08-15 23:55:42.737] [INFO] session - 211613276,Martín,dsdsds
+[2016-08-27 18:48:41.891] [INFO] session - 211613276,Martín,/start vCH1vGWJxfSeofSAs0K5PA
+[2016-08-27 18:48:43.636] [INFO] session - 211613276,Martín,hola
+[2016-08-27 18:48:48.777] [INFO] session - 211613276,Martín,Hola
+[2016-08-27 18:48:58.673] [INFO] session - 211613276,Martín,hola
+[2016-08-27 18:49:03.628] [INFO] session - <Pre> 211613276:{}
+[2016-08-27 18:49:03.631] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-08-27 18:49:10.801] [INFO] session - 211613276,Martín,hola
+[2016-08-27 18:49:16.172] [INFO] session - 211613276,Martín,Hola
+[2016-08-27 18:49:19.101] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-08-27 18:49:19.105] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"Hola"}
+[2016-08-27 18:49:24.615] [INFO] session - 211613276,Martín,HHola
+[2016-08-27 18:49:31.031] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"Hola"}
+[2016-08-27 18:49:31.032] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"HHola"}
+[2016-08-27 18:49:40.349] [INFO] session - 211613276,Martín,Haola
+[2016-08-27 18:49:41.137] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"HHola"}
+[2016-08-27 18:49:41.139] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"Haola"}
+[2016-08-27 18:49:50.665] [INFO] session - 211613276,Martín,H ola
+[2016-08-27 18:49:52.949] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"Haola"}
+[2016-08-27 18:49:52.950] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"H ola"}
+[2016-08-27 18:50:01.130] [INFO] session - 211613276,Martín,quien sos?
+[2016-08-27 18:50:01.860] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"H ola"}
+[2016-08-27 18:50:01.861] [INFO] session - <New> 211613276:{"who":"who","msg_request":"quien sos?"}
+[2016-08-27 19:16:23.084] [INFO] session - 211613276,Martín,que libros de sistemas operativos hay disponibles
+[2016-08-27 19:16:25.176] [INFO] session - <Pre> 211613276:{"who":"who","msg_request":"quien sos?"}
+[2016-08-27 19:16:25.180] [INFO] session - <New> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 19:16:31.189] [INFO] session - <Pre> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 19:16:31.192] [INFO] session - <New> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 19:19:15.926] [INFO] session - 211613276,Martín,que libros de sistemas operativos hay disponibles
+[2016-08-27 19:19:17.765] [INFO] session - <Pre> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 19:19:17.768] [INFO] session - <New> 211613276:{"what":"what","book":"book","materia":"Sistemas Operativos","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 19:24:03.411] [INFO] session - 211613276,Martín,que libros de sistemas operativos hay disponibles
+[2016-08-27 19:24:22.910] [INFO] session - 211613276,Martín,que libros de sistemas operativos hay disponibles
+[2016-08-27 19:24:24.795] [INFO] session - <Pre> 211613276:{"what":"what","book":"book","materia":"Sistemas Operativos","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 19:24:24.798] [INFO] session - <New> 211613276:{"what":"what","book":"book","materia":"Sistemas Operativos","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 19:34:56.784] [INFO] session - 211613276,Martín,que libros de sistemas operativos hay disponibles
+[2016-08-27 19:34:57.810] [INFO] session - <Pre> 211613276:{"what":"what","book":"book","materia":"Sistemas Operativos","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 19:34:57.813] [INFO] session - <New> 211613276:{"what":"what","book":"book","materia":"Sistemas Operativos","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 19:48:39.194] [INFO] session - 211613276,Martín,que libros de SO hay?
+[2016-08-27 19:48:49.780] [INFO] session - 211613276,Martín,que libros de SO hay?
+[2016-08-27 19:49:38.588] [INFO] session - 211613276,Martín,que libros de SO hay?
+[2016-08-27 19:50:08.253] [INFO] session - 211613276,Martín,que libros de So hay?
+[2016-08-27 19:50:37.143] [INFO] session - 211613276,Martín,que libros de SO hay?
+[2016-08-27 19:51:41.311] [INFO] session - 211613276,Martín,que libros de SO hay?
+[2016-08-27 19:53:42.536] [INFO] session - 211613276,Martín,que libros de SO hay?
+[2016-08-27 19:54:13.373] [INFO] session - 211613276,Martín,que libros de SO hay?
+[2016-08-27 19:54:51.229] [INFO] session - 211613276,Martín,que libros de SO hay?
+[2016-08-27 19:55:17.977] [INFO] session - 211613276,Martín,que libros de SO hay
+[2016-08-27 19:56:02.536] [INFO] session - 211613276,Martín,que libros de So hay
+[2016-08-27 19:56:21.300] [INFO] session - 211613276,Martín,que libros de SO hay
+[2016-08-27 19:56:53.338] [INFO] session - 211613276,Martín,que libros de SO hay?
+[2016-08-27 19:57:14.543] [INFO] session - 211613276,Martín,que libros de SO hay
+[2016-08-27 19:57:25.024] [INFO] session - 211613276,Martín,que libros de So hay
+[2016-08-27 19:57:47.740] [INFO] session - 211613276,Martín,que libros de SO hay
+[2016-08-27 20:17:37.841] [INFO] session - 211613276,Martín,hola
+[2016-08-27 20:17:50.468] [INFO] session - 211613276,Martín,hola
+[2016-08-27 20:19:01.460] [INFO] session - 211613276,Martín,hola
+[2016-08-27 20:19:41.166] [INFO] session - 211613276,Martín,hola
+[2016-08-27 20:19:43.385] [INFO] session - <Pre> 211613276:{"what":"what","book":"book","materia":"Sistemas Operativos","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 20:19:43.390] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-08-27 20:24:47.432] [INFO] session - 211613276,Martín,que libros de sistemas operativos hay disponibles
+[2016-08-27 20:24:49.983] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-08-27 20:24:49.988] [INFO] session - <New> 211613276:{"what":"what","book":"book","materia":"Sistemas Operativos","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 20:25:20.493] [INFO] session - 211613276,Martín,que libros de sistemas operativos hay disponibles
+[2016-08-27 20:26:18.179] [INFO] session - 211613276,Martín,que libros de sistemas operativos hay disponibles
+[2016-08-27 20:26:28.384] [INFO] session - 211613276,Martín,que libros de sistemas operativos hay disponibles
+[2016-08-27 20:26:55.151] [INFO] session - 211613276,Martín,que libros de sistemas operativos hay disponibles
+[2016-08-27 20:26:57.179] [INFO] session - <Pre> 211613276:{"what":"what","book":"book","materia":"Sistemas Operativos","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 20:26:57.183] [INFO] session - <New> 211613276:{"what":"what","book":"book","materia":"Sistemas Operativos","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 20:28:04.250] [INFO] session - 211613276,Martín,books_list
+[2016-08-27 20:28:04.259] [INFO] session - 211613276,Martín,que libros de sistemas operativos hay disponibles
+[2016-08-27 20:28:15.754] [INFO] session - 211613276,Martín,que libros de sistemas operativos hay disponibles
+[2016-08-27 20:28:17.610] [INFO] session - <Pre> 211613276:{"what":"what","book":"book","materia":"Sistemas Operativos","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 20:28:17.613] [INFO] session - <New> 211613276:{"what":"what","book":"book","materia":"Sistemas Operativos","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 20:28:30.988] [INFO] session - 211613276,Martín,que libros de sistemas operativos hay disponibles
+[2016-08-27 20:36:04.997] [INFO] session - 211613276,Martín,hola
+[2016-08-27 20:36:13.455] [INFO] session - 211613276,Martín,chau
+[2016-08-27 20:36:28.824] [INFO] session - 211613276,Martín,que libros de sistemas operativos hay disponibles
+[2016-08-27 20:36:33.317] [INFO] session - 211613276,Martín,djsbdjbfjsdlbfdjskbfljkbdsjfkg
+[2016-08-27 20:36:42.985] [INFO] session - 211613276,Martín,hola
+[2016-08-27 20:36:46.588] [INFO] session - <Pre> 211613276:{"what":"what","book":"book","materia":"Sistemas Operativos","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 20:36:46.593] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-08-27 20:36:54.418] [INFO] session - 211613276,Martín,que libros de sistemas operativos hay disponibles
+[2016-08-27 20:36:56.711] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
+[2016-08-27 20:36:56.714] [INFO] session - <New> 211613276:{"what":"what","book":"book","materia":"Sistemas Operativos","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 20:37:00.666] [INFO] session - 211613276,Martín,hola
+[2016-08-27 20:37:08.240] [INFO] session - 211613276,Martín,hola
+[2016-08-27 20:37:09.298] [INFO] session - 211613276,Martín,hola
+[2016-08-27 20:37:10.571] [INFO] session - 211613276,Martín,hola
+[2016-08-27 20:37:14.721] [INFO] session - 211613276,Martín,que libros de sistemas operativos hay disponibles
+[2016-08-27 20:37:16.374] [INFO] session - 211613276,Martín,que libros de sistemas operativos hay disponibles
+[2016-08-27 20:37:17.448] [INFO] session - 211613276,Martín,chau
+[2016-08-27 20:37:19.953] [INFO] session - <Pre> 211613276:{"what":"what","book":"book","materia":"Sistemas Operativos","msg_request":"que libros de sistemas operativos hay disponibles"}
+[2016-08-27 20:37:19.956] [INFO] session - <New> 211613276:{"bye":"bye","msg_request":"chau"}
+[2016-08-27 20:41:27.113] [INFO] session - 211613276,Martín,esta disponible el libro Silberschatz?
+[2016-08-27 20:41:28.384] [INFO] session - <Pre> 211613276:{"bye":"bye","msg_request":"chau"}
+[2016-08-27 20:41:28.387] [INFO] session - <New> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"esta disponible el libro Silberschatz?"}
+[2016-08-27 20:43:56.155] [INFO] session - 211613276,Martín,esta diponible el libro  Silberschatz?
+[2016-08-27 20:43:57.801] [INFO] session - <Pre> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"esta disponible el libro Silberschatz?"}
+[2016-08-27 20:43:57.805] [INFO] session - <New> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"esta diponible el libro  Silberschatz?"}
+[2016-08-27 20:44:14.135] [INFO] session - 211613276,Martín,esta diponible el libro  Silberschatz?
+[2016-08-27 20:44:23.133] [INFO] session - 211613276,Martín,esta diponible el libro  Silberschatz?
+[2016-08-27 20:44:24.668] [INFO] session - <Pre> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"esta diponible el libro  Silberschatz?"}
+[2016-08-27 20:44:24.672] [INFO] session - <New> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"esta diponible el libro  Silberschatz?"}
+[2016-08-27 20:49:51.038] [INFO] session - 211613276,Martín,esta diponible el libro  Silberschatz?
+[2016-08-27 20:50:08.321] [INFO] session - 211613276,Martín,esta diponible el libro  Silberschatz?
+[2016-08-27 20:50:10.380] [INFO] session - <Pre> 211613276:{"not_story":"No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)","msg_request":"esta diponible el libro  Silberschatz?"}
+[2016-08-27 20:50:10.384] [INFO] session - <New> 211613276:{"query_availability":"query_availability","book":"book","book_name":"book_name","msg_request":"esta diponible el libro  Silberschatz?"}
+[2016-08-27 20:51:55.349] [INFO] session - 211613276,Martín,esta diponible el libro  Silberschatz?
+[2016-08-27 20:51:57.695] [INFO] session - <Pre> 211613276:{"query_availability":"query_availability","book":"book","book_name":"book_name","msg_request":"esta diponible el libro  Silberschatz?"}
+[2016-08-27 20:51:57.699] [INFO] session - <New> 211613276:{"query_availability":"query_availability","book":"book","book_name":"book_name","msg_request":"esta diponible el libro  Silberschatz?"}
+[2016-08-27 20:53:29.315] [INFO] session - 211613276,Martín,esta diponible el libro  Silberschatz?
+[2016-08-27 20:53:41.425] [INFO] session - 211613276,Martín,esta diponible el libro  Silberschatz?
+[2016-08-27 20:53:43.066] [INFO] session - <Pre> 211613276:{"query_availability":"query_availability","book":"book","book_name":"book_name","msg_request":"esta diponible el libro  Silberschatz?"}
+[2016-08-27 20:53:43.069] [INFO] session - <New> 211613276:{"query_availability":"query_availability","book":"book","book_name":"book_name","msg_request":"esta diponible el libro  Silberschatz?"}
+[2016-08-27 20:53:51.862] [INFO] session - 211613276,Martín,esta diponible el libro  Silberschatz?
+[2016-08-27 20:56:02.555] [INFO] session - 211613276,Martín,hola
+[2016-08-27 20:56:10.170] [INFO] session - 211613276,Martín,gola
+[2016-08-27 20:56:11.674] [INFO] session - <Pre> 211613276:{"query_availability":"query_availability","book":"book","book_name":"book_name","msg_request":"esta diponible el libro  Silberschatz?"}
+[2016-08-27 20:56:11.677] [INFO] session - <New> 211613276:{"query_availability":"query_availability","book":"book","book_name":"book_name","msg_request":"gola"}
+[2016-08-27 20:56:25.214] [INFO] session - 211613276,Martín,Hola
+[2016-08-27 20:56:38.001] [INFO] session - 211613276,Martín,Hola
+[2016-08-27 20:56:39.001] [INFO] session - <Pre> 211613276:{"query_availability":"query_availability","book":"book","book_name":"book_name","msg_request":"gola"}
+[2016-08-27 20:56:39.010] [INFO] session - <New> 211613276:{"greeting":"greeting","msg_request":"Hola"}
+[2016-08-28 21:03:04.984] [INFO] session - 211613276,Martín,esta disponible el libro Silberschatz?
+[2016-08-28 21:03:12.024] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"Hola"}
+[2016-08-28 21:03:12.030] [INFO] session - <New> 211613276:{"query_availability":"query_availability","book":"book","book_name":"book_name","msg_request":"esta disponible el libro Silberschatz?"}
+[2016-08-28 21:03:36.376] [INFO] session - 211613276,Martín,esta disponible el libro Silberschatz?
