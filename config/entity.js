@@ -22,23 +22,24 @@ De momento estoy preparada para lo siguiente:
 3) Contarte donde esta tu departamento.
 4) Saludarte.
 
-Dia a dia voy a gregando nuevos skills.
+Dia a dia voy agregando nuevos skills.
 Arriba esas palmas!! Clap clap!
 	*/}),
-/*
-	NOT_STORY: Historia no entrenada.
-	Algunas preguntas o comentarios no los entiendo todavia, o quizas si,
-	pero esta fuera de contexto y necesito información adicional para entenderte.
-	Verifica que tu consulta se encuentre dentro del contexto correcto.
-	Ejemplo: Decime "¿Está disponible el aula Hola cómo estás?", no tiene ningún sentido.
-*/
+	CONFUSE: multiline(function(){/*
+Me estas confundiendo. Pregunta concreta. ¿En que puedo ayudarte?
+	*/}),	
 	NOT_STORY: multiline(function(){/*
 No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)
+Algunas preguntas o comentarios no los entiendo todavia, o quizas si,
+pero esta fuera de contexto y necesito información adicional para entenderte.
+Verifica que tu consulta se encuentre dentro del contexto correcto.
+Ejemplo: Decime "¿Está disponible el Hola cómo estás?", no tiene ningún sentido.
+Proba preguntandome de otras formas, quizas comprenda.
 	*/}),
 	TESTME: multiline(function(){/*
 Hola crack!!, Ya estoy online de nuevo con algo más de entrenamiento.
 Cuando tengas tiempo libre testeame.
-Y si funciono mal no te quejes que estamos arrancando.
+Y si funciono mal no te quejes que estamos trabajando.
 Abrazo.
 	*/}),
 

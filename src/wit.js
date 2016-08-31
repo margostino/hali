@@ -30,10 +30,32 @@ const matchContext = (context) => {
 	  return hit;
 };
 
+const matchConfuse = (context) => {
+	  var current = _.without(_.keys(context), 'msg_request');
+	  var hit = false;
+	  _.each(current, function(e){
+			_.each(ctx_cfg.contexts, function(c){
+			  var diff = _.difference([e], c);
+			    if (current.length==c.length && _.isEmpty(diff)){
+			      hit = true;
+			      return;
+			    }
+		  });
+		});
+	  return hit;
+};
+
 const getNotStory = (context) => {
 	logger.app.info("Contexto no entrenado: " + JSON.stringify(context));
 	var ctx = {};
 	ctx['not_story'] = entity.NOT_STORY;
+	return ctx;
+};
+
+const getConfuse = (context) => {
+	logger.app.info("Contexto confuso: " + JSON.stringify(context));
+	var ctx = {};
+	ctx['confuse'] = entity.CONFUSE;
 	return ctx;
 };
 
@@ -98,10 +120,12 @@ var wit = {
 	updateContext: (current, pre) => {
 	    var ctx = {};
 	    if(matchContext(pre))
-	          ctx = pre;
+	      ctx = pre;
 	    else if(matchContext(current))
-	          ctx = current;
-	    else
+	      ctx = current;
+			else if(matchConfuse(current)){
+				ctx = getConfuse(current);
+	    }else
 	      ctx = getNotStory(current);
 
 	  return ctx;

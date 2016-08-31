@@ -28,8 +28,6 @@ function processMerge(cb, id, context, entities, message){
 }
 
 function processMerge(cb, id, context, entities, message, cached_msg){
-console.log("merge entities: " + JSON.stringify(entities));
-console.log("merge message: " + message);
     if(redis){
       console.log("Previous Context:  " + cached_msg);
       context = JSON.parse(cached_msg);
@@ -42,8 +40,14 @@ console.log("merge message: " + message);
     console.log("Current:  " + JSON.stringify(current));
     var pre = wit.mergePreContext(current, context);
     console.log("Merge PreContext:  " + JSON.stringify(pre));
-    context = wit.updateContext(current, pre);
     context["msg_request"] = message;
+
+    if (("send" in context) && ("alumnos" in context) && ("message" in context)){
+      context["broadcast"] = "broadcast";
+      console.log('Es Broadcast!');
+    }else
+      context = wit.updateContext(current, pre);
+
     console.log("New Context:  " + JSON.stringify(context));
     console.log("Entities:  " + JSON.stringify(entities));
     logger.session.info("<New> " + logger.genMerge(id, context));
@@ -80,6 +84,31 @@ const actions = {
     //telegram.sendMessage(utils.getChatId(sessionId),"algo no esta bien")
     console.log(error);
   },
+  send_message(sessionId, context, cb) {
+    var id = sessionId.split('==')[1];
+    var name = '';
+    var to = [];
+    var message = context["msg_request"];
+    _.each(app_cfg.users, function(user){
+        if(user.id==id)
+          name = user.name;
+        else
+          to.push(user);
+    });
+
+    var msg = message;
+    if(name){
+      msg = "El usuario " + name + " te envia el siguiente mensaje: ";
+      msg += message;
+    }
+    //telegram.sendBroadcast(app_cfg.users, msg, telegram.opts);
+    telegram.sendBroadcast(to, msg, telegram.opts);
+
+    var message_status = "Mensaje enviado OK. Remitente: " + name;
+    message_status += ". Destinatarios: " + JSON.stringify(to);
+    context.message_status =  message_status;
+    cb(context);
+  },
   get_wifi_password(sessionId, context, cb) {
     context.wifi_password = "invit@do";
     cb(context);
@@ -112,10 +141,6 @@ const actions = {
     context.location_info = entity_cfg.LOCATIONS;
     cb(context);
   },
-  send_message(sessionId, context, cb) {
-    context.message = "ok";
-    cb(context);
-  },
   ['get-availability'](sessionId, context, cb) {
     // Here should go the api call, e.g.:
     // context.forecast = apiCall(context.loc)
@@ -135,7 +160,7 @@ const actions = {
     cb(context);
   },
   ['get-skills'](sessionId, context, cb) {
-    context.skills = SKILLS;
+    context.skills = entity_cfg.SKILLS;
     cb(context);
   },
   ['ping'](sessionId, context, cb) {
@@ -292,13 +317,7 @@ console.log("Server [" + ip.address() + "] listening...");
 console.log("Session Wit: " + wit.session);
 
 //Enviar Broadcast
-/*telegram.sendBroadcast(app_cfg.users, entity_cfg.TESTME, telegram.opts);
-  /*.then(function (sended) {
-    var chatId = sended.chat.id;
-    var messageId = sended.message_id;
-    bot.onReplyToMessage(chatId, messageId, function (message) {
-      console.log('User is %s years old', message.text);
-    });
-});*/
+//telegram.sendBroadcast(app_cfg.users, entity_cfg.TESTME, telegram.opts);
 
+//Cliente interactive por consola
 //wit.interactive(actions);

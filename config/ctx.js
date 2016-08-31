@@ -11,7 +11,9 @@ var ctx = {
 		  ['about_it','hali_activity'],['search_departamento','where','especialidad'],
 		  ['start'],['info_final','materia'],['wifi', 'what', 'password'],
 			['property', 'what', 'who'],['where','university'],['send','to','message'],
-			['book','materia','what'],['book','query_availability', 'book_name']
+			['book','materia','what'],['book','query_availability', 'book_name'],
+			['hali_skills','do'],['alumnos','send','message'],
+			['alumnos','send','message','broadcast']
 	],
 	weather: {
 		area: 'Capital Federal, Buenos Aires',
