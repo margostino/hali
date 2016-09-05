@@ -1,4 +1,4 @@
-[2016-09-02 10:40:30.573] [INFO] session - 211613276,Martín,que podes hacer?
+[2016-09-02 10:40:30.573] [INFO] session - 211613276,Martín,que podes hacer?.
 [2016-09-02 10:40:31.675] [INFO] session - <Pre> 211613276:{"greeting":"greeting","msg_request":"hola"}
 [2016-09-02 10:40:31.683] [INFO] session - <New> 211613276:{"hali_skills":"hali_skills","msg_request":"que podes hacer?"}
 [2016-09-02 10:41:15.599] [INFO] session - 211613276,Martín,difundir: daleeee viejooooo
