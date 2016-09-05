@@ -12,8 +12,10 @@ var ctx = {
 		  ['start'],['info_final','materia'],['wifi', 'what', 'password'],
 			['property', 'what', 'who'],['where','university'],['send','to','message'],
 			['book','materia','what'],['book','query_availability', 'book_name'],
-			['hali_skills','do'],['alumnos','send','message'],
-			['alumnos','send','message','broadcast']
+			['hali_skills','do'],['alumnos','send','message'],['broadcast'],
+			['hali','greeting'],['who_iam'],['find_course','when'],['find_course'],
+			['find_course','yes']
+			//['message_status','broadcast'],['alumnos','say','broadcast'],
 	],
 	weather: {
 		area: 'Capital Federal, Buenos Aires',

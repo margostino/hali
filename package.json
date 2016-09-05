@@ -32,6 +32,7 @@
     "queue": "^4.0.0",
     "random-js": "^1.0.8",
     "redis": "^2.6.0-2",
+    "request": "^2.74.0",
     "should": "^8.4.0",
     "underscore": "^1.8.3",
     "weather-js": "^1.0.2",

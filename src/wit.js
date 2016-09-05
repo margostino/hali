@@ -45,6 +45,25 @@ const matchConfuse = (context) => {
 	  return hit;
 };
 
+const matchBroadcastConfuse = (context) => {
+	  var current = _.without(_.keys(context), 'msg_request');
+		var say = _.contains(current, "say");
+		var alumnos = _.contains(current, "alumnos");
+
+		if (say&&alumnos)
+			return true;
+
+	  return false;
+};
+
+const matchBroadcast = (context) => {
+	  var current = _.without(_.keys(context), 'msg_request');
+		if (_.contains(current, "broadcast"))
+			return true;
+
+	  return false;
+};
+
 const getNotStory = (context) => {
 	logger.app.info("Contexto no entrenado: " + JSON.stringify(context));
 	var ctx = {};
@@ -58,6 +77,21 @@ const getConfuse = (context) => {
 	ctx['confuse'] = entity.CONFUSE;
 	return ctx;
 };
+
+const getBroadcastConfuse = (context) => {
+	logger.app.info("Contexto broadcast confuso: " + JSON.stringify(context));
+	var ctx = {};
+	ctx['broadcast_confuse'] = entity.BROADCAST_CONFUSE;
+	return ctx;
+};
+
+const getBroadcast = (context) => {
+	logger.app.info("Contexto broadcast: " + JSON.stringify(context));
+	var ctx = {};
+	ctx['broadcast'] = "broadcast";
+	return ctx;
+};
+
 
 var wit = {
 	session: session,
@@ -123,18 +157,31 @@ var wit = {
 	      ctx = pre;
 	    else if(matchContext(current))
 	      ctx = current;
-			else if(matchConfuse(current)){
+			else if(matchBroadcast(current))
+				ctx = getBroadcast(current);
+			/*else if(matchBroadcastConfuse(current))
+				ctx = getBroadcastConfuse(current);*/
+			else if(matchConfuse(current))
 				ctx = getConfuse(current);
-	    }else
+	    else
 	      ctx = getNotStory(current);
 
 	  return ctx;
 	},
-	runActions: (actions, chatId, message, fn) => {
+	runActions: (actions, chatId, username, message, fn) => {
     //session = session + chatId;
 	  console.log("Ejecuta Wit.ai");
 	  console.log('Wit User Session: ' + session);
-	  client(actions).runActions(session + chatId, message, context, (error, context1) => {
+
+		context.chatId = chatId;
+		context.username = username;
+		/*var msg_data = {
+			id: chatId,
+			username: username,
+			message: message
+		};*/
+		var id = session;
+	  client(actions).runActions("ss", message, context, (error, context1) => {
 	  		fn(error, context1);
 	  });
 	}

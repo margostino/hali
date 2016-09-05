@@ -25,15 +25,18 @@ De momento estoy preparada para lo siguiente:
 Dia a dia voy agregando nuevos skills.
 Arriba esas palmas!! Clap clap!
 	*/}),
+	BROADCAST_CONFUSE: multiline(function(){/*
+Me estas confundiendo. Si queres enviar un mensaje a los alumnos, enviame:
+Ejemplo:
+Mensaje: "la facultad va a estar cerrada hoy"
+	*/}),
 	CONFUSE: multiline(function(){/*
 Me estas confundiendo. Pregunta concreta. ¿En que puedo ayudarte?
-	*/}),	
+	*/}),
 	NOT_STORY: multiline(function(){/*
-No estoy entrenada aún para esto. Pero lo agrego a mi backlog! :)
-Algunas preguntas o comentarios no los entiendo todavia, o quizas si,
-pero esta fuera de contexto y necesito información adicional para entenderte.
-Verifica que tu consulta se encuentre dentro del contexto correcto.
-Ejemplo: Decime "¿Está disponible el Hola cómo estás?", no tiene ningún sentido.
+¿En que puedo ayudarte?
+Algunas preguntas o comentarios no los entiendo todavía.
+Necesito información adicional para entenderte.
 Proba preguntandome de otras formas, quizas comprenda.
 	*/}),
 	TESTME: multiline(function(){/*

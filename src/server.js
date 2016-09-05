@@ -16,18 +16,31 @@ var ip = require('ip'),
   redis_node = require("redis"),
   multiline = require('multiline'),
   botan = require('botanio')(app_cfg.token_botan),
-  Q = require("q");
+  Q = require("q"),
+  request = require('request');
 
 var response = '';
+var api_url = "http://"+app_cfg.api_host+":"+app_cfg.api_port+"/has/wifi";
 
-if (app_cfg.cache_enable)
+if (app_cfg.cache_enable){
   var redis = redis_node.createClient();
-
-function processMerge(cb, id, context, entities, message){
-  processMerge(cb, id, context, entities, message, null);
+  redis.flushall();
 }
 
-function processMerge(cb, id, context, entities, message, cached_msg){
+function processMerge(cb, id, username, context, entities, message){
+  processMerge(cb, id, username, context, entities, message, null);
+}
+
+function isBroadcast(message){
+  var prefix_control = "difundir:";
+  if(message.substring(9,0).trim()==prefix_control)
+    return true;
+  else
+    return false;
+}
+
+function processMerge(cb, id, username, context, entities, message, cached_msg){
+  console.log(JSON.stringify(context));
     if(redis){
       console.log("Previous Context:  " + cached_msg);
       context = JSON.parse(cached_msg);
@@ -40,13 +53,18 @@ function processMerge(cb, id, context, entities, message, cached_msg){
     console.log("Current:  " + JSON.stringify(current));
     var pre = wit.mergePreContext(current, context);
     console.log("Merge PreContext:  " + JSON.stringify(pre));
-    context["msg_request"] = message;
+    context = wit.updateContext(current, pre);
 
-    if (("send" in context) && ("alumnos" in context) && ("message" in context)){
-      context["broadcast"] = "broadcast";
-      console.log('Es Broadcast!');
-    }else
-      context = wit.updateContext(current, pre);
+      if (_.contains(context, "who_iam") || _.contains(context, "start"))
+        context.username = username;
+
+      if (isBroadcast(message)){
+        var msg_broadcast = username + " te envia el mensaje: " + message.substring(9).trim();
+        context["msg_request"] = msg_broadcast;
+        context.username = username;
+        context.chatId = id;
+      }else
+        context["msg_request"] = message;
 
     console.log("New Context:  " + JSON.stringify(context));
     console.log("Entities:  " + JSON.stringify(entities));
@@ -69,26 +87,36 @@ const actions = {
     cb();
   },
   merge(sessionId, context, entities, message, cb) {
-    var chatId = utils.getChatId(sessionId)
+
+    //console.log("actual: " + JSON.stringify(context));
+    //console.log("actual message: " + JSON.stringify(message));
+
+    //var chatId = utils.getChatId(sessionId)
+    //var username = utils.getUsername(sessionId);
+    var chatId = context.chatId;
+    var username = context.username;
+
     //Obtengo el contexto anterior cacheado
     //Para un simple monitoreo durante el desarrollo
     if (redis)
       redis.get(chatId, function(err,value){
-          processMerge(cb, chatId, context, entities, message, value);
+          processMerge(cb, chatId, username, context, entities, message, value);
       });
     else
-      processMerge(cb, chatId, context, entities, message);
+      processMerge(cb, chatId, username, context, entities, message);
 
   },
   error(sessionId, context, error) {
-    //telegram.sendMessage(utils.getChatId(sessionId),"algo no esta bien")
-    console.log(error);
+    console.log("Error: " + error);
   },
-  send_message(sessionId, context, cb) {
-    var id = sessionId.split('==')[1];
+  send_broadcast(sessionId, context, cb) {
+    console.log(JSON.stringify(context));
+    //var id = sessionId.split('==')[1];
+    var id = context.chatId;
     var name = '';
     var to = [];
     var message = context["msg_request"];
+
     _.each(app_cfg.users, function(user){
         if(user.id==id)
           name = user.name;
@@ -101,7 +129,7 @@ const actions = {
       msg = "El usuario " + name + " te envia el siguiente mensaje: ";
       msg += message;
     }
-    //telegram.sendBroadcast(app_cfg.users, msg, telegram.opts);
+
     telegram.sendBroadcast(to, msg, telegram.opts);
 
     var message_status = "Mensaje enviado OK. Remitente: " + name;
@@ -109,11 +137,20 @@ const actions = {
     context.message_status =  message_status;
     cb(context);
   },
-  get_wifi_password(sessionId, context, cb) {
-    context.wifi_password = "invit@do";
+  get_username(sessionId, context, cb) {
+    context.username = context.username;
     cb(context);
   },
-  get_books(sessionId, context, cb) {
+  get_wifi_password(sessionId, context, cb) {
+
+    request(api_url, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        context.wifi_password = JSON.parse(body).password;
+        cb(context);
+      }
+    })
+  },
+  get_books(sessionId, context, cb){
     context.books_list = "Los libros disponibles: William Stallings 5ta Edición, Abraham Silberschatz.";
     cb(context);
   },
@@ -193,9 +230,10 @@ const actions = {
   },
   ['start-auth'](sessionId, context, cb) {
       //Se recibe TOKEN de authenticación. Una opción es enviar el token al Sinap y validarlo
-      botan.track(msg, 'Start');
+      //botan.track(msg, 'Start');
       var token = context['msg_request'].split(' ')[1];
-      context.status = 'OK';
+      console.log(JSON.stringify(context));
+      context.status = "Bienvenido " + context.username + " ¿en que puedo ayudarte?";
       cb(context);
   },
 };
@@ -223,11 +261,11 @@ function sendMessage(chatId, message){
   return deferred.promise;
 }
 
-function runWit(chatId, message){
+function runWit(chatId, username, message){
   var deferred = Q.defer();
   message_sanitized = telegram.sanitizeMessage(message);
   if (message_sanitized){
-    wit.runActions(actions, chatId, message_sanitized, function(error, context){
+    wit.runActions(actions, chatId, username, message_sanitized, function(error, context){
         if (error) {
           console.log('Oops! Got an error: ' + error);
           sendMessage(chatId, entity.NOT_STORY)
@@ -245,11 +283,11 @@ function runWit(chatId, message){
   return deferred.promise;
 }
 
-function processMessage(id, msg){
-  return processMessage(id, msg, null, null);
+function processMessage(id, username, msg){
+  return processMessage(id, username, msg, null, null);
 }
 
-function processMessage(id, msg, cached_msg, cached_hash){
+function processMessage(id, username, msg, cached_msg, cached_hash){
   var deferred = Q.defer();
 
   if(cached_msg){
@@ -266,7 +304,7 @@ function processMessage(id, msg, cached_msg, cached_hash){
             });
     }else{
       //Ejecuto Wit.ai para obtener la respuesta de la historia
-      runWit(id, msg)
+      runWit(id, username, msg)
         .then(function(m){
           if (cached_hash) redis.set(cached_hash,m);
           deferred.resolve(m);
@@ -279,6 +317,9 @@ function processMessage(id, msg, cached_msg, cached_hash){
 }
 
 function fn_bot (msg) {
+  //console.log(JSON.stringify(msg));
+  //console.log(("document" in msg)? true:false);
+
   var deferred = Q.defer();
   var chatId = msg.chat.id;
   var message = msg.text;
@@ -290,18 +331,20 @@ function fn_bot (msg) {
   console.log("From: " + from);
   console.log("Chat ID: " + chatId);
 
+  var username = msg.from.first_name;
+
   logger.session.info(logger.genInitial({id:chatId, name:msg.from.first_name}, message));
   var message_hash = hash({chatId:chatId, session:wit.session, message:message}, app_cfg.hash);
   telegram.sendChatAction(chatId, "typing");
 
   if (app_cfg.cache_enable)
     redis.get(message_hash, function(error,value){
-        processMessage(chatId, message, value, message_hash)
+        processMessage(chatId, username, message, value, message_hash)
           .then(deferred.resolve)
           .fail(deferred.reject);
     });
   else {
-    processMessage(chatId, message)
+    processMessage(chatId, username, message)
       .then(deferred.resolve)
       .fail(deferred.reject);
   }
@@ -315,6 +358,24 @@ exports.listen = telegram.on(fn_bot);
 
 console.log("Server [" + ip.address() + "] listening...");
 console.log("Session Wit: " + wit.session);
+
+
+/*var fs = require('fs'),
+    request = require('request');
+
+var download = function(uri, filename, callback){
+  request.head(uri, function(err, res, body){
+    console.log('content-type:', res.headers['content-type']);
+    console.log('content-length:', res.headers['content-length']);
+
+    request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+  });
+};
+
+download('https://api.telegram.org/file/bot219665776:AAEigXWrsa16CxeVqPWvhOoMolhUm7ADVyI/photo/file_2.jpg', 'file_2.png', function(){
+  console.log('done');
+});*/
+
 
 //Enviar Broadcast
 //telegram.sendBroadcast(app_cfg.users, entity_cfg.TESTME, telegram.opts);
