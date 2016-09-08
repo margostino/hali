@@ -64,6 +64,14 @@ const matchBroadcast = (context) => {
 	  return false;
 };
 
+const matchTicket = (context) => {
+	  var current = _.without(_.keys(context), 'msg_request');
+		if (_.contains(current, "ticket"))
+			return true;
+
+	  return false;
+};
+
 const getNotStory = (context) => {
 	logger.app.info("Contexto no entrenado: " + JSON.stringify(context));
 	var ctx = {};
@@ -92,6 +100,12 @@ const getBroadcast = (context) => {
 	return ctx;
 };
 
+const getTicket = (context) => {
+	logger.app.info("Contexto ticket: " + JSON.stringify(context));
+	var ctx = {};
+	ctx['ticket'] = "ticket";
+	return ctx;
+};
 
 var wit = {
 	session: session,
@@ -159,6 +173,8 @@ var wit = {
 	      ctx = current;
 			else if(matchBroadcast(current))
 				ctx = getBroadcast(current);
+			else if(matchTicket(current))
+				ctx = getTicket(current);
 			/*else if(matchBroadcastConfuse(current))
 				ctx = getBroadcastConfuse(current);*/
 			else if(matchConfuse(current))
@@ -180,8 +196,7 @@ var wit = {
 			username: username,
 			message: message
 		};*/
-		var id = session;
-	  client(actions).runActions("ss", message, context, (error, context1) => {
+	  client(actions).runActions(session, message, context, (error, context1) => {
 	  		fn(error, context1);
 	  });
 	}

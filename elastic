@@ -1,0 +1,88 @@
+POST hali/_search
+{"query": {"match_all": {}}}
+DELETE hali/
+POST hali/events
+{
+    "fecha": "2016-08-19",
+    "tipo": "institucional",
+    "usuario": "Belen Guti",
+    "rol": "autoridad",
+    "especialidad": "Bedel",
+    "Sede": "Medrano",
+    "mensaje": "La facultad estará cerrada hoy por falta de luz",
+    "device": "iPhone"
+}
+
+PUT hali
+{
+"settings": {
+    "analysis": {
+"filter": {
+    "spanish_stop": {
+      "type":       "stop",
+      "stopwords_path":  "stopwords/spanish"
+    },
+    "spanish_keywords": {
+      "type":       "keyword_marker",
+      "keywords_path":   "keywords/spanish"
+
+    },
+    "spanish_stemmer": {
+      "type":       "stemmer",
+      "language":   "spanish"
+    }
+  },
+      "analyzer": {
+        "spanish": {
+            "type": "custom",
+            "tokenizer" : "standard",
+      "filter": [
+         "standard",
+        "lowercase",
+        "asciifolding",
+        "spanish_stop",
+        "spanish_keywords"
+      ]
+        }
+      }
+}},
+    "mappings": {
+         "events": {
+            "properties": {
+               "fecha": {
+                  "type": "date",
+                  "format": "yyyy-MM-dd"
+               },
+               "tipo": {
+                  "type": "string",
+                  "index": "not_analyzed"
+               },
+               "usuario": {
+                  "type": "string",
+                  "index": "not_analyzed"
+               },
+               "rol": {
+                  "type": "string",
+                  "index": "not_analyzed"
+               },
+               "mensaje": {
+                  "type": "string",
+                  "analyzer": "spanish"
+               },
+               "device": {
+                  "type": "string",
+                  "index": "not_analyzed"
+               },
+               "especialidad": {
+                  "type": "string",
+                  "index": "not_analyzed"
+               },
+               "sede": {
+                  "type": "string",
+                  "index": "not_analyzed"
+               }
+
+              }
+          }
+        }
+}

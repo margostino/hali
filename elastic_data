@@ -1,0 +1,181 @@
+POST hali/events/_bulk
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-01", "tipo": "consulta cursada", "usuario": "juan perez","rol": "alumno","especialidad": "Sistemas","sede": "Medrano","mensaje": "donde curso hoy?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-01","tipo": "consulta carrera","usuario": "matias garcia","rol": "alumno","especialidad": "Sistemas","sede": "Campus","mensaje": "que incumbencia tiene mi carrera?","device": "Android 5"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-02","tipo": "consulta calendario","usuario": "ian alvarez","rol": "alumno","especialidad": "Civil","sede": "Medrano","mensaje": "cuando comienza el cuatrimestre?","device": "Android 6"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-02","tipo": "procesos","usuario": "sebastian perez","rol": "alumno","especialidad": "Industrial","sede": "Medrano","mensaje": "como hago PPS?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-02","tipo": "institucional","usuario": "Belen Guti","rol": "autoridad","especialidad": "Bedel","sede": "Medrano","mensaje": "La facultad estará cerrada hoy por falta de luz","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-03","tipo": "consulta cursada","usuario": "juan perez","rol": "alumno","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando es el examen?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-03","tipo": "consulta recursos","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "esta disponible el aula magna el jueves?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-03","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-04","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-04","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-05","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-06","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-07","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-07","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-07","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-08","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-09","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-09","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-09", "tipo": "consulta cursada", "usuario": "juan perez","rol": "alumno","especialidad": "Sistemas","sede": "Medrano","mensaje": "donde curso hoy?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-10","tipo": "consulta carrera","usuario": "matias garcia","rol": "alumno","especialidad": "Sistemas","sede": "Campus","mensaje": "que incumbencia tiene mi carrera?","device": "Android 5"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-10","tipo": "consulta calendario","usuario": "ian alvarez","rol": "alumno","especialidad": "Civil","sede": "Medrano","mensaje": "cuando comienza el cuatrimestre?","device": "Android 6"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-10","tipo": "procesos","usuario": "sebastian perez","rol": "alumno","especialidad": "Industrial","sede": "Medrano","mensaje": "como hago PPS?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-11","tipo": "institucional","usuario": "Belen Guti","rol": "autoridad","especialidad": "Bedel","sede": "Medrano","mensaje": "La facultad estará cerrada hoy por falta de luz","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-11","tipo": "consulta cursada","usuario": "juan perez","rol": "alumno","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando es el examen?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-12","tipo": "consulta recursos","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "esta disponible el aula magna el jueves?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-13","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-14","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-15","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-16","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-17","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-17","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-17","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-17","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-18","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-19","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-20","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-21", "tipo": "consulta cursada", "usuario": "juan perez","rol": "alumno","especialidad": "Sistemas","sede": "Medrano","mensaje": "donde curso hoy?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-22","tipo": "consulta carrera","usuario": "matias garcia","rol": "alumno","especialidad": "Sistemas","sede": "Campus","mensaje": "que incumbencia tiene mi carrera?","device": "Android 5"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-23","tipo": "consulta calendario","usuario": "ian alvarez","rol": "alumno","especialidad": "Civil","sede": "Medrano","mensaje": "cuando comienza el cuatrimestre?","device": "Android 6"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-23","tipo": "procesos","usuario": "sebastian perez","rol": "alumno","especialidad": "Industrial","sede": "Medrano","mensaje": "como hago PPS?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-24","tipo": "institucional","usuario": "Belen Guti","rol": "autoridad","especialidad": "Bedel","sede": "Medrano","mensaje": "La facultad estará cerrada hoy por falta de luz","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-24","tipo": "consulta cursada","usuario": "juan perez","rol": "alumno","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando es el examen?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-24","tipo": "consulta recursos","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "esta disponible el aula magna el jueves?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-24","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-25","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-25","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-27","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-30","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-31","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-31","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-01","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-15","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-14","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-19","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-21", "tipo": "consulta cursada", "usuario": "juan perez","rol": "alumno","especialidad": "Sistemas","sede": "Medrano","mensaje": "donde curso hoy?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-22","tipo": "consulta carrera","usuario": "matias garcia","rol": "alumno","especialidad": "Sistemas","sede": "Campus","mensaje": "que incumbencia tiene mi carrera?","device": "Android 5"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-20","tipo": "consulta calendario","usuario": "ian alvarez","rol": "alumno","especialidad": "Civil","sede": "Medrano","mensaje": "cuando comienza el cuatrimestre?","device": "Android 6"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-23","tipo": "procesos","usuario": "sebastian perez","rol": "alumno","especialidad": "Industrial","sede": "Medrano","mensaje": "como hago PPS?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-19","tipo": "institucional","usuario": "Belen Guti","rol": "autoridad","especialidad": "Bedel","sede": "Medrano","mensaje": "La facultad estará cerrada hoy por falta de luz","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-20","tipo": "consulta cursada","usuario": "juan perez","rol": "alumno","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando es el examen?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-24","tipo": "consulta recursos","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "esta disponible el aula magna el jueves?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-24","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-20","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-24","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-27","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-30","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-01","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-10","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-12","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-15","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-14","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-19","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-21", "tipo": "consulta cursada", "usuario": "juan perez","rol": "alumno","especialidad": "Sistemas","sede": "Medrano","mensaje": "donde curso hoy?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-22","tipo": "consulta carrera","usuario": "matias garcia","rol": "alumno","especialidad": "Sistemas","sede": "Campus","mensaje": "que incumbencia tiene mi carrera?","device": "Android 5"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-20","tipo": "consulta calendario","usuario": "ian alvarez","rol": "alumno","especialidad": "Civil","sede": "Medrano","mensaje": "cuando comienza el cuatrimestre?","device": "Android 6"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-23","tipo": "procesos","usuario": "sebastian perez","rol": "alumno","especialidad": "Industrial","sede": "Medrano","mensaje": "como hago PPS?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-19","tipo": "institucional","usuario": "Belen Guti","rol": "autoridad","especialidad": "Bedel","sede": "Medrano","mensaje": "La facultad estará cerrada hoy por falta de luz","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-20","tipo": "consulta cursada","usuario": "juan perez","rol": "alumno","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando es el examen?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-24","tipo": "consulta recursos","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "esta disponible el aula magna el jueves?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-24","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-20","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-24","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-27","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-07-30","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-01","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-10","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-12","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-15","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}
+{"index":{"_index":"hali", "_type":"events"}}
+{"fecha": "2016-03-30","tipo": "cursada - ausencia","usuario": "miguel rodriguez","rol": "profesor","especialidad": "Sistemas","sede": "Medrano","mensaje": "cuando son los finales de Inteligencia Artificial?","device": "iPhone"}

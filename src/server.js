@@ -20,7 +20,7 @@ var ip = require('ip'),
   request = require('request');
 
 var response = '';
-var api_url = "http://"+app_cfg.api_host+":"+app_cfg.api_port+"/has/wifi";
+var api_url = "http://"+app_cfg.api_host+":"+app_cfg.api_port;
 
 if (app_cfg.cache_enable){
   var redis = redis_node.createClient();
@@ -34,6 +34,14 @@ function processMerge(cb, id, username, context, entities, message){
 function isBroadcast(message){
   var prefix_control = "difundir:";
   if(message.substring(9,0).trim()==prefix_control)
+    return true;
+  else
+    return false;
+}
+
+function isTicket(message){
+  var prefix_control = "ticket:";
+  if(message.substring(7,0).trim()==prefix_control)
     return true;
   else
     return false;
@@ -61,6 +69,11 @@ function processMerge(cb, id, username, context, entities, message, cached_msg){
       if (isBroadcast(message)){
         var msg_broadcast = username + " te envia el mensaje: " + message.substring(9).trim();
         context["msg_request"] = msg_broadcast;
+        context.username = username;
+        context.chatId = id;
+      }else if (isTicket(message)){
+        var msg_ticket = username + " envia el mensaje: " + message.substring(7).trim();
+        context["msg_request"] = msg_ticket;
         context.username = username;
         context.chatId = id;
       }else
@@ -107,10 +120,37 @@ const actions = {
 
   },
   error(sessionId, context, error) {
+    logger.error.error(error);
     console.log("Error: " + error);
   },
+  send_ticket(sessionId, context, cb) {
+    var chatId = context.chatId;
+
+    var ticket_data = {
+      "user": "legajoTIPO1110009",
+      "subject": "Pedido de mantenimiento",
+      "location": "Medrano",
+      "description": "Esta inundado el baño del 3ro"
+    }
+
+    telegram.sendChatAction(chatId, "typing");
+    request.post({
+        json: true,
+        body: ticket_data,
+        url: api_url + "/has/tickets"
+        }, function(error, response, body) {
+          telegram.sendChatAction(chatId, "typing");
+      		if(error) {
+      			deferred.reject('<ALUMNO> No pudo preguntar: ' + error);
+            console.log("Error al enviar el ticket")
+      		} else {
+            context.ticket_status = body.status;
+            cb(context);
+      		}
+	  });
+
+  },
   send_broadcast(sessionId, context, cb) {
-    console.log(JSON.stringify(context));
     //var id = sessionId.split('==')[1];
     var id = context.chatId;
     var name = '';
@@ -142,13 +182,12 @@ const actions = {
     cb(context);
   },
   get_wifi_password(sessionId, context, cb) {
-
-    request(api_url, function (error, response, body) {
+    request(api_url+"/has/wifi", function (error, response, body) {
       if (!error && response.statusCode == 200) {
         context.wifi_password = JSON.parse(body).password;
         cb(context);
       }
-    })
+    });
   },
   get_books(sessionId, context, cb){
     context.books_list = "Los libros disponibles: William Stallings 5ta Edición, Abraham Silberschatz.";
@@ -358,7 +397,6 @@ exports.listen = telegram.on(fn_bot);
 
 console.log("Server [" + ip.address() + "] listening...");
 console.log("Session Wit: " + wit.session);
-
 
 /*var fs = require('fs'),
     request = require('request');
