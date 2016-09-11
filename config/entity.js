@@ -14,7 +14,9 @@ Por cierto venis muy bien en la carrera! Vamos por más. :)
 Me encuentro en estado de entrenamiento. En breve ya voy a ser más inteligente! :)
 Cuando te recibas vamos a tomar unas cervezas!!!
 	*/}),
-
+	NOT_WORKED: multiline(function(){/*
+No llego el mensaje. ¿podrías repetirlo?		
+	*/}),
 	SKILLS: multiline(function(){/*
 De momento estoy preparada para lo siguiente:
 1) Contarte si el aula Magna esta disponible o no.
@@ -39,20 +41,26 @@ Algunas preguntas o comentarios no los entiendo todavía.
 Necesito información adicional para entenderte.
 Proba preguntandome de otras formas, quizas comprenda.
 	*/}),
+	START: multiline(function(){/*
+Hola!!!. Necesito que comprobar tu identidad.
+Autenticate presionando el comando de abajo porfa :)
+	*/}),
 	TESTME: multiline(function(){/*
 Hola crack!!, Ya estoy online de nuevo con algo más de entrenamiento.
 Cuando tengas tiempo libre testeame.
 Y si funciono mal no te quejes que estamos trabajando.
 Abrazo.
 	*/}),
-
+	ASK_START: multiline(function(){/*
+Hola. Aún no estas autenticado.
+Por favor identificate presionando el boton de abajo.
+	*/}),
 	LOCATIONS: multiline(function(){/*
 		Medrano 951 (C1179AAQ) C.A.B.A - Tel: (54 11) 4867-7500.
 		Campus: Mozart 2300 (C1407IVT) C.A.B.A. - Tel: (54 11) 4867-7500.
 	*/}),
 
 	GOOGLE_IT: "https://www.google.com.ar/#q=",
-	START: 'Bienvenido!',
 	STOP: 'Hasta pronto!'
 };
 

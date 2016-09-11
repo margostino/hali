@@ -5,6 +5,8 @@ var ip = require('ip'),
   wit = require('./wit'),
   utils = require('./utils'),
   telegram = require('./telegram'),
+  walpha = require('./walpha'),
+  translate = require('./translate'),
   _ = require('underscore'),
   logger = require('./logger'),
   weather = require('weather-js'),
@@ -34,6 +36,14 @@ function processMerge(cb, id, username, context, entities, message){
 function isBroadcast(message){
   var prefix_control = "difundir:";
   if(message.substring(9,0).trim()==prefix_control)
+    return true;
+  else
+    return false;
+}
+
+function isWAlpha(message){
+  var prefix_control = "w:";
+  if(message.toLowerCase().substring(2,0).trim()==prefix_control)
     return true;
   else
     return false;
@@ -121,7 +131,7 @@ const actions = {
   },
   error(sessionId, context, error) {
     logger.error.error(error);
-    console.log("Error: " + error);
+    console.log("Error Wit: " + error);
   },
   send_ticket(sessionId, context, cb) {
     var chatId = context.chatId;
@@ -130,7 +140,7 @@ const actions = {
       "user": "legajoTIPO1110009",
       "subject": "Pedido de mantenimiento",
       "location": "Medrano",
-      "description": "Esta inundado el baño del 3ro"
+      "description": context['msg_request']
     }
 
     telegram.sendChatAction(chatId, "typing");
@@ -271,8 +281,7 @@ const actions = {
       //Se recibe TOKEN de authenticación. Una opción es enviar el token al Sinap y validarlo
       //botan.track(msg, 'Start');
       var token = context['msg_request'].split(' ')[1];
-      console.log(JSON.stringify(context));
-      context.status = "Bienvenido " + context.username + " ¿en que puedo ayudarte?";
+      context.status = entity_cfg.START;
       cb(context);
   },
 };
@@ -290,14 +299,18 @@ redis.get("k1", function(err, reply) {
     console.log(reply);
 });*/
 
-function sendMessage(chatId, message){
+function sendMessage(chatId, message, options){
   var deferred = Q.defer();
-  telegram.sendMessage(chatId,message)
+  telegram.sendMessage(chatId, message, options)
           .then(function(res){
             deferred.resolve(message);
           });
 
   return deferred.promise;
+}
+
+function isStart(context){
+    return ("start" in context)? true:false;
 }
 
 function runWit(chatId, username, message){
@@ -307,10 +320,16 @@ function runWit(chatId, username, message){
     wit.runActions(actions, chatId, username, message_sanitized, function(error, context){
         if (error) {
           console.log('Oops! Got an error: ' + error);
-          sendMessage(chatId, entity.NOT_STORY)
+          logger.error.error(error);
+          wit.renewSession();
+          sendMessage(chatId, entity_cfg.NOT_WORKED)
                   .then(deferred.reject);
         } else {
-          sendMessage(chatId, response)
+          if(isStart(context)){
+            sendMessage(chatId, response, telegram.opts)
+                    .then(deferred.resolve);
+          }else
+            sendMessage(chatId, response)
                   .then(deferred.resolve);
         }
     });
@@ -355,38 +374,102 @@ function processMessage(id, username, msg, cached_msg, cached_hash){
   return deferred.promise;
 }
 
+function isAuthenticated(hash){
+  var deferred = Q.defer();
+  redis.get(hash, function(error,value){
+      if(value){
+        console.log('Autenticado!');
+        deferred.resolve("authenticated");
+      }else{
+        console.log('No Autenticado!');
+        deferred.reject("not authenticated");
+      }
+  });
+  return deferred.promise;
+}
+
 function fn_bot (msg) {
-  //console.log(JSON.stringify(msg));
+  console.log(JSON.stringify(msg));
   //console.log(("document" in msg)? true:false);
 
   var deferred = Q.defer();
   var chatId = msg.chat.id;
-  var message = msg.text;
   var messageId = msg.message_id;
   var from = JSON.stringify(msg.from);
+  var username = msg.from.first_name;
+  var authenticate = false;
+  var start_hash = hash({chatId:chatId, start:"start"}, app_cfg.hash);
+  var message = "";
 
-  console.log("Mensaje: " + message);
   console.log("Mensaje ID: " + messageId);
   console.log("From: " + from);
   console.log("Chat ID: " + chatId);
 
-  var username = msg.from.first_name;
+  if(msg.text){
+    //Envio texto para Wit.ai
+    message = msg.text;
+    console.log("Mensaje: " + message);
+  }
+
+  if(msg.contact){
+    //Presiono el boton de autenticar
+    console.log("Phone number:  " + msg.contact.phone_number);
+    message = "Bienvenido " + username + " ¿en que puedo ayudarte?";
+    authenticate = true;
+    redis.set(start_hash, "OK");
+  }
 
   logger.session.info(logger.genInitial({id:chatId, name:msg.from.first_name}, message));
   var message_hash = hash({chatId:chatId, session:wit.session, message:message}, app_cfg.hash);
+
   telegram.sendChatAction(chatId, "typing");
 
-  if (app_cfg.cache_enable)
-    redis.get(message_hash, function(error,value){
-        processMessage(chatId, username, message, value, message_hash)
+  isAuthenticated(start_hash, message)
+    .then(function(res){
+      //Ya esta autenticado
+      if (authenticate){
+        var message = "Bienvenido " + username + " ¿en que puedo ayudarte?";
+
+        var options ={
+          reply_markup:{"keyboard":[["Hi!"]],"resize_keyboard": true,"one_time_keyboard":true}
+        }
+        sendMessage(chatId, message, options)
+              .then(deferred.resolve);
+      }else if (app_cfg.cache_enable){
+        message = msg.text;
+        if(isWAlpha(message)){
+          message = message.substring(2).trim();
+          walpha.query(message, function (err, result) {
+            walpha.response(err, result)
+              .then(function(res){
+                sendMessage(chatId, res)
+                      .then(deferred.resolve);
+                })
+              .fail(function(e){
+                sendMessage(chatId, "No puedo responder a eso. Reformula por favor!")
+                      .then(deferred.resolve);
+                })
+          });
+        }else{
+          redis.get(message_hash, function(error,value){
+              processMessage(chatId, username, message, value, message_hash)
+                .then(deferred.resolve)
+                .fail(deferred.reject);
+          });
+        }
+      }else {
+        processMessage(chatId, username, message)
           .then(deferred.resolve)
           .fail(deferred.reject);
+      }
+    })
+    .fail(function(e){
+      //Pide autenticarse
+      var message = entity_cfg.START;
+      sendMessage(chatId, message, telegram.opts)
+        .then(deferred.resolve);
     });
-  else {
-    processMessage(chatId, username, message)
-      .then(deferred.resolve)
-      .fail(deferred.reject);
-  }
+
 
   return deferred.promise;
 };
@@ -397,7 +480,19 @@ exports.listen = telegram.on(fn_bot);
 
 console.log("Server [" + ip.address() + "] listening...");
 console.log("Session Wit: " + wit.session);
+/*var LanguageDetect = require('languagedetect');
+var lngDetector = new LanguageDetect();
+console.log(lngDetector.detect('¿quien es Obama?'));*/
 
+
+//var fs = require('fs');
+//var obj = JSON.parse(fs.readFileSync('walpha_sample.json', 'utf8'));
+
+
+
+
+//var reply_markup = telegram.ReplyKeyboardMarkup([[telegram.KeyboardButton('Share contact', request_contact=True)]])
+//bot.sendMessage(CHAT_ID, 'Example', reply_markup=reply_markup)
 /*var fs = require('fs'),
     request = require('request');
 

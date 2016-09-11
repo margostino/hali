@@ -14,10 +14,28 @@ const TOKEN = app_cfg.token_tg;
 const bot = new TelegramBot(TOKEN, app_cfg.polling);
 var telegram = {
 	opts: {
-		reply_markup: JSON.stringify(
-		    {
-		      force_reply: true
-		    })
+		reply_markup:{
+				keyboard:[[{
+					text:'AUTENTICARME EN UTN (right now!)',
+					request_contact: true
+				}]],
+				one_time_keyboard:true,
+				request_location: true,
+				resize_keyboard: true
+			}
+		/*reply_markup: JSON.stringify({
+			keyboard: [
+						[{
+							text:'AUTENTICARME EN UTN (right now!)',
+							resize_keyboard: true,
+							//force_reply: true,
+							//hide_keyboard: true,
+							one_time_keyboard: true,
+							request_contact: true,
+							request_location: true
+						}]
+			]
+		})*/
 	},
 	on: (fn) => {
 		return bot.on('message', fn);
@@ -30,8 +48,11 @@ var telegram = {
 			bot.sendMessage(u.id, message);
 		});
 	},
-	sendMessage: (user, message) => {		
-		return bot.sendMessage(user, message);
+	sendMessage: (user, message, options) => {
+		if(options)
+			return bot.sendMessage(user, message, options);
+		else
+			return bot.sendMessage(user, message);
 	},
 	sanitizeMessage: (message) => {
 	  var message_sanitized = message;
