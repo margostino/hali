@@ -109,7 +109,8 @@ const getTicket = (context) => {
 
 var wit = {
 	session: session,
-	renewSession: () => {
+	restart: (actions) => {
+		client = new Wit(TOKEN, actions);
 		session = hash(app_cfg.session, app_cfg.hash);
 		console.log("Renew Wit Session: " + session);
 	},

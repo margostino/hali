@@ -15,7 +15,7 @@ Me encuentro en estado de entrenamiento. En breve ya voy a ser más inteligente!
 Cuando te recibas vamos a tomar unas cervezas!!!
 	*/}),
 	NOT_WORKED: multiline(function(){/*
-No llego el mensaje. ¿podrías repetirlo?		
+No llego el mensaje. ¿podrías repetirlo?
 	*/}),
 	SKILLS: multiline(function(){/*
 De momento estoy preparada para lo siguiente:
@@ -59,7 +59,13 @@ Por favor identificate presionando el boton de abajo.
 		Medrano 951 (C1179AAQ) C.A.B.A - Tel: (54 11) 4867-7500.
 		Campus: Mozart 2300 (C1407IVT) C.A.B.A. - Tel: (54 11) 4867-7500.
 	*/}),
-
+	WALPHA_REFORM: multiline(function(){/*
+El módulo WAlpha no puede interpretar tu pregunta. Reformula por favor.
+Recorda que por el momento este módulo acepta pregunta en Ingles.
+Ejemplo pregunta OK: "w: who is the current president of Brazil?".
+Ejemplo pregunta OK: "w: how is going MELI Stock?".
+Ejemplo pregunta NO-OK: "w: hola como andas, tell me pitagor theorem fiera!".
+	*/}),
 	GOOGLE_IT: "https://www.google.com.ar/#q=",
 	STOP: 'Hasta pronto!'
 };

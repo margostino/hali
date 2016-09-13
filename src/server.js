@@ -321,7 +321,7 @@ function runWit(chatId, username, message){
         if (error) {
           console.log('Oops! Got an error: ' + error);
           logger.error.error(error);
-          wit.renewSession();
+          wit.restart(actions);
           sendMessage(chatId, entity_cfg.NOT_WORKED)
                   .then(deferred.reject);
         } else {
