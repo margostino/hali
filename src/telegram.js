@@ -12,6 +12,7 @@ var TelegramBot = require('node-telegram-bot-api'),
 var regEx = new RegExp('(<span class=\"emoji [_]([0-9]*[a-zA-Z]*[0-9]*)*\"><\/span>)*','g');
 const TOKEN = app_cfg.token_tg;
 const bot = new TelegramBot(TOKEN, app_cfg.polling);
+
 var telegram = {
 	opts: {
 		reply_markup:{

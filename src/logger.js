@@ -8,21 +8,13 @@ const APP = 'hali';
 const SESSION = 'session';
 const ERROR = 'error';
 
-var logger = {
-	app: log4js.getLogger(APP),
-	session: log4js.getLogger(SESSION),
-  error: log4js.getLogger(ERROR),
-  genInitial: (chat,message) => {
-    return chat.id + "," + chat.name + "," + message;
-  },
-  genMerge: (session,context) => {
-    return session + ":" + JSON.stringify(_.omit(context, '_chat'));
-  }
-}
+var log_app = log4js.getLogger(APP);
+var log_session = log4js.getLogger(SESSION);
+var log_error = log4js.getLogger(ERROR);
 
-logger.app.setLevel('INFO'); //TRACE, INFO, WARN, ERROR, FATAL, DEBUG
-logger.session.setLevel('INFO');
-logger.error.setLevel('ERROR');
+log_app.setLevel('INFO'); //TRACE, INFO, WARN, ERROR, FATAL, DEBUG
+log_session.setLevel('INFO');
+log_error.setLevel('ERROR');
 
 const configureLogs = (logger, path, app) => {
 
@@ -37,8 +29,20 @@ const configureLogs = (logger, path, app) => {
   });
 };
 
-configureLogs(logger.app, PATH, APP);
-configureLogs(logger.session, PATH_SESSION, SESSION);
-configureLogs(logger.error, PATH_ERROR, ERROR);
+//configureLogs(log_app, PATH, APP);
+configureLogs(log_session, PATH_SESSION, SESSION);
+//configureLogs(log_error, PATH_ERROR, ERROR);
+
+var logger = {
+	app: log_app,
+	session: log_session,
+  error: log_error,
+  genInitial: (chat,message) => {
+    return chat.id + "," + chat.name + "," + message;
+  },
+  genMerge: (session,context) => {
+    return session + ":" + JSON.stringify(_.omit(context, '_chat'));
+  }
+}
 
 module.exports = logger;

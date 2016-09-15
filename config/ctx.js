@@ -14,8 +14,12 @@ var ctx = {
 			['book','materia','what'],['book','query_availability', 'book_name'],
 			['hali_skills','do'],['alumnos','send','message'],['broadcast'],['ticket'],
 			['hali','greeting'],['who_iam'],['find_course','when'],['find_course'],
-			['find_course','yes'],['create','ticket','soporte']
+			['find_course','yes'],['create','ticket','soporte'],['what','day','when'],
+			['test_story']
 			//['message_status','broadcast'],['alumnos','say','broadcast'],
+	],
+	stories: [
+		{context:['test_story'],method:['test_story']}
 	],
 	weather: {
 		area: 'Capital Federal, Buenos Aires',

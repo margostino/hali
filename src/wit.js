@@ -9,8 +9,8 @@ var _ = require('underscore'),
 	hash = require('object-hash');
 
 const session = hash(app_cfg.session, app_cfg.hash);
-const TOKEN = app_cfg.token_wit;
-//const TOKEN = app_cfg.token_wit_test;
+//const TOKEN = app_cfg.token_wit;
+const TOKEN = app_cfg.token_wit_test;
 const context = {};
 const client = (actions) =>{
 		return new Wit(TOKEN, actions)
@@ -110,8 +110,8 @@ const getTicket = (context) => {
 var wit = {
 	session: session,
 	restart: (actions) => {
-		client = new Wit(TOKEN, actions);
-		session = hash(app_cfg.session, app_cfg.hash);
+		this.client = new Wit(TOKEN, actions);
+		this.session = hash(app_cfg.session, app_cfg.hash);
 		console.log("Renew Wit Session: " + session);
 	},
 	logger: new logger_wit(levels.DEBUG),

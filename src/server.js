@@ -1,4 +1,5 @@
 var ip = require('ip'),
+  logger = require('./logger'),
   app_cfg = require('../config/app'),
   ctx_cfg = require('../config/ctx'),
   entity_cfg = require('../config/entity'),
@@ -8,7 +9,6 @@ var ip = require('ip'),
   walpha = require('./walpha'),
   translate = require('./translate'),
   _ = require('underscore'),
-  logger = require('./logger'),
   weather = require('weather-js'),
   isSEmoji = require('is-standard-emoji'),
   unicode = require("emoji-unicode-map"),
@@ -19,7 +19,8 @@ var ip = require('ip'),
   multiline = require('multiline'),
   botan = require('botanio')(app_cfg.token_botan),
   Q = require("q"),
-  request = require('request');
+  request = require('request'),
+  readline = require('readline');
 
 var response = '';
 var api_url = "http://"+app_cfg.api_host+":"+app_cfg.api_port;
@@ -49,6 +50,14 @@ function isWAlpha(message){
     return false;
 }
 
+function isTranslate(message){
+  var prefix_control = "t:";
+  if(message.toLowerCase().substring(2,0).trim()==prefix_control)
+    return true;
+  else
+    return false;
+}
+
 function isTicket(message){
   var prefix_control = "ticket:";
   if(message.substring(7,0).trim()==prefix_control)
@@ -58,11 +67,15 @@ function isTicket(message){
 }
 
 function processMerge(cb, id, username, context, entities, message, cached_msg){
-  console.log(JSON.stringify(context));
+    console.log(JSON.stringify(context));
     if(redis){
       console.log("Previous Context:  " + cached_msg);
       context = JSON.parse(cached_msg);
     }
+
+
+
+
 
     //Valida contextos configurados
     logger.session.info("<Pre> " + logger.genMerge(id, context));
@@ -93,6 +106,12 @@ function processMerge(cb, id, username, context, entities, message, cached_msg){
     console.log("Entities:  " + JSON.stringify(entities));
     logger.session.info("<New> " + logger.genMerge(id, context));
 
+    //TODO: desacomplar logica de contextos validados contra metodos mejorar
+    // todos los flujos
+    if ("when" in context && "day" in context && "what"){
+      context["get_datetime"]="get_datetime";
+      context["msg_request"] = message;
+    }
     //Proceso merge directo - evaluar por cambios en Wit.ai
     /*var context = wit.mergeEntities(entities);
     console.log("Current:  " + JSON.stringify(context));
@@ -389,6 +408,7 @@ function isAuthenticated(hash){
 }
 
 function fn_bot (msg) {
+
   console.log(JSON.stringify(msg));
   //console.log(("document" in msg)? true:false);
 
@@ -450,6 +470,17 @@ function fn_bot (msg) {
                       .then(deferred.resolve);
                 })
           });
+        }else if(isTranslate(message)){
+              message = message.substring(2).trim();
+              translate.get(message)
+              .then(function(res){
+                sendMessage(chatId, res)
+                      .then(deferred.resolve);
+                })
+              .fail(function(e){
+                sendMessage(chatId, "No puedo traducir eso. Reformula por favor!")
+                      .then(deferred.resolve);
+                })
         }else{
           redis.get(message_hash, function(error,value){
               processMessage(chatId, username, message, value, message_hash)
@@ -469,8 +500,6 @@ function fn_bot (msg) {
       sendMessage(chatId, message, telegram.opts)
         .then(deferred.resolve);
     });
-
-
   return deferred.promise;
 };
 
@@ -487,8 +516,6 @@ console.log(lngDetector.detect('¿quien es Obama?'));*/
 
 //var fs = require('fs');
 //var obj = JSON.parse(fs.readFileSync('walpha_sample.json', 'utf8'));
-
-
 
 
 //var reply_markup = telegram.ReplyKeyboardMarkup([[telegram.KeyboardButton('Share contact', request_contact=True)]])
@@ -515,3 +542,22 @@ download('https://api.telegram.org/file/bot219665776:AAEigXWrsa16CxeVqPWvhOoMolh
 
 //Cliente interactive por consola
 //wit.interactive(actions);
+
+var interactive = () => {
+  rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+  rl.setPrompt('> ');
+  rl.prompt();
+  rl.write(null, {ctrl: true, name: 'e'});
+  rl.on('line', ((line) => {
+    const msg = line.trim();
+    var user = msg.split(',')[0].trim();
+    var message = msg.split(',')[1].trim();
+    telegram.sendMessage(user, message);
+    rl.setPrompt('> ');
+    rl.prompt();
+  }).bind(this));
+};
+interactive();
