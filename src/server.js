@@ -1,13 +1,11 @@
 var ip = require('ip'),
   logger = require('./logger'),
   app_cfg = require('../config/app'),
-  ctx_cfg = require('../config/ctx'),
   entity_cfg = require('../config/entity'),
   wit = require('./wit'),
   utils = require('./utils'),
   telegram = require('./telegram'),
   walpha = require('./walpha'),
-  translate = require('./translate'),
   _ = require('underscore'),
   weather = require('weather-js'),
   isSEmoji = require('is-standard-emoji'),
@@ -20,65 +18,157 @@ var ip = require('ip'),
   botan = require('botanio')(app_cfg.token_botan),
   Q = require("q"),
   request = require('request'),
-  readline = require('readline');
+  readline = require('readline'),
+  translate = require('./translate'),
+  datetime = require('node-datetime');
 
 var response = '';
-var api_url = "http://"+app_cfg.api_host+":"+app_cfg.api_port;
 
 if (app_cfg.cache_enable){
   var redis = redis_node.createClient();
   redis.flushall();
 }
 
+function setCache(id, message, data){
+  if (redis){
+    var data_hash = utils.generateHash(id, message);
+    redis.set(data_hash, data);
+  }
+}
+
+function sendMessage(chatId, message, options){
+  var deferred = Q.defer();
+  telegram.sendMessage(chatId, message, options)
+          .then(function(res){
+            deferred.resolve(message);
+          });
+
+  return deferred.promise;
+}
+
+function sendBroadcast(id, message) {
+  var name = '';
+  var to = [];
+
+  _.each(app_cfg.users, function(user){
+      if(user.id==id)
+        name = user.name;
+      else
+        to.push(user);
+  });
+
+  var msg = message;
+  if(name){
+    msg = "El usuario " + name + " te envia el siguiente mensaje: ";
+    msg += message;
+  }
+
+  telegram.sendBroadcast(to, msg, telegram.opts);
+
+  var message_status = "Mensaje enviado OK. Remitente: " + name;
+  message_status += ". Destinatarios: " + JSON.stringify(to);
+
+  sendMessage(id, message_status);
+}
+
+
 function processMerge(cb, id, username, context, entities, message){
   processMerge(cb, id, username, context, entities, message, null);
 }
 
-function isBroadcast(message){
-  var prefix_control = "difundir:";
-  if(message.substring(9,0).trim()==prefix_control)
-    return true;
-  else
-    return false;
-}
+//ELIMINAR LO DE ABAJO
+/*var context = ['greeting']
 
-function isWAlpha(message){
-  var prefix_control = "w:";
-  if(message.toLowerCase().substring(2,0).trim()==prefix_control)
-    return true;
-  else
-    return false;
-}
+var diff = _.difference(['greeting'], ['greeting']);
+//console.log(diff)
 
-function isTranslate(message){
-  var prefix_control = "t:";
-  if(message.toLowerCase().substring(2,0).trim()==prefix_control)
-    return true;
-  else
-    return false;
-}
 
-function isTicket(message){
-  var prefix_control = "ticket:";
-  if(message.substring(7,0).trim()==prefix_control)
-    return true;
-  else
-    return false;
-}
+var story = wit.matchStory(context)
+if(story)
+  story.method().then(console.log);
+else
+  console.log('There is no story')
 
-function processMerge(cb, id, username, context, entities, message, cached_msg){
-    console.log(JSON.stringify(context));
-    if(redis){
-      console.log("Previous Context:  " + cached_msg);
-      context = JSON.parse(cached_msg);
+var e = {"intent":[{"confidence":1,"type":"value","value":"how"},{"confidence":1,"type":"value","value":"time"}]}
+var ctx = {};
+var keys = _.keys(e);
+console.log(keys);
+var ctx={};
+  _.each(keys, function(entity){
+      _.each(e[entity], function(values){
+        if (entity=="intent")
+          ctx[values.value] = values.value;
+        else
+          ctx[entity] = values.value;
+      });
+  });
+
+console.log(ctx);*/
+/*var pre=['find_course']
+var ctx=['when']
+console.log("validaaa");
+pre.push(ctx)
+var current = _.flatten(pre)
+console.log(current);*/
+
+//ELIMINAR LO DE ARRIBA
+
+function processMerge(cb, id, username, context, entities, message, context_cached){
+    //console.log(JSON.stringify(context));
+    var story = {};
+    var pre_context = [];
+
+    //Asigno el contexto previo
+    if(redis && context_cached)
+      pre_context = JSON.parse(context_cached);
+
+//inicio nuevo
+    //Valida contextos configurados
+    logger.session.info("<Pre> " + logger.genMerge(id, pre_context));
+    logger.session.info("<Entities> " + logger.genMerge(id, entities));
+    var current_context = _.keys(wit.mergeEntities(entities));
+    logger.session.info("<Current> " + logger.genMerge(id, current_context));
+
+    //Se mergea contexto previo con actual
+    pre_context.push(current_context)
+    var context_merged = _.flatten(pre_context)
+    logger.session.info("<Merged> " + logger.genMerge(id, context_merged));
+
+    /*
+      Primero busca match de contexto actual.
+      Si no tiene exito busca match con contexto previo mergeado
+    */
+    story = wit.matchStory(current_context)
+    if(story){
+      context = current_context;
+      console.log("Evalua contexto actual.")
+    }else{
+      story = wit.matchStory(context_merged)
+      context = context_merged;
+      console.log("Evalua contexto mergeado.")
     }
 
+    //Si hay story configurada ejecuto su method
+    if(story)
+      story.method()
+        .then(function(response){
+          logger.session.info("<Response> " + id+":"+response);
+          sendMessage(id, response);
+          //Se cachea la respuesta
+          setCache(chatId, message, response);
+        })
+    else
+      console.log('There is no story')
 
+    //Se cachea el contexto para validar continuaciones en el flujo
+    if (redis) redis.set(id,JSON.stringify(context));
 
+    cb({});
 
+//fin nuevo
 
     //Valida contextos configurados
-    logger.session.info("<Pre> " + logger.genMerge(id, context));
+    /*logger.session.info("<Pre> " + logger.genMerge(id, context));
     context = wit.validatePreContext(context);
     var current = wit.mergeEntities(entities);
     console.log("Current:  " + JSON.stringify(current));
@@ -104,26 +194,23 @@ function processMerge(cb, id, username, context, entities, message, cached_msg){
 
     console.log("New Context:  " + JSON.stringify(context));
     console.log("Entities:  " + JSON.stringify(entities));
-    logger.session.info("<New> " + logger.genMerge(id, context));
+    logger.session.info("<New> " + logger.genMerge(id, context));*/
 
     //TODO: desacomplar logica de contextos validados contra metodos mejorar
     // todos los flujos
-    if ("when" in context && "day" in context && "what"){
+    /*if ("when" in context && "day" in context && "what"){
       context["get_datetime"]="get_datetime";
       context["msg_request"] = message;
-    }
+    }*/
+
     //Proceso merge directo - evaluar por cambios en Wit.ai
     /*var context = wit.mergeEntities(entities);
     console.log("Current:  " + JSON.stringify(context));
     context["msg_request"] = message;*/
 
-    if (redis)
-      redis.set(id,JSON.stringify(context));
-
-    cb(context);
 }
 
-const actions = {
+const wit_actions = {
   say(sessionId, context, message, cb) {
     response = message;
     cb();
@@ -318,44 +405,25 @@ redis.get("k1", function(err, reply) {
     console.log(reply);
 });*/
 
-function sendMessage(chatId, message, options){
-  var deferred = Q.defer();
-  telegram.sendMessage(chatId, message, options)
-          .then(function(res){
-            deferred.resolve(message);
-          });
-
-  return deferred.promise;
-}
-
-function isStart(context){
-    return ("start" in context)? true:false;
-}
-
 function runWit(chatId, username, message){
   var deferred = Q.defer();
-  message_sanitized = telegram.sanitizeMessage(message);
-  if (message_sanitized){
-    wit.runActions(actions, chatId, username, message_sanitized, function(error, context){
+
+  wit.runActions(wit_actions, chatId, username, message, function(error, context){
         if (error) {
           console.log('Oops! Got an error: ' + error);
           logger.error.error(error);
-          wit.restart(actions);
+          wit.restart(datetime.create(Date.now()), wit_actions);
           sendMessage(chatId, entity_cfg.NOT_WORKED)
                   .then(deferred.reject);
         } else {
-          if(isStart(context)){
+          if(wit.isStart(context)){
             sendMessage(chatId, response, telegram.opts)
                     .then(deferred.resolve);
-          }else
+          }/*else
             sendMessage(chatId, response)
-                  .then(deferred.resolve);
+                  .then(deferred.resolve);*/
         }
     });
-  }else{
-    sendMessage(chatId, message)
-      .then(deferred.resolve);
-  }
 
   return deferred.promise;
 }
@@ -364,7 +432,7 @@ function processMessage(id, username, msg){
   return processMessage(id, username, msg, null, null);
 }
 
-function processMessage(id, username, msg, cached_msg, cached_hash){
+function processMessage(id, username, message, cached_msg, cached_hash){
   var deferred = Q.defer();
 
   if(cached_msg){
@@ -372,24 +440,64 @@ function processMessage(id, username, msg, cached_msg, cached_hash){
       sendMessage(id, cached_msg)
         .then(deferred.resolve);
   }else{
-    if(isSEmoji(msg)){
+
+    if(utils.isTagged('w:', message)){ //WAlpha
+      message = message.substring(2).trim();
+      walpha.query(message, function (err, result) {
+        walpha.response(err, result)
+          .then(function(res){
+            setCache(id, message, res);
+            sendMessage(chatId, res)
+                  .then(deferred.resolve);
+            })
+          .fail(function(e){
+            sendMessage(chatId, "No puedo responder a eso. Reformula por favor!")
+                  .then(deferred.resolve);
+            })
+      });
+    }else if(utils.isTagged('t:', message)){ //Translator
+        //Es flujo traductor
+        message = message.substring(2).trim();
+        translate.get(message)
+            .then(function(res){
+              setCache(id, message, res);
+              sendMessage(id, res)
+                  .then(deferred.resolve);
+                })
+            .fail(function(e){
+            sendMessage(id, "No puedo traducir eso. Reformula por favor!")
+                  .then(deferred.resolve);
+            })
+
+    }else if(utils.isTagged('b:', message)){ //Broadcast
+      var msg_broadcast = username + " te envia el mensaje: " + message.substring(2).trim();
+      sendBroadcast(id,msg_broadcast);
+    }else if(isSEmoji(message)){
       //Si envia un emoji se responde lo mismo
-      sendMessage(id, msg)
+      sendMessage(id, message)
             .then(function(m){
-              if (cached_hash) redis.set(cached_hash,m);
+              setCache(id, message, m);
               deferred.resolve(m);
             });
     }else{
-      //Ejecuto Wit.ai para obtener la respuesta de la historia
-      runWit(id, username, msg)
-        .then(function(m){
-          if (cached_hash) redis.set(cached_hash,m);
-          deferred.resolve(m);
-        })
-        .fail(deferred.reject);
+      //Es un mensaje para Wit.ai
+      //Valido mensajes que no tiene flujo Wit.ai
+      var message_sanitized = telegram.sanitizeMessage(message);
+      if (message_sanitized){
+        //Ejecuto Wit.ai para obtener la respuesta de la historia
+        runWit(id, username, message_sanitized)
+          .then(function(response){
+            if (cached_hash) redis.set(cached_hash,response);
+            deferred.resolve(response);
+          })
+          .fail(deferred.reject);
+      }else{
+        //Como no pudo sanitazar mensaje envía lo mismo que recibió
+        sendMessage(chatId, message)
+          .then(deferred.resolve);
+      }
     }
   }
-
   return deferred.promise;
 }
 
@@ -440,10 +548,11 @@ function fn_bot (msg) {
   }
 
   logger.session.info(logger.genInitial({id:chatId, name:msg.from.first_name}, message));
-  var message_hash = hash({chatId:chatId, session:wit.session, message:message}, app_cfg.hash);
+  var message_hash = utils.generateHash(chatId, message);
 
   telegram.sendChatAction(chatId, "typing");
 
+  //Verifica que este autenticado
   isAuthenticated(start_hash, message)
     .then(function(res){
       //Ya esta autenticado
@@ -457,38 +566,13 @@ function fn_bot (msg) {
               .then(deferred.resolve);
       }else if (app_cfg.cache_enable){
         message = msg.text;
-        if(isWAlpha(message)){
-          message = message.substring(2).trim();
-          walpha.query(message, function (err, result) {
-            walpha.response(err, result)
-              .then(function(res){
-                sendMessage(chatId, res)
-                      .then(deferred.resolve);
-                })
-              .fail(function(e){
-                sendMessage(chatId, "No puedo responder a eso. Reformula por favor!")
-                      .then(deferred.resolve);
-                })
-          });
-        }else if(isTranslate(message)){
-              message = message.substring(2).trim();
-              translate.get(message)
-              .then(function(res){
-                sendMessage(chatId, res)
-                      .then(deferred.resolve);
-                })
-              .fail(function(e){
-                sendMessage(chatId, "No puedo traducir eso. Reformula por favor!")
-                      .then(deferred.resolve);
-                })
-        }else{
-          redis.get(message_hash, function(error,value){
+        redis.get(message_hash, function(error,value){
               processMessage(chatId, username, message, value, message_hash)
                 .then(deferred.resolve)
                 .fail(deferred.reject);
-          });
-        }
+        });
       }else {
+        //No esta habilitado Redis
         processMessage(chatId, username, message)
           .then(deferred.resolve)
           .fail(deferred.reject);

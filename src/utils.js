@@ -1,12 +1,15 @@
-var ctx_cfg = require('../config/ctx'),
+var //ctx_cfg = require('../config/ctx'),
+    app_cfg = require('../config/app'),
+    wit = require('./wit'),
     _ = require('underscore'),
     weather = require('weather-js'),
-    datetime = require('node-datetime');
+    datetime = require('node-datetime'),
+    story_cfg = require('../config/story');
 
-const AREA = ctx_cfg.weather.area;
-const LANG = ctx_cfg.weather.lang;
-const DEGREE = ctx_cfg.weather.degreeType;
-const SYMBOL = ctx_cfg.weather.degreeSymbol;
+const AREA = app_cfg.timezone.area;
+const LANG = app_cfg.timezone.lang;
+const DEGREE = app_cfg.timezone.degreeType;
+const SYMBOL = app_cfg.timezone.degreeSymbol;
 
 var utils = {
   now: () => {
@@ -39,6 +42,24 @@ var utils = {
         return 'test';
     else
         return username;
+  },
+  isTagged: (prefix, message) => {
+    if(message.toLowerCase().substring(2,0).trim()==prefix)
+	    return true;
+	  else
+	    return false;
+  },
+  isValidTag: (tag) => {
+    tags = story_cfg.tags;
+    return _.contains(tags,tag);
+  },
+  generateHash: (id, data) =>{
+    message_split = data.split(':')
+    message_len = message_split.length
+    if(message_len>1 && utils.isValidTag(message_split[0]))
+      data = data.substring(message_split[0].length+1)
+
+    return hash({chatId:id, session:wit.session, data:data}, app_cfg.hash);
   }
 }
 

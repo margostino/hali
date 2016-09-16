@@ -1,6 +1,7 @@
 var _ = require('underscore'),
 	app_cfg = require('../config/app'),
-	ctx_cfg = require('../config/ctx'),
+	//ctx_cfg = require('../config/ctx'),
+	story_cfg = require('../config/story'),
 	entity = require('../config/entity'),
 	logger_wit = require('node-wit').Logger;
 	levels = require('node-wit').logLevels;
@@ -109,10 +110,10 @@ const getTicket = (context) => {
 
 var wit = {
 	session: session,
-	restart: (actions) => {
-		this.client = new Wit(TOKEN, actions);
-		this.session = hash(app_cfg.session, app_cfg.hash);
-		console.log("Renew Wit Session: " + session);
+	restart: (id, actions) => {
+		client = new Wit(TOKEN, actions);
+		wit.session = hash(id, app_cfg.hash);
+		console.log("Renew Wit Session: " + wit.session);
 	},
 	logger: new logger_wit(levels.DEBUG),
 	interactive: (actions) => {
@@ -156,7 +157,7 @@ var wit = {
 	  return context;
 	},
 	//Merge pre-contexto con el contexto actual.
-	//El objetivo es continuar flujos de las historias
+	//El objetivo es continuar flujos de las historias si hay match
 	mergePreContext: (ctx, pre) => {
 		var current = JSON.parse(JSON.stringify(ctx));
 	    _.each(_.keys(pre),function(k){
@@ -189,10 +190,24 @@ var wit = {
 
 	  return ctx;
 	},
+	isStart: (context) => {
+			return ("start" in context)? true:false;
+	},
+	matchStory: (current) => {
+		current = _.uniq(current);
+	  return _.find(story_cfg.list, function(story){
+	    return _.find(story.contexts, function(context){
+	      var diff = _.difference(current, context);
+	      var len_current = current.length;
+	      var len_config = context.length;
+	      return (len_current==len_config && _.isEmpty(diff))? true:false;
+	    });
+	  });
+	},
 	runActions: (actions, chatId, username, message, fn) => {
     //session = session + chatId;
 	  console.log("Ejecuta Wit.ai");
-	  console.log('Wit User Session: ' + session);
+	  console.log('Wit User Session: ' + wit.session);
 
 		context.chatId = chatId;
 		context.username = username;
@@ -201,7 +216,7 @@ var wit = {
 			username: username,
 			message: message
 		};*/
-	  client(actions).runActions(session, message, context, (error, context1) => {
+	  client(actions).runActions(wit.session, message, context, (error, context1) => {
 	  		fn(error, context1);
 	  });
 	}

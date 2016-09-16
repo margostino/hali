@@ -1,6 +1,4 @@
 var actions = require('../src/actions')
-console.log("actionsaaassssssaa")
-console.log(actions)
 
 var stories = {
 	contexts: [
@@ -65,7 +63,7 @@ var stories = {
 		find_course: (context) => {
 				//('where','course') => {1}
 		}
-	},
+	},	
 	tags:['t','b','w','m'],
 	weather: {
 		area: 'Capital Federal, Buenos Aires',
