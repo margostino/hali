@@ -1,15 +1,15 @@
-var //ctx_cfg = require('../config/ctx'),
-    app_cfg = require('../config/app'),
+var app_cfg = require('../config/app'),
+    story_cfg = require('../config/story'),
     wit = require('./wit'),
     _ = require('underscore'),
     weather = require('weather-js'),
-    datetime = require('node-datetime'),
-    story_cfg = require('../config/story');
+    datetime = require('node-datetime');
 
 const AREA = app_cfg.timezone.area;
 const LANG = app_cfg.timezone.lang;
 const DEGREE = app_cfg.timezone.degreeType;
 const SYMBOL = app_cfg.timezone.degreeSymbol;
+const TAGS = story_cfg.tags;
 
 var utils = {
   now: () => {
@@ -43,15 +43,20 @@ var utils = {
     else
         return username;
   },
-  isTagged: (prefix, message) => {
-    if(message.toLowerCase().substring(2,0).trim()==prefix)
-	    return true;
-	  else
-	    return false;
+  getTag: (message) => {
+    message_split = message.split(':')
+    message_len = message_split.length
+    tag = message_split[0]
+    return (message_len>1 && utils.isValidTag(tag))? tag:'';
+  },
+  isTagged: (message) => {
+    return (utils.getTag(message))? true:false;
   },
   isValidTag: (tag) => {
-    tags = story_cfg.tags;
-    return _.contains(tags,tag);
+    return _.contains(TAGS,tag);
+  },
+  getTaggedMessage: (message) => {    
+    return message.substring(2).trim();
   },
   generateHash: (id, data) =>{
     message_split = data.split(':')

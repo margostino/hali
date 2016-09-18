@@ -1,6 +1,5 @@
 var _ = require('underscore'),
 	app_cfg = require('../config/app'),
-	//ctx_cfg = require('../config/ctx'),
 	story_cfg = require('../config/story'),
 	entity = require('../config/entity'),
 	logger_wit = require('node-wit').Logger;

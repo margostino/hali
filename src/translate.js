@@ -24,8 +24,10 @@ var translate = {
 
         console.log("Traducción: " + res);
         deferred.resolve(res);
+      }else{
+        deferred.resolve("No puedo traducir eso. Reformula por favor!");
       }
-    })
+    });
 
     return deferred.promise;
   }

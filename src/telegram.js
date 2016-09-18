@@ -50,6 +50,7 @@ var telegram = {
 		});
 	},
 	sendMessage: (user, message, options) => {
+		console.log('Envia respuesta TELEGRAM...')
 		if(options)
 			return bot.sendMessage(user, message, options);
 		else
