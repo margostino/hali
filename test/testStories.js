@@ -117,7 +117,7 @@ describe('Test stories from Wit.ai', function () {
     message['text'] = 'como esta el tiempo?';
     server.fn_bot(message)
       .then(function(response){
-        assert.equal(response.indexOf('Actual'), 0);
+        assert.notEqual(response.indexOf('Actual'), -1);
         done();
       })
       .fail(console.log);
@@ -149,7 +149,7 @@ describe('Test stories from Wit.ai', function () {
     message['text'] = 'w:what is the meaning of life?';
     server.fn_bot(message)
       .then(function(response){
-        assert.equal(response.indexOf('::Result::42'), 0);
+        assert.notEqual(response.indexOf('::Result::42'), -1);
         done();
       })
       .fail(console.log);
@@ -159,7 +159,7 @@ describe('Test stories from Wit.ai', function () {
     message['text'] = 'b:Hola es un test broadcast';
     server.fn_bot(message)
       .then(function(response){
-        assert.equal(response.indexOf('Mensaje enviado OK'), 0);
+        assert.notEqual(response.indexOf('Mensaje enviado OK'), -1);
         done();
       })
       .fail(console.log);
@@ -169,10 +169,19 @@ describe('Test stories from Wit.ai', function () {
     message['text'] = 'm:Hola es un test ticket';
     server.fn_bot(message)
       .then(function(response){
-        assert.equal(response.indexOf('Ticket enviado OK'), 0);
+        assert.notEqual(response.indexOf('Ticket enviado OK'), -1);
         done();
       })
       .fail(console.log);
   });
 
+  it('Not Story: should return an answer', function(done){
+    message['text'] = 'the cat is under de table';
+    server.fn_bot(message)
+      .then(function(response){
+        assert.notEqual(response.indexOf('Necesito información adicional'), -1);
+        done();
+      })
+      .fail(console.log);
+  });
 });
