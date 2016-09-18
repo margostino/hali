@@ -9,7 +9,7 @@ const AREA = app_cfg.timezone.area;
 const LANG = app_cfg.timezone.lang;
 const DEGREE = app_cfg.timezone.degreeType;
 const SYMBOL = app_cfg.timezone.degreeSymbol;
-const TAGS = story_cfg.tags;
+const TAGS = app_cfg.tags;
 
 var utils = {
   now: () => {
@@ -47,6 +47,7 @@ var utils = {
     message_split = message.split(':')
     message_len = message_split.length
     tag = message_split[0]
+
     return (message_len>1 && utils.isValidTag(tag))? tag:'';
   },
   isTagged: (message) => {
@@ -55,14 +56,14 @@ var utils = {
   isValidTag: (tag) => {
     return _.contains(TAGS,tag);
   },
-  getTaggedMessage: (message) => {    
+  getTaggedMessage: (message) => {
     return message.substring(2).trim();
   },
   generateHash: (id, data) =>{
-    message_split = data.split(':')
+    /*message_split = data.split(':')
     message_len = message_split.length
     if(message_len>1 && utils.isValidTag(message_split[0]))
-      data = data.substring(message_split[0].length+1)
+      data = data.substring(message_split[0].length+1)*/
 
     return hash({chatId:id, session:wit.session, data:data}, app_cfg.hash);
   }

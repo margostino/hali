@@ -62,8 +62,7 @@ var stories = {
 			contexts: [['bye']],
 			method:actions.bye
 		}
-	],
-	tags:['t','b','w','m'],
+	],	
 	weather: {
 		area: 'Capital Federal, Buenos Aires',
 		lang: 'es-ES',

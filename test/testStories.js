@@ -39,6 +39,7 @@ describe('Test stories from Wit.ai', function () {
       .then(function(response){
         var ok = "Bienvenido Martín ¿en que puedo ayudarte?";
         assert.equal(response.text, ok);
+        console.log("Verifica API HAS - Wifi call...");
         request(api_url+"/has/wifi", function (error, response, body) {
           if (!error && response.statusCode == 200) {
             wifi_password_api = JSON.parse(body).password;
@@ -48,10 +49,15 @@ describe('Test stories from Wit.ai', function () {
           done()
         });
       })
-      .fail(console.log);
+      .fail(function(e){
+        console.log(e)
+        done();
+      });
+      this.timeout(5000);
+      //done();
   });
 
-  this.timeout(8000);
+  this.timeout(20000);
 
   it('Greeting Story: should return an answer', function(done){
     message['text'] = 'hola';
@@ -148,4 +154,25 @@ describe('Test stories from Wit.ai', function () {
       })
       .fail(console.log);
   });
+
+  it('Broadcast Story: should return an answer', function(done){
+    message['text'] = 'b:Hola es un test broadcast';
+    server.fn_bot(message)
+      .then(function(response){
+        assert.equal(response.indexOf('Mensaje enviado OK'), 0);
+        done();
+      })
+      .fail(console.log);
+  });
+
+  it('Ticket Story: should return an answer', function(done){
+    message['text'] = 'm:Hola es un test ticket';
+    server.fn_bot(message)
+      .then(function(response){
+        assert.equal(response.indexOf('Ticket enviado OK'), 0);
+        done();
+      })
+      .fail(console.log);
+  });
+
 });

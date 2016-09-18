@@ -1,10 +1,11 @@
 var Q = require("q"),
     request = require('request'),
-    utils = require('./utils'),
     app_cfg = require('../config/app'),
+    entity_cfg = require('../config/entity'),
     telegram = require('./telegram'),
     translate = require('./translate'),
     walpha = require('../src/walpha'),
+    utils = require('./utils'),
     _ = require('underscore');
 
 var api_url = "http://"+app_cfg.api_host+":"+app_cfg.api_port;
@@ -12,6 +13,11 @@ var api_url = "http://"+app_cfg.api_host+":"+app_cfg.api_port;
 const actions = {
   ping_story: (session, context) => {
     console.log('SUPERMAN VS BATMAN')
+  },
+  not_story: (id) => {
+    response = entity_cfg.NOT_STORY;
+    telegram.sendMessage(id, response)
+    return Q(response);
   },
   greeting: (id) => {
     response = "Hola, que bueno encontrarte por aca. ¿como estás?";
@@ -32,7 +38,6 @@ const actions = {
     var deferred = Q.defer();
     utils.getWeather(function(response){
       telegram.sendMessage(id, response)
-      console.log('SUPERMAN');
       deferred.resolve(response);
     });
     return deferred.promise;
@@ -71,7 +76,7 @@ const actions = {
         "location": "Medrano",
         "description": message
       }
-
+      console.log('Envia a la API el ticket...');
       request.post({
           json: true,
           body: ticket_data,

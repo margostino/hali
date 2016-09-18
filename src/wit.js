@@ -1,7 +1,7 @@
 var _ = require('underscore'),
 	app_cfg = require('../config/app'),
-	story_cfg = require('../config/story'),
 	entity = require('../config/entity'),
+	story_cfg = require('../config/story'),
 	logger_wit = require('node-wit').Logger;
 	levels = require('node-wit').logLevels;
 	Wit = require('node-wit').Wit,

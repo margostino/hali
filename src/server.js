@@ -35,6 +35,7 @@ if (_.app_cfg.cache_enable){
 function setCache(id, message, data){
   if (redis){
     var data_hash = _.utils.generateHash(id, message);
+    console.log('HASH SET: ' + data_hash)
     redis.set(data_hash, data);
   }
 }
@@ -132,15 +133,17 @@ function processWitMessage(cb, id, username, context, entities, message, context
     if(story)
       story.method(id)
         .then(function(response){
-          _.logger.session.info("<Response> " + id+":"+response);
+          //_.logger.session.info("<Response> " + id+":"+response);
           cb({response: response});
         }).fail(function(error){
               //TODO: evaluar error de telegram en el envio
         })
     else{
-      response = 'There is no story';
-      console.log(response);
-      cb({response: response});
+      console.log('There is no story');
+      _.actions.not_story(id)
+        .then(function(response){
+          cb({response: response});
+        });
     }
 
 //fin nuevo
@@ -346,26 +349,49 @@ function processTaggedMessage(id, username, message){
   var deferred = _.Q.defer();
   tag = _.utils.getTag(message);
   message = _.utils.getTaggedMessage(message);
-  console.log('Verifica el tipo de mensaje que es...');
+  console.log('Verifica el tipo de mensaje que es para tag: ' + tag);
   switch (tag) {
     case 't':
       console.log('Es mensaje tipo tag traductor.');
       //Es flujo traductor
       _.actions.translate(id, message)
-          .then(deferred.resolve);
+          .then(function(response){
+            //_.logger.session.info("<Response> " + id+":"+response);
+            deferred.resolve(response);
+          });
       break;
     case 'w':
       console.log('Es mensaje tipo tag WAlpha.');
       //Es flujo WAlpha
       _.actions.walpha(id, message)
-          .then(deferred.resolve);
+        .then(function(response){
+          //_.logger.session.info("<Response> " + id+":"+response);
+          deferred.resolve(response);
+        });
       break;
     case 'b':
       console.log('Es mensaje tipo tag broadcast.');
       //Es flujo broadcast
       var msg_broadcast = username + " te envia el mensaje: " + message;
       _.actions.broadcast(id, msg_broadcast)
-        .then(deferred.resolve);
+        .then(function(response){
+          //_.logger.session.info("<Response> " + id+":"+response);
+          deferred.resolve(response);
+        });
+      break;
+    case 'm':
+        console.log('Es mensaje tipo tag ticket.');
+        //Es flujo ticket
+        _.actions.ticket(id, message)
+          .then(function(response){
+            //_.logger.session.info("<Response> " + id+":"+response);
+            deferred.resolve(response);
+          });
+      break;
+    default:
+      response = 'Es mensaje tageado pero no es un tag valido.'
+      _.telegram.sendMessage(id,'Es mensaje tageado pero no es un tag valido.')
+      deferred.resolve(response);
       break;
   }
 
@@ -469,12 +495,16 @@ function fn_bot (msg) {
             message = msg.text;
             _.logger.session.info(_.logger.genInitial({id:chatId, name:msg.from.first_name}, message));
             var message_hash = _.utils.generateHash(chatId, message);
+            console.log('HASH GET: ' + message_hash)
             console.log('Busca mensaje en cache...');
-            redis.get(message_hash, function(error,response){
-                  processMessage(chatId, username, message, response, message_hash)
+            redis.get(message_hash, function(error,response_cached){
+                  processMessage(chatId, username, message, response_cached, message_hash)
                     .then(function(response){
-                      //Se cachea la respuesta
-                      setCache(chatId, message, response);
+                      if(!response_cached)
+                        //Se cachea la respuesta
+                        setCache(chatId, message, response);
+
+                      _.logger.session.info("<Response> " + chatId+":"+response);
                       deferred.resolve(response);
                     }).fail(deferred.reject);
             });
@@ -484,6 +514,7 @@ function fn_bot (msg) {
             .then(function(response){
               //Se cachea la respuesta
               setCache(chatId, message, response);
+              _.logger.session.info("<Response> " + chatId+":"+response);
               deferred.resolve(response);
             }).fail(deferred.reject);
           }

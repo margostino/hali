@@ -1,6 +1,5 @@
 var telegram = require('../src/telegram'),
     logger = require('../src/logger'),
-    utils = require('../src/utils'),
     app_cfg = require('./app'),
     entity_cfg = require('./entity'),
     ip = require('ip'),
@@ -19,8 +18,9 @@ var telegram = require('../src/telegram'),
     readline = require('readline'),
     datetime = require('node-datetime'),
     random = require("random-js")(),
+    wit = require('../src/wit'),
     actions = require('../src/actions'),
-    wit = require('../src/wit');
+    utils = require('../src/utils');
 
 var _ = {
   ip: ip,
