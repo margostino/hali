@@ -315,14 +315,6 @@ if (redis)
       console.log("Error Redis: " + err);
   });
 
-/*redis.set("k1", "string val");
-redis.hset("hash key", "hashtest 1", "some value", redis_node.print);
-redis.hset(["hash key", "hashtest 2", "some other value"], redis_node.print);
-redis.get("k1", function(err, reply) {
-    // reply is null when the key is missing
-    console.log(reply);
-});*/
-
 function runWit(chatId, username, message){
   var deferred = _.Q.defer();
 
@@ -472,7 +464,8 @@ function fn_bot (msg) {
   var from = JSON.stringify(msg.from);
   var username = msg.from.first_name;
   var authenticate = false;
-  var start_hash = hash({chatId:chatId, start:"start"}, _.app_cfg.hash);
+  //var start_hash = hash({chatId:chatId, start:"start"}, _.app_cfg.hash);
+  var start_hash = 'auth_'+chatId;
   var message = "";
 
   console.log("Mensaje ID: " + messageId);
@@ -542,6 +535,7 @@ function fn_bot (msg) {
     _.telegram.sendMessage(chatId, message, options)
           .then(deferred.resolve);
 
+    console.log('HASH Authentication: ' + start_hash);
     redis.set(start_hash, "OK");
   }
 

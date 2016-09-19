@@ -57,6 +57,11 @@ const actions = {
     telegram.sendMessage(id, response)
     return Q(response);
   },
+  insulto: (id) =>{
+    response = "No seas mal educado queres!";
+    telegram.sendMessage(id, response)
+    return Q(response);
+  },  
   info_wifi: (id) =>{
     var deferred = Q.defer();
     request(api_url+"/has/wifi", function (error, response, body) {

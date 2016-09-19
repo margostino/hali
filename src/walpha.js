@@ -33,6 +33,7 @@ var walpha = {
     client.query(query, fn);
   },
   response: (error, result) => {
+    //console.log(JSON.stringify(result));
     var deferred = Q.defer();
     var response = '';
     if (error) deferred.reject(err);
@@ -43,7 +44,10 @@ var walpha = {
           var subpods = entry.subpods;
           if(validTitle(title)){
             if (validSubpods(subpods)){
-              response += "::" + title + "::";
+
+              if(title!='Result')
+                response += "::" + title + "::";
+
               subpods.forEach(function(entry) {
                 var result = "";
                 if(entry.title)

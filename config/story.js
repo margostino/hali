@@ -61,8 +61,12 @@ var stories = {
 		{
 			contexts: [['bye']],
 			method:actions.bye
-		}
-	],	
+		},
+		{
+			contexts: [['insulto']],
+			method:actions.insulto
+		}			
+	],
 	weather: {
 		area: 'Capital Federal, Buenos Aires',
 		lang: 'es-ES',
