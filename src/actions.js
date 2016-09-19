@@ -61,7 +61,27 @@ const actions = {
     response = "No seas mal educado queres!";
     telegram.sendMessage(id, response)
     return Q(response);
-  },  
+  },
+  hali_years_old: (id) =>{
+    response = "Tengo tan solo unos meses pero me siento pleno como un adolescente";
+    telegram.sendMessage(id, response)
+    return Q(response);
+  },
+  hali_colour: (id) =>{
+    response = "Azul.";
+    telegram.sendMessage(id, response)
+    return Q(response);
+  },
+  hali_birthday: (id) =>{
+    response = "Nací el 18 de Abril de 2016. Mi peso al nacer fue de tan solo 56kb.";
+    telegram.sendMessage(id, response)
+    return Q(response);
+  },
+  datetime: (id) =>{
+    response = utils.now();;
+    telegram.sendMessage(id, response)
+    return Q(response);
+  },
   info_wifi: (id) =>{
     var deferred = Q.defer();
     request(api_url+"/has/wifi", function (error, response, body) {
@@ -121,6 +141,7 @@ const actions = {
       walpha.response(err, result)
         .then(function(response){
           telegram.sendMessage(id, response)
+          telegram.sendMessage(id, entity_cfg.ADVICE)
           deferred.resolve(response);
         })
     });

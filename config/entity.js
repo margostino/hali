@@ -45,6 +45,11 @@ Proba preguntandome de otras formas, quizas comprenda.
 Hola!!!. Necesito que comprobar tu identidad.
 Autenticate presionando el comando de abajo porfa :)
 	*/}),
+	ADVICE: multiline(function(){/*
+Si consideras que la respuesta no es correcta, por favor reformula la misma.
+Tal vez nombres y apellidos, mas datos del lugar o lo que quieras saber.
+Enjoy the knowledge!!! :)
+	*/}),
 	TESTME: multiline(function(){/*
 Hola crack!!, Ya estoy online de nuevo con algo más de entrenamiento.
 Cuando tengas tiempo libre testeame.

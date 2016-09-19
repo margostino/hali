@@ -20,6 +20,12 @@ var stories = {
 			['ping_story']
 			//['message_status','broadcast'],['alumnos','say','broadcast'],
 	],
+	weather: {
+		area: 'Capital Federal, Buenos Aires',
+		lang: 'es-ES',
+		degreeType: 'C',
+		degreeSymbol: '°C'
+	},
 	list: [
 		{
 			contexts:[['ping_story', 'dummy']],
@@ -65,14 +71,24 @@ var stories = {
 		{
 			contexts: [['insulto']],
 			method:actions.insulto
-		}			
-	],
-	weather: {
-		area: 'Capital Federal, Buenos Aires',
-		lang: 'es-ES',
-		degreeType: 'C',
-		degreeSymbol: '°C'
-	}
+		},
+		{
+			contexts: [['how','years']],
+			method:actions.hali_years_old
+		},
+		{
+			contexts: [['what','colour']],
+			method:actions.hali_colour
+		},
+		{
+			contexts: [['when','birthday','you']],
+			method:actions.hali_birthday
+		},
+		{
+			contexts: [['what','hour'],['what','day'],['what','when','day']],
+			method:actions.datetime
+		}
+	]
 };
 
 module.exports = stories;
