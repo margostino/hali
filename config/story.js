@@ -99,6 +99,10 @@ var stories = {
 			['what','information','can','ask'],['what','can','do'],['what','can','tell'],
 			['what','know'],['what','can','ask'],['what','know','do'],['what','skills']],
 			method:actions.hali_skills
+		},
+		{
+			contexts: [['who','are']],
+			method:actions.hali_who
 		}
 	]
 };

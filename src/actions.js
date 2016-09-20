@@ -78,8 +78,12 @@ const actions = {
     return Q(response);
   },
   hali_skills: (id) =>{
-    console.log('JSJSNJKNBSJKNSBJKSNBJKSNB')
     response = entity_cfg.HALI_SKILLS;
+    telegram.sendMessage(id, response)
+    return Q(response);
+  },
+  hali_who: (id) =>{
+    response = entity_cfg.ABOUT_ME;
     telegram.sendMessage(id, response)
     return Q(response);
   },

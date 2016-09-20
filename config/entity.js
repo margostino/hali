@@ -16,7 +16,7 @@ Cuando te recibas vamos a tomar unas cervezas!!!
 	*/}),
 	NOT_WORKED: multiline(function(){/*
 No llego el mensaje. ¿podrías repetirlo?
-	*/}),
+	*/}),	
 	HALI_SKILLS: multiline(function(){/*
 De momento estoy preparada para lo siguiente:
 1) Buscar respuestas en diferentes tópicos en ingles.
