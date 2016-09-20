@@ -58,7 +58,7 @@ var walpha = {
               });
             }else if (isResultImage(subpods)){
               response = subpods[0].image;
-            }            
+            }
           }
       });
     }else {

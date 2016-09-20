@@ -17,12 +17,20 @@ Cuando te recibas vamos a tomar unas cervezas!!!
 	NOT_WORKED: multiline(function(){/*
 No llego el mensaje. ¿podrías repetirlo?
 	*/}),
-	SKILLS: multiline(function(){/*
+	HALI_SKILLS: multiline(function(){/*
 De momento estoy preparada para lo siguiente:
-1) Contarte si el aula Magna esta disponible o no.
-2) Contarte acerca de mi, mi historia.
-3) Contarte donde esta tu departamento.
-4) Saludarte.
+1) Buscar respuestas en diferentes tópicos en ingles.
+(comenzar la pregunta con "w:". Ejemplo: "w: who is Obama?")
+2) Traducir texto de español a ingles.
+(comenzar la pregunta con "t:". Ejemplo: "t: hola como estas?")
+3) Decirte la temperatura actual.
+4) Decirte hora y fecha actual.
+5) De dominio academico puedo:
+	Contarte si el aula Magna esta disponible o no.
+	Contarte acerca de mi, mi historia.
+	Contarte donde esta tu departamento.
+	Contarte libros disponibles.
+Y más....!!!!
 
 Dia a dia voy agregando nuevos skills.
 Arriba esas palmas!! Clap clap!
@@ -70,6 +78,19 @@ Recorda que por el momento este módulo acepta pregunta en Ingles.
 Ejemplo pregunta OK: "w: who is the current president of Brazil?".
 Ejemplo pregunta OK: "w: how is going MELI Stock?".
 Ejemplo pregunta NO-OK: "w: hola como andas, tell me pitagor theorem fiera!".
+	*/}),
+	WALPHA_SKILLS: multiline(function(){/*
+Los tópicos que puedo responder son:
+Matemática, Estadística y análisis de datos, Química, Física, Astronomía, Ingeniería,
+Materiales, Ciencias de la vida (anatomía, plantas, animales, ADN, Genética, etc etc),
+Ciencias de la computación, Gramática y linguistica, Historia y Personajes,
+Cultura y Media, Arte y diseño, Musica, Lugares y Geografía, Ciencia de la tierra,
+Clima y metereologia, Transporte, Unidad de medidas, Fechas, Calendarios, Feriados, etc.,
+Economía y finanzas, Datos socioeconomicos, Salud y medicina, Alimentación y nutrición,
+Shopping, Mundo tecnológico, Webs y sistemas computacionales,
+Soluciones paso a paso: formulas físicas, química, matemática, teoría de números,
+estadística, trigonometría, calculo, ecuaciones diferenciales, etc, etc.,
+Educación, Organizaciones, Deportes y juegos.
 	*/}),
 	GOOGLE_IT: "https://www.google.com.ar/#q=",
 	STOP: 'Hasta pronto!'

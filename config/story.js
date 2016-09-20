@@ -87,6 +87,18 @@ var stories = {
 		{
 			contexts: [['what','hour'],['what','day'],['what','when','day']],
 			method:actions.datetime
+		},
+		{
+			contexts: [['walpha','what','skills']],
+			method:actions.walpha_skills
+		},
+		{
+			contexts: [['can','what','help'],['can','where','help'],
+			['what','information','know'],['what','information','know'],
+			['what','can','do'],['what','know'],['how','can','help'],['what','do'],
+			['what','information','can','ask'],['what','can','do'],['what','can','tell'],
+			['what','know'],['what','can','ask'],['what','know','do'],['what','skills']],
+			method:actions.hali_skills
 		}
 	]
 };

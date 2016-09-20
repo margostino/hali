@@ -77,8 +77,19 @@ const actions = {
     telegram.sendMessage(id, response)
     return Q(response);
   },
+  hali_skills: (id) =>{
+    console.log('JSJSNJKNBSJKNSBJKSNBJKSNB')
+    response = entity_cfg.HALI_SKILLS;
+    telegram.sendMessage(id, response)
+    return Q(response);
+  },
   datetime: (id) =>{
-    response = utils.now();;
+    response = utils.now();
+    telegram.sendMessage(id, response)
+    return Q(response);
+  },
+  walpha_skills: (id) =>{
+    response = entity_cfg.WALPHA_SKILLS;
     telegram.sendMessage(id, response)
     return Q(response);
   },
@@ -141,7 +152,9 @@ const actions = {
       walpha.response(err, result)
         .then(function(response){
           telegram.sendMessage(id, response)
-          telegram.sendMessage(id, entity_cfg.ADVICE)
+          setTimeout(function(){
+            telegram.sendMessage(id, entity_cfg.ADVICE);
+          }, 1000);
           deferred.resolve(response);
         })
     });
