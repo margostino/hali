@@ -1,28 +1,3 @@
-/*var ip = require('ip'),
-  logger = require('./logger'),
-  app_cfg = require('../config/app'),
-  entity_cfg = require('../config/entity'),
-  utils = require('./utils'),
-  wit = require('./wit'),
-  actions = require('./actions'),
-  telegram = require('./telegram'),
-  walpha = require('./walpha'),
-  _ = require('underscore'),
-  weather = require('weather-js'),
-  isSEmoji = require('is-standard-emoji'),
-  unicode = require("emoji-unicode-map"),
-  emoji = require("emoji-dictionary"),
-  google = require('google'),
-  queue = require('queue'),
-  redis_node = require("redis"),
-  multiline = require('multiline'),
-  botan = require('botanio')(_.app_cfg.token_botan),
-  Q = require("q"),
-  request = require('request'),
-  readline = require('readline'),
-  translate = require('./translate'),
-  datetime = require('node-datetime');*/
-
 var _ = require('../config/requires');
 
 var response = '';
@@ -40,53 +15,6 @@ function setCache(id, message, data){
   }
 }
 
-/*function sendMessage(chatId, message, options){
-  var deferred = _.Q.defer();
-  _.telegram.sendMessage(chatId, message, options)
-          .then(function(res){
-            deferred.resolve(message);
-          });
-  return deferred.promise;
-}*/
-
-//ELIMINAR LO DE ABAJO
-/*var context = ['greeting']
-
-var diff = _.jsu.difference(['greeting'], ['greeting']);
-//console.log(diff)
-
-
-var story = _.wit.matchStory(context)
-if(story)
-  story.method().then(console.log);
-else
-  console.log('There is no story')
-
-var e = {"intent":[{"confidence":1,"type":"value","value":"how"},{"confidence":1,"type":"value","value":"time"}]}
-var ctx = {};
-var keys = _.jsu.keys(e);
-console.log(keys);
-var ctx={};
-  _.jsu.each(keys, function(entity){
-      _.jsu.each(e[entity], function(values){
-        if (entity=="intent")
-          ctx[values.value] = values.value;
-        else
-          ctx[entity] = values.value;
-      });
-  });
-
-console.log(ctx);*/
-/*var pre=['find_course']
-var ctx=['when']
-console.log("validaaa");
-pre.push(ctx)
-var current = _.jsu.flatten(pre)
-console.log(current);*/
-
-//ELIMINAR LO DE ARRIBA
-
-
 function processWitMessage(cb, id, username, context, entities, message){
   processWitMessage(cb, id, username, context, entities, message, null);
 }
@@ -100,7 +28,6 @@ function processWitMessage(cb, id, username, context, entities, message, context
     if(redis && context_cached)
       pre_context = JSON.parse(context_cached);
 
-//inicio nuevo
     //Valida contextos configurados
     _.logger.session.info("<Pre> " + _.logger.genMerge(id, pre_context));
     _.logger.session.info("<Entities> " + _.logger.genMerge(id, entities));
@@ -145,50 +72,6 @@ function processWitMessage(cb, id, username, context, entities, message, context
           cb({response: response});
         });
     }
-
-//fin nuevo
-
-    //Valida contextos configurados
-    /*_.logger.session.info("<Pre> " + _.logger.genMerge(id, context));
-    context = _.wit.validatePreContext(context);
-    var current = _.wit.mergeEntities(entities);
-    console.log("Current:  " + JSON.stringify(current));
-    var pre = _.wit.mergePreContext(current, context);
-    console.log("Merge PreContext:  " + JSON.stringify(pre));
-    context = _.wit.updateContext(current, pre);
-
-      if (_.jsu.contains(context, "who_iam") || _.jsu.contains(context, "start"))
-        context.username = username;
-
-      if (isBroadcast(message)){
-        var msg_broadcast = username + " te envia el mensaje: " + message.substring(9).trim();
-        context["msg_request"] = msg_broadcast;
-        context.username = username;
-        context.chatId = id;
-      }else if (isTicket(message)){
-        var msg_ticket = username + " envia el mensaje: " + message.substring(7).trim();
-        context["msg_request"] = msg_ticket;
-        context.username = username;
-        context.chatId = id;
-      }else
-        context["msg_request"] = message;
-
-    console.log("New Context:  " + JSON.stringify(context));
-    console.log("Entities:  " + JSON.stringify(entities));
-    _.logger.session.info("<New> " + _.logger.genMerge(id, context));*/
-
-    //TODO: desacomplar logica de contextos validados contra metodos mejorar
-    // todos los flujos
-    /*if ("when" in context && "day" in context && "what"){
-      context["get_datetime"]="get_datetime";
-      context["msg_request"] = message;
-    }*/
-
-    //Proceso merge directo - evaluar por cambios en _.wit.ai
-    /*var context = _.wit.mergeEntities(entities);
-    console.log("Current:  " + JSON.stringify(context));
-    context["msg_request"] = message;*/
-
 }
 
 const wit_actions = {
@@ -196,12 +79,6 @@ const wit_actions = {
     cb();
   },
   merge(sessionId, context, entities, message, cb) {
-
-    //console.log("actual: " + JSON.stringify(context));
-    //console.log("actual message: " + JSON.stringify(message));
-
-    //var chatId = _.utils.getChatId(sessionId)
-    //var username = _.utils.getUsername(sessionId);
     var chatId = context.chatId;
     var username = context.username;
 
@@ -265,20 +142,8 @@ const wit_actions = {
     context.aula = '615';
     cb(context);
   },
-  ['get-aboutMe'](sessionId, context, cb) {
-    context.about_me = _.entity_cfg.ABOUT_ME;
-    cb(context);
-  },
-  ['get-skills'](sessionId, context, cb) {
-    context.skills = _.entity_cfg.SKILLS;
-    cb(context);
-  },
   ['ping'](sessionId, context, cb) {
     context.response = "OK!";
-    cb(context);
-  },
-  ['get-datetime'](sessionId, context, cb) {
-    context.datetime = _.utils.now();
     cb(context);
   },
   ['google-it'](sessionId, context, cb){
@@ -287,33 +152,11 @@ const wit_actions = {
     context.google_results = _.entity_cfg.GOOGLE_IT+query;
     cb(context);
   },
-  ['get-weather'](sessionId, context, cb) {
-    _.utils.getWeather(function(w){
-      context.weather_today = w;
-      cb(context);
-    });
-  },
   ['get-info-final'](sessionId, context, cb) {
     context.when_where_final = "Lunes 22 de Agosto. 19hs Medrano";
     cb(context);
-  },
-  ['get-wifi-password'](sessionId, context, cb) {
-    context.wifi_password = "invit@do";
-    cb(context);
-  },
-  ['start-auth'](sessionId, context, cb) {
-      //Se recibe TOKEN de authenticación. Una opción es enviar el token al Sinap y validarlo
-      //botan.track(msg, 'Start');
-      var token = context['msg_request'].split(' ')[1];
-      context.status = _.entity_cfg.START;
-      cb(context);
   }*/
 };
-
-if (redis)
-  redis.on("error", function (err) {
-      console.log("Error Redis: " + err);
-  });
 
 function runWit(chatId, username, message){
   var deferred = _.Q.defer();
@@ -327,10 +170,6 @@ function runWit(chatId, username, message){
                   .then(deferred.reject);
         } else {
           deferred.resolve(context);
-          /*if(_.wit.isStart(context)){
-            sendMessage(chatId, response, _.telegram.opts)
-                    .then(deferred.resolve);
-          }*/
         }
     });
 
@@ -542,16 +381,22 @@ function fn_bot (msg) {
   return deferred.promise;
 };
 
+//botan.track(msg, 'Start');
+if (redis)
+  redis.on("error", function (err) {
+      console.log("Error Redis: " + err);
+  });
+
 exports.fn_bot = fn_bot;
 // Any kind of message
 exports.listen = _.telegram.on(fn_bot);
 
 console.log("Server [" + _.ip.address() + "] listening...");
 console.log("Session Wit: " + _.wit.session);
+
 /*var LanguageDetect = require('languagedetect');
 var lngDetector = new LanguageDetect();
 console.log(lngDetector.detect('¿quien es Obama?'));*/
-
 
 //var fs = require('fs');
 //var obj = JSON.parse(fs.readFileSync('walpha_sample.json', 'utf8'));
@@ -582,6 +427,7 @@ download('https://api._.telegram.org/file/bot219665776:AAEigXWrsa16CxeVqPWvhOoMo
 //Cliente interactive por consola
 //_.wit.interactive(actions);
 
+// Interactive Zone (just for dev-enviroment)
 var interactive = () => {
   rl = _.readline.createInterface({
     input: process.stdin,
