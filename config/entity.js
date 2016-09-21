@@ -16,7 +16,7 @@ Cuando te recibas vamos a tomar unas cervezas!!!
 	*/}),
 	NOT_WORKED: multiline(function(){/*
 No llego el mensaje. ¿podrías repetirlo?
-	*/}),	
+	*/}),
 	HALI_SKILLS: multiline(function(){/*
 De momento estoy preparada para lo siguiente:
 1) Buscar respuestas en diferentes tópicos en ingles.
@@ -78,6 +78,25 @@ Recorda que por el momento este módulo acepta pregunta en Ingles.
 Ejemplo pregunta OK: "w: who is the current president of Brazil?".
 Ejemplo pregunta OK: "w: how is going MELI Stock?".
 Ejemplo pregunta NO-OK: "w: hola como andas, tell me pitagor theorem fiera!".
+
+Intenta lo siguiente:
+Usar diferentes frases o notaciones
+Ingresa palabras completas en lugar de abreviaciones
+Evita mezclar expresiones matematicas con otras notaciones
+Verifica tu ortografia
+La pregunta hacela en ingles (por el momento...)
+
+Otros tips usando las consultas en ingles:
+Las preguntas en ingles se esperan que sean especificas mas que de tópicos generales...
+Ejemplo: Ingresa  "2 cups of sugar", y no "nutrition information"
+Vos podes solamente tener respuestas acerca de hechos objetivos...
+Ejemplo: Intenta "highest mountain", no "most beautiful painting"
+Solo conozco lo conocido y real...
+Ejemplo: Pregunta "how many men in Mauritania", no "how many monsters in Loch Ness"
+Solo información pública tengo disponible
+Ejemplo: Pregunta acerca de "GDP of France", no "home phone of Michael Jordan"
+
+Besis.
 	*/}),
 	WALPHA_SKILLS: multiline(function(){/*
 Los tópicos que puedo responder son:

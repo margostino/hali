@@ -1,6 +1,7 @@
 var _ = require('../config/requires');
 
 var response = '';
+var lngDetector = new _.LanguageDetect();
 
 if (_.app_cfg.cache_enable){
   var redis = _.redis_node.createClient();
@@ -229,6 +230,16 @@ function processTaggedMessage(id, username, message){
   return deferred.promise;
 }
 
+function detect_language(message){
+  var langs_detected = lngDetector.detect(message);
+  var langs_scores = _.jsu.filter(langs_detected, function(el){return (el[0]=="english" || el[0]=="spanish")});
+  var lang_l1 = langs_scores[0][0]
+  var score_l1 = langs_scores[0][1]
+  var score_l2 = langs_scores[1][1]
+  var diff_scores = score_l1 - score_l2;
+  _.logger.session.info("<Score Lang Detector> " + lang_l1 + "," + diff_scores);  
+}
+
 function processMessage(id, username, msg){
   return processMessage(id, username, msg, null, null);
 }
@@ -242,6 +253,7 @@ function processMessage(id, username, message, response_cached, cached_hash){
       _.telegram.sendMessage(id, response_cached)
       deferred.resolve(response_cached);
   }else{
+    detect_language(message);
     if(_.utils.isTagged(message)){
       console.log('Procesa mensaje tageado...');
       //Es un mensaje tageado -> Busca su respuesta según corresponda
@@ -394,9 +406,19 @@ exports.listen = _.telegram.on(fn_bot);
 console.log("Server [" + _.ip.address() + "] listening...");
 console.log("Session Wit: " + _.wit.session);
 
+//Lang Detector
 /*var LanguageDetect = require('languagedetect');
-var lngDetector = new LanguageDetect();
-console.log(lngDetector.detect('¿quien es Obama?'));*/
+var msg_test = 'como estas?';
+var lng_detected = lngDetector.detect(msg_test)
+var langs = _.jsu.filter(lng_detected, function(el){return (el[0]=="english" || el[0]=="spanish")})
+var score_1 = langs[0][1]
+var score_2 = langs[1][1]
+var dif = score_1 - score_2;
+console.log(lng_detected);
+console.log(score_1);
+console.log(score_2);
+console.log("dif: " + dif);
+console.log(langs);*/
 
 //var fs = require('fs');
 //var obj = JSON.parse(fs.readFileSync('walpha_sample.json', 'utf8'));

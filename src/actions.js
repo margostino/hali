@@ -155,10 +155,16 @@ const actions = {
     walpha.query(message, function (err, result) {
       walpha.response(err, result)
         .then(function(response){
-          telegram.sendMessage(id, response)
-          setTimeout(function(){
-            telegram.sendMessage(id, entity_cfg.ADVICE);
-          }, 1000);
+          if(response){
+            telegram.sendMessage(id, response)
+            setTimeout(function(){
+              telegram.sendMessage(id, entity_cfg.ADVICE);
+            }, 1000);
+          }else{
+            response = entity_cfg.WALPHA_REFORM;
+            telegram.sendMessage(id, response)
+          }
+
           deferred.resolve(response);
         })
     });

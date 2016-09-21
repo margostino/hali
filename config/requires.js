@@ -20,7 +20,8 @@ var telegram = require('../src/telegram'),
     random = require("random-js")(),
     wit = require('../src/wit'),
     actions = require('../src/actions'),
-    utils = require('../src/utils');
+    utils = require('../src/utils'),
+    LanguageDetect = require('languagedetect');
 
 var _ = {
   ip: ip,
@@ -45,7 +46,8 @@ var _ = {
   logger: logger,
   utils: utils,
   app_cfg: app_cfg,
-  entity_cfg: entity_cfg
+  entity_cfg: entity_cfg,
+  LanguageDetect: LanguageDetect
 }
 
 module.exports = _;

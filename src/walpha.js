@@ -62,7 +62,7 @@ var walpha = {
           }
       });
     }else {
-      response = entity_cfg.WALPHA_REFORM;
+      //response = entity_cfg.WALPHA_REFORM;
     }
     deferred.resolve(response);
     return deferred.promise;
