@@ -233,11 +233,14 @@ function processTaggedMessage(id, username, message){
 function detect_language(message){
   var langs_detected = lngDetector.detect(message);
   var langs_scores = _.jsu.filter(langs_detected, function(el){return (el[0]=="english" || el[0]=="spanish")});
-  var lang_l1 = langs_scores[0][0]
-  var score_l1 = langs_scores[0][1]
-  var score_l2 = langs_scores[1][1]
-  var diff_scores = score_l1 - score_l2;
-  _.logger.session.info("<Score Lang Detector> " + lang_l1 + "," + diff_scores);  
+  console.log('Lang Score: ' + JSON.stringify(langs_scores));
+  if (langs_scores.length>0){
+    var lang_l1 = langs_scores[0][0]
+    var score_l1 = langs_scores[0][1]
+    var score_l2 = (langs_scores.length>1)? langs_scores[1][1]:0;s
+    var diff_scores = score_l1 - score_l2;
+    _.logger.session.info("<Score Lang Detector> " + lang_l1 + "," + diff_scores);
+  }
 }
 
 function processMessage(id, username, msg){
@@ -375,6 +378,7 @@ function fn_bot (msg) {
       });
   }else if(msg.contact){
     //Presiono el boton de autenticar
+    //_.botan.track(msg, 'Auth');
     //TODO: validar con API HAS
     console.log('Autenticación exitosa!');
     console.log("Phone number:  " + msg.contact.phone_number);
