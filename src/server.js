@@ -237,7 +237,7 @@ function detect_language(message){
   if (langs_scores.length>0){
     var lang_l1 = langs_scores[0][0]
     var score_l1 = langs_scores[0][1]
-    var score_l2 = (langs_scores.length>1)? langs_scores[1][1]:0;s
+    var score_l2 = (langs_scores.length>1)? langs_scores[1][1]:0;
     var diff_scores = score_l1 - score_l2;
     _.logger.session.info("<Score Lang Detector> " + lang_l1 + "," + diff_scores);
   }
@@ -345,6 +345,12 @@ function fn_bot (msg) {
             console.log('HASH GET: ' + message_hash)
             console.log('Busca mensaje en cache...');
             redis.get(message_hash, function(error,response_cached){
+
+                  if(response_cached)
+                    _.botan.track(msg, 'msg_cached');
+                  else
+                    _.botan.track(msg, 'message');
+
                   processMessage(chatId, username, message, response_cached, message_hash)
                     .then(function(response){
                       if(!response_cached)
@@ -378,7 +384,9 @@ function fn_bot (msg) {
       });
   }else if(msg.contact){
     //Presiono el boton de autenticar
-    //_.botan.track(msg, 'Auth');
+    _.botan.track(msg, 'auth');
+    //https://api.botan.io/track?token=B9qm3Cx-lA76u825_e9CVP5T5LVgzBCD&uid=211613276&name=auth
+    //Consultar metricas en Botanio Telegram desde mobile
     //TODO: validar con API HAS
     console.log('Autenticación exitosa!');
     console.log("Phone number:  " + msg.contact.phone_number);
@@ -410,49 +418,8 @@ exports.listen = _.telegram.on(fn_bot);
 console.log("Server [" + _.ip.address() + "] listening...");
 console.log("Session Wit: " + _.wit.session);
 
-//Lang Detector
-/*var LanguageDetect = require('languagedetect');
-var msg_test = 'como estas?';
-var lng_detected = lngDetector.detect(msg_test)
-var langs = _.jsu.filter(lng_detected, function(el){return (el[0]=="english" || el[0]=="spanish")})
-var score_1 = langs[0][1]
-var score_2 = langs[1][1]
-var dif = score_1 - score_2;
-console.log(lng_detected);
-console.log(score_1);
-console.log(score_2);
-console.log("dif: " + dif);
-console.log(langs);*/
-
-//var fs = require('fs');
-//var obj = JSON.parse(fs.readFileSync('walpha_sample.json', 'utf8'));
-
-
-//var reply_markup = _.telegram.ReplyKeyboardMarkup([[_.telegram.KeyboardButton('Share contact', request_contact=True)]])
-//bot.sendMessage(CHAT_ID, 'Example', reply_markup=reply_markup)
-/*var fs = require('fs'),
-    request = require('request');
-
-var download = function(uri, filename, callback){
-  request.head(uri, function(err, res, body){
-    console.log('content-type:', res.headers['content-type']);
-    console.log('content-length:', res.headers['content-length']);
-
-    request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
-  });
-};
-
-download('https://api._.telegram.org/file/bot219665776:AAEigXWrsa16CxeVqPWvhOoMolhUm7ADVyI/photo/file_2.jpg', 'file_2.png', function(){
-  console.log('done');
-});*/
-
-
-//Enviar Broadcast
-//_.telegram.sendBroadcast(_.app_cfg.users, _.entity_cfg.TESTME, _.telegram.opts);
-
 //Cliente interactive por consola
 //_.wit.interactive(actions);
-
 // Interactive Zone (just for dev-enviroment)
 var interactive = () => {
   rl = _.readline.createInterface({
