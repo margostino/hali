@@ -87,6 +87,26 @@ const actions = {
     telegram.sendMessage(id, response)
     return Q(response);
   },
+  hali_arq: (id) =>{
+    response = "No puedo darte esta información";
+    telegram.sendMessage(id, response)
+    return Q(response);
+  },
+  hali_location: (id) =>{
+    response = "Estoy en un bonito servidor y uso la lectora de living comedor.";
+    telegram.sendMessage(id, response)
+    return Q(response);
+  },
+  hali_sex: (id) =>{
+    response = "Soy un robot pero me siento muy humana.";
+    telegram.sendMessage(id, response)
+    return Q(response);
+  },
+  hali_languages: (id) =>{
+    response = entity_cfg.HALI_LANGUAGES;
+    telegram.sendMessage(id, response)
+    return Q(response);
+  },
   datetime: (id) =>{
     response = utils.now();
     telegram.sendMessage(id, response)

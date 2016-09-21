@@ -1,5 +1,6 @@
 var app_cfg = require('../config/app'),
     story_cfg = require('../config/story'),
+    entity_cfg = require('../config/entity'),
     wit = require('./wit'),
     _ = require('underscore'),
     weather = require('weather-js'),
@@ -55,6 +56,9 @@ var utils = {
   },
   isValidTag: (tag) => {
     return _.contains(TAGS,tag);
+  },
+  isNotStory: (response) => {
+    return (response==entity_cfg.NOT_STORY)? true:false;
   },
   getTaggedMessage: (message) => {
     return message.substring(2).trim();

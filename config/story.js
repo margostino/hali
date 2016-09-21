@@ -77,7 +77,7 @@ var stories = {
 			method:actions.hali_years_old
 		},
 		{
-			contexts: [['what','colour']],
+			contexts: [['what','colour'],['what','colour','are']],
 			method:actions.hali_colour
 		},
 		{
@@ -103,6 +103,22 @@ var stories = {
 		{
 			contexts: [['who','are']],
 			method:actions.hali_who
+		},
+		{
+			contexts: [['where','are']],
+			method:actions.hali_location
+		},
+		{
+			contexts: [['what','can','talk','lang'],['what','know','talk','lang']],
+			method:actions.hali_languages
+		},
+		{
+			contexts: [['what','ip'],['what','ip','you'],['what','ip','your']],
+			method:actions.hali_arq
+		},
+		{
+			contexts: [['human','are']],
+			method:actions.hali_sex
 		}
 	]
 };

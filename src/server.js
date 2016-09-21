@@ -354,8 +354,9 @@ function fn_bot (msg) {
                   processMessage(chatId, username, message, response_cached, message_hash)
                     .then(function(response){
                       if(!response_cached)
-                        //Se cachea la respuesta
-                        setCache(chatId, message, response);
+                        //Se cachea la respuesta, salvo que sea NOT_STORY
+                        if(!_.utils.isNotStory(response))
+                          setCache(chatId, message, response);
 
                       _.logger.session.info("<Response> " + chatId+":"+response);
                       deferred.resolve(response);
