@@ -112,6 +112,11 @@ const actions = {
     telegram.sendMessage(id, response)
     return Q(response);
   },
+  who_user: (id) =>{
+    response = 'The Genius'; //TODO: api request con ID
+    telegram.sendMessage(id, response)
+    return Q(response);
+  },
   walpha_skills: (id) =>{
     response = entity_cfg.WALPHA_SKILLS;
     telegram.sendMessage(id, response)

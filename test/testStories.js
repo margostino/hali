@@ -119,8 +119,6 @@ describe('Test stories from Wit.ai', function () {
     message['text'] = 'como esta el tiempo?';
     server.fn_bot(message)
       .then(function(response){
-        console.log('VOLVIO')
-        console.log(response)
         assert.notEqual(response.indexOf('Actual'), -1);
         done();
       })
@@ -326,6 +324,17 @@ describe('Test stories from Wit.ai', function () {
     server.fn_bot(message)
       .then(function(response){
         var ok = "No seas mal educado queres!";
+        assert.equal(response, ok);
+        done();
+      })
+      .fail(console.log);
+  });
+
+  it('Who User Story: should return an answer', function(done){
+    message['text'] = 'sabes quien soy?';
+    server.fn_bot(message)
+      .then(function(response){
+        var ok = 'The Genius';
         assert.equal(response, ok);
         done();
       })

@@ -119,6 +119,10 @@ var stories = {
 		{
 			contexts: [['human','are']],
 			method:actions.hali_sex
+		},
+		{
+			contexts: [['who','know','iam'],['who','iam']],
+			method:actions.who_user
 		}
 	]
 };
