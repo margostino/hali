@@ -97,10 +97,6 @@ const wit_actions = {
     _.logger.error.error(error);
     console.log("Error Wit: " + error);
   }/*,
-  get_username(sessionId, context, cb) {
-    context.username = context.username;
-    cb(context);
-  },
   get_books(sessionId, context, cb){
     context.books_list = "Los libros disponibles: William Stallings 5ta Edición, Abraham Silberschatz.";
     cb(context);
@@ -178,6 +174,7 @@ function runWit(chatId, username, message){
 }
 
 function processTaggedMessage(id, username, message){
+  console.log('Procesa mensaje tageado...');
   var deferred = _.Q.defer();
   tag = _.utils.getTag(message);
   message = _.utils.getTaggedMessage(message);
@@ -230,17 +227,23 @@ function processTaggedMessage(id, username, message){
   return deferred.promise;
 }
 
+function isEnglish(message_lang){
+  return (message_lang=='english')? true:false;
+}
+
 function detect_language(message){
+  var lang_l1 = '';
   var langs_detected = lngDetector.detect(message);
   var langs_scores = _.jsu.filter(langs_detected, function(el){return (el[0]=="english" || el[0]=="spanish")});
   console.log('Lang Score: ' + JSON.stringify(langs_scores));
   if (langs_scores.length>0){
-    var lang_l1 = langs_scores[0][0]
+    lang_l1 = langs_scores[0][0]
     var score_l1 = langs_scores[0][1]
     var score_l2 = (langs_scores.length>1)? langs_scores[1][1]:0;
     var diff_scores = score_l1 - score_l2;
     _.logger.session.info("<Score Lang Detector> " + lang_l1 + "," + diff_scores);
   }
+  return lang_l1;
 }
 
 function processMessage(id, username, msg){
@@ -256,9 +259,8 @@ function processMessage(id, username, message, response_cached, cached_hash){
       _.telegram.sendMessage(id, response_cached)
       deferred.resolve(response_cached);
   }else{
-    detect_language(message);
+    var message_lang = detect_language(message);
     if(_.utils.isTagged(message)){
-      console.log('Procesa mensaje tageado...');
       //Es un mensaje tageado -> Busca su respuesta según corresponda
       processTaggedMessage(id, username, message)
         .then(function(response){
@@ -268,6 +270,15 @@ function processMessage(id, username, message, response_cached, cached_hash){
       //Si envia un emoji se responde lo mismo
       _.telegram.sendMessage(id, message)
       deferred.resolve(message);
+    }else if(isEnglish(message_lang)){
+      console.log('Se detecto idioma INGLES.');
+      console.log('Se taggea mensaje original para procesarlo como tipo WAlpha...');
+      //Detecto ingles, entonces lo transforma en mensaje tageado WAlpha
+      message = 'w:' + message;
+      processTaggedMessage(id, username, message)
+        .then(function(response){
+          deferred.resolve(response);
+        });
     }else{
       //Es un mensaje para _.wit.ai
       var message_sanitized = _.telegram.sanitizeMessage(message);
