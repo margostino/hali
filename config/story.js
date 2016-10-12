@@ -28,7 +28,7 @@ var stories = {
 	},
 	list: [
 		{
-			contexts:[['ping_story', 'dummy']],
+			contexts:[['ping_story', 'dummy'],['ping_story']],
 			method:actions.ping_story
 		},
 		{
@@ -123,6 +123,14 @@ var stories = {
 		{
 			contexts: [['who','know','iam'],['who','iam']],
 			method:actions.who_user
+		},
+		{
+			contexts: [['availability','book','name']],
+			method:actions.book_availability
+		},
+		{
+			contexts: [['what','advice','book','subject']],
+			method:actions.book_advice
 		}
 	]
 };

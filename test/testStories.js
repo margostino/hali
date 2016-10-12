@@ -178,7 +178,7 @@ describe('Test stories from Wit.ai', function () {
   });
 
   it('Not Story: should return an answer', function(done){
-    message['text'] = 'the cat is under de table';
+    message['text'] = 'dklfmnkdlsnfgkldsngklfdsngklvmafn dk';
     server.fn_bot(message)
       .then(function(response){
         assert.notEqual(response.indexOf('Necesito información adicional'), -1);
@@ -320,7 +320,7 @@ describe('Test stories from Wit.ai', function () {
   });
 
   it('Insulto Story: should return an answer', function(done){
-    message['text'] = 'dale forra!!!!';
+    message['text'] = 'esta es una puta prueba';
     server.fn_bot(message)
       .then(function(response){
         var ok = "No seas mal educado queres!";
@@ -335,6 +335,28 @@ describe('Test stories from Wit.ai', function () {
     server.fn_bot(message)
       .then(function(response){
         var ok = 'The Genius';
+        assert.equal(response, ok);
+        done();
+      })
+      .fail(console.log);
+  });
+
+  it('Book Availability Story: should return an answer', function(done){
+    message['text'] = 'esta disponible el libro de Silberschatz?';
+    server.fn_bot(message)
+      .then(function(response){
+        var ok = 'El libro esta disponible';
+        assert.equal(response, ok);
+        done();
+      })
+      .fail(console.log);
+  });
+
+  it('Book Advice Story: should return an answer', function(done){
+    message['text'] = 'que libro me recomendas para Sistemas Operativos??';
+    server.fn_bot(message)
+      .then(function(response){
+        var ok = 'Los libros disponibles: William Stallings 5ta Edición, Abraham Silberschatz.';
         assert.equal(response, ok);
         done();
       })

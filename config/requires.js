@@ -21,7 +21,8 @@ var telegram = require('../src/telegram'),
     wit = require('../src/wit'),
     actions = require('../src/actions'),
     utils = require('../src/utils'),
-    LanguageDetect = require('languagedetect');
+    LanguageDetect = require('languagedetect'),
+    stopwords = require('./stopwords');
 
 var _ = {
   ip: ip,
@@ -47,7 +48,8 @@ var _ = {
   utils: utils,
   app_cfg: app_cfg,
   entity_cfg: entity_cfg,
-  LanguageDetect: LanguageDetect
+  LanguageDetect: LanguageDetect,
+  stopwords: stopwords
 }
 
 module.exports = _;

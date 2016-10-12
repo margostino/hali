@@ -227,6 +227,23 @@ function processTaggedMessage(id, username, message){
   return deferred.promise;
 }
 
+//Valida reglas para forzar Wit process
+function forceWit(message){
+  var force = false;
+  switch (true) {
+      case (message.trim()=='ping'):
+        force = true;
+        break;
+    default:
+        force = false;
+        break;
+  }
+
+  if(force) console.log('Wit forced.')
+
+  return force;
+}
+
 function isEnglish(message_lang){
   return (message_lang=='english')? true:false;
 }
@@ -246,6 +263,10 @@ function detect_language(message){
   return lang_l1;
 }
 
+function isStopWord(message){
+  return _.jsu.contains(_.stopwords, message);
+}
+
 function processMessage(id, username, msg){
   return processMessage(id, username, msg, null, null);
 }
@@ -259,7 +280,11 @@ function processMessage(id, username, message, response_cached, cached_hash){
       _.telegram.sendMessage(id, response_cached)
       deferred.resolve(response_cached);
   }else{
-    var message_lang = detect_language(message);
+    var message_lang = ''
+    //Verify if it is stopword
+    if (!isStopWord(message))
+      message_lang = detect_language(message);
+
     if(_.utils.isTagged(message)){
       //Es un mensaje tageado -> Busca su respuesta según corresponda
       processTaggedMessage(id, username, message)
@@ -270,7 +295,7 @@ function processMessage(id, username, message, response_cached, cached_hash){
       //Si envia un emoji se responde lo mismo
       _.telegram.sendMessage(id, message)
       deferred.resolve(message);
-    }else if(isEnglish(message_lang)){
+    }else if(isEnglish(message_lang) && !forceWit(message)){
       console.log('Se detecto idioma INGLES.');
       console.log('Se taggea mensaje original para procesarlo como tipo WAlpha...');
       //Detecto ingles, entonces lo transforma en mensaje tageado WAlpha
@@ -281,6 +306,7 @@ function processMessage(id, username, message, response_cached, cached_hash){
         });
     }else{
       //Es un mensaje para _.wit.ai
+      console.log('Se detecto idioma ESPAÑOL: mensaje para Wit.ai');
       var message_sanitized = _.telegram.sanitizeMessage(message);
       if (message_sanitized){
         //Ejecuto _.wit.ai para obtener la respuesta de la historia
@@ -431,6 +457,7 @@ console.log("Server [" + _.ip.address() + "] listening...");
 console.log("Session Wit: " + _.wit.session);
 
 //Cliente interactive por consola
+//Para uso de desarrollo: userid, Mensaje
 //_.wit.interactive(actions);
 // Interactive Zone (just for dev-enviroment)
 var interactive = () => {

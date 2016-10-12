@@ -11,8 +11,10 @@ var Q = require("q"),
 var api_url = "http://"+app_cfg.api_host+":"+app_cfg.api_port;
 
 const actions = {
-  ping_story: (session, context) => {
-    console.log('SUPERMAN VS BATMAN')
+  ping_story: (id) => {
+    response = entity_cfg.PONG;
+    telegram.sendMessage(id, response)
+    return Q(response);
   },
   not_story: (id) => {
     response = entity_cfg.NOT_STORY;
@@ -125,10 +127,14 @@ const actions = {
   info_wifi: (id) =>{
     var deferred = Q.defer();
     request(api_url+"/has/wifi", function (error, response, body) {
+      console.log(error);
       if (!error && response.statusCode == 200) {
         response = JSON.parse(body).password;
         telegram.sendMessage(id, response)
         deferred.resolve(response);
+      }else{
+        telegram.sendMessage(id, entity_cfg.API_ERROR)
+        deferred.resolve(error);
       }
     });
     return deferred.promise;
@@ -210,6 +216,21 @@ const actions = {
         });
 
     return deferred.promise;
+  },
+  book_info: (id) =>{
+    response = "El libro esta disponible";
+    telegram.sendMessage(id, response)
+    return Q(response);
+  },
+  book_availability: (id) =>{
+    response = "El libro esta disponible";
+    telegram.sendMessage(id, response)
+    return Q(response);
+  },
+  book_advice: (id) =>{
+    response = "Los libros disponibles: William Stallings 5ta Edición, Abraham Silberschatz.";
+    telegram.sendMessage(id, response)
+    return Q(response);
   }
 };
 

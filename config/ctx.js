@@ -2,6 +2,7 @@ var actions = require('../src/actions')
 console.log("actionsaaassssssaa")
 console.log(actions)
 
+//TO DEPRECATE
 var stories = {
 	contexts: [
 		  ['bye'],['greeting'],['greeting','greeting_how'],

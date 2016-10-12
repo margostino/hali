@@ -17,12 +17,17 @@ Cuando te recibas vamos a tomar unas cervezas!!!
 	NOT_WORKED: multiline(function(){/*
 No llego el mensaje. ¿podrías repetirlo?
 	*/}),
+	API_ERROR: multiline(function(){/*
+Ups!, Al parecer tengo un tornillo desajustado y no puedo responder eso.
+En breve ya voy a restablecer contacto y así poder ayudarte. Perdón!		
+	*/}),
+	PONG: "Pong!",
 	HALI_LANGUAGES: multiline(function(){/*
 Entiendo ESPAÑOL y me defiendo con INGLES.
 Ojo!, si me haces preguntas en ingles deben ser de los topicos:
 Matemática, Estadística y análisis de datos, Química, Física, Astronomía, Ingeniería,
 Materiales, Ciencias de la vida (anatomía, plantas, animales, ADN, Genética, etc etc),
-Ciencias de la computación.....etc etc....		
+Ciencias de la computación.....etc etc....
 	*/}),
 	HALI_SKILLS: multiline(function(){/*
 De momento estoy preparada para lo siguiente:

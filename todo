@@ -44,3 +44,10 @@ https://api.wit.ai/converse?session_id=DxcfFz1PVL9Xp1oNFcq7Ag==&q=que%20curso%20
 
 Iniciativas:
 Recomendar acciones
+Feedback
+
+Mejoras:
+Enviar en un solo lugar la respuesta para telegram y no en cada story
+Analizar que hacer en casos de detectar idioma ingles en mensajes claros en español, que no sean stopwords
+Console: node
+> require("./underscore").include(test,"ping")
