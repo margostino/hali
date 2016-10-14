@@ -9,7 +9,7 @@ if (_.app_cfg.cache_enable){
 }
 
 function setCache(id, message, data){
-  if (redis){
+  if (redis && data){
     var data_hash = _.utils.generateHash(id, message);
     console.log('HASH SET: ' + data_hash)
     redis.set(data_hash, data);
@@ -97,14 +97,6 @@ const wit_actions = {
     _.logger.error.error(error);
     console.log("Error Wit: " + error);
   }/*,
-  get_books(sessionId, context, cb){
-    context.books_list = "Los libros disponibles: William Stallings 5ta Edición, Abraham Silberschatz.";
-    cb(context);
-  },
-  get_book_status(sessionId, context, cb) {
-    context.book_status = "El libro esta disponible.";
-    cb(context);
-  },
   get_departamento(sessionId, context, cb) {
     context.oficina = "322";
     cb(context);
@@ -163,8 +155,10 @@ function runWit(chatId, username, message){
           console.log('Oops! Got an error: ' + error);
           _.logger.error.error(error);
           _.wit.restart(_.datetime.create(Date.now()), wit_actions);
+          //Siempre responde. Modela una respuesta aún fallando
           _.telegram.sendMessage(chatId, _.entity_cfg.NOT_WORKED)
-                  .then(deferred.reject);
+                  //.then(deferred.reject);
+                  .then(deferred.resolve)
         } else {
           deferred.resolve(context);
         }
@@ -395,7 +389,9 @@ function fn_bot (msg) {
                         if(!_.utils.isNotStory(response))
                           setCache(chatId, message, response);
 
-                      _.logger.session.info("<Response> " + chatId+":"+response);
+                      if (response)
+                        _.logger.session.info("<Response> " + chatId+":"+response);
+
                       deferred.resolve(response);
                     }).fail(deferred.reject);
             });
@@ -405,7 +401,9 @@ function fn_bot (msg) {
             .then(function(response){
               //Se cachea la respuesta
               setCache(chatId, message, response);
-              _.logger.session.info("<Response> " + chatId+":"+response);
+              if (response)
+                _.logger.session.info("<Response> " + chatId+":"+response);
+
               deferred.resolve(response);
             }).fail(deferred.reject);
           }

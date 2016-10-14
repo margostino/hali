@@ -8,6 +8,7 @@ var assert = require('assert'),
     should = require('should'),
     request = require('request'),
     _ = require('underscore'),
+    Q = require("q"),
     telegram = require('../src/telegram');
 
 var api_url = "http://"+app_cfg.api_host+":"+app_cfg.api_port;
@@ -33,6 +34,25 @@ var contact = {
 };
 
 var wifi_password_api = "joke";
+
+//Function for looping Promises results in case that restart server
+function loop(promise, fn) {
+  return promise.then(fn).then(function (wrapper) {
+    return !wrapper.done ? loop(Q(wrapper.value), fn) : wrapper.value;
+  });
+}
+
+function assertStory(message, response, done){
+  loop(server.fn_bot(message), function (response_to_check) {
+    console.log("Interacción response: " + response_to_check);
+    return {
+      done: response_to_check == response,
+      value: response
+    };
+  }).done(function () {
+    done();
+  });
+}
 
 describe('Test stories from Wit.ai', function () {
   before(function(done) {
@@ -63,13 +83,16 @@ describe('Test stories from Wit.ai', function () {
 
   it('Greeting Story: should return an answer', function(done){
     message['text'] = 'hola';
-    server.fn_bot(message)
+    var response = "Hola, que bueno encontrarte por aca. ¿como estás?";
+    assertStory(message, response, done);
+
+    /*server.fn_bot(message)
       .then(function(response){
         var ok = "Hola, que bueno encontrarte por aca. ¿como estás?";
         assert.equal(response, ok);
         done();
       })
-      .fail(console.log);
+      .fail(console.log);*/
   });
 
   it('Bye Story: should return an answer', function(done){
@@ -127,13 +150,25 @@ describe('Test stories from Wit.ai', function () {
 
   it('Info Course Story: should return an answer', function(done){
     message['text'] = 'donde curso hoy?';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = "Cursas IA en aula 518 a las 19hs en Medrano.";
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var ok = "Cursas IA en aula 518 a las 19hs en Medrano";
+
+    loop(server.fn_bot(message), function (response) {
+      console.log("Interacción response: " + response);
+      return {
+        done: response == ok,
+        value: ok
+      };
+    }).done(function () {
+      done();
+    });
+
+    /*server.fn_bot(message)
+        .then(function(response){
+          var ok = "Cursas IA en aula 518 a las 19hs en Medrano";
+          assert.equal(response, ok);
+          done();
+        })
+        .fail(console.log);*/
   });
 
   it('Translate Story: should return an answer', function(done){
@@ -363,8 +398,51 @@ describe('Test stories from Wit.ai', function () {
       .fail(console.log);
   });
 
-  /*it('Info Course II: should return an answer', function(done){
-    //TODO
-  });*/
+  it('Info Department Story: should return an answer', function(done){
+    message['text'] = 'donde el departamento de sistemas';
+    server.fn_bot(message)
+      .then(function(response){
+        var ok = "Tu departamento esta en Medrano, oficina 318 (piso 3)";
+        assert.equal(response, ok);
+        done();
+      })
+      .fail(console.log);
+  });
+
+  it('Info Department Story (with ask): should return an answer', function(done){
+    message['text'] = 'donde esta mi departamento?';
+    server.fn_bot(message)
+      .then(function(response){
+        var ok = "¿especialidad/carrera?";
+        assert.equal(response, ok);
+        message['text'] = 'sistemas';
+        server.fn_bot(message)
+          .then(function(response){
+            var ok = "Tu departamento esta en Medrano, oficina 318 (piso 3)";
+            assert.equal(response, ok);
+            done();
+          })
+          .fail(console.log);
+      })
+      .fail(console.log);
+  });
+
+  it('Info Course Story (with ask): should return an answer', function(done){
+    message['text'] = 'donde curso?';
+    server.fn_bot(message)
+      .then(function(response){
+        var ok = "¿cuando?";
+        assert.equal(response, ok);
+        message['text'] = 'hoy';
+        server.fn_bot(message)
+          .then(function(response){
+            var ok = "Cursas IA en aula 518 a las 19hs en Medrano";
+            assert.equal(response, ok);
+            done();
+          })
+          .fail(console.log);
+      })
+      .fail(console.log);
+  });
 
 });

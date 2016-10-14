@@ -50,7 +50,7 @@ const actions = {
     return Q(response);
   },
   info_course: (id) =>{
-    response = "Cursas IA en aula 518 a las 19hs en Medrano.";
+    response = "Cursas IA en aula 518 a las 19hs en Medrano";
     telegram.sendMessage(id, response)
     return Q(response);
   },
@@ -138,6 +138,16 @@ const actions = {
       }
     });
     return deferred.promise;
+  },
+  info_department: (id) =>{
+    response = "Tu departamento esta en Medrano, oficina 318 (piso 3)";
+    telegram.sendMessage(id, response)
+    return Q(response);
+  },
+  what_career: (id) =>{
+    response = "¿especialidad/carrera?";
+    telegram.sendMessage(id, response)
+    return Q(response);
   },
   ticket: (id, message) => {
       var deferred = Q.defer();

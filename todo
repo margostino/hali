@@ -49,5 +49,12 @@ Feedback
 Mejoras:
 Enviar en un solo lugar la respuesta para telegram y no en cada story
 Analizar que hacer en casos de detectar idioma ingles en mensajes claros en español, que no sean stopwords
+Mejorar interaccion por idioma y flujo de procesamiento de mensaje:
+  -If EN  --> Posible traduccion EN-ES
+  -If notTagged() --> Primero flujo Wit
+    If notResponse --> WAlpha
+      -If notResponse --> mensaje de respuesta no encontrada (posible feedback)
+
+
 Console: node
 > require("./underscore").include(test,"ping")

@@ -131,6 +131,15 @@ var stories = {
 		{
 			contexts: [['what','advice','book','subject']],
 			method:actions.book_advice
+		},
+		{
+			contexts: [['where','department'],['what','department']],
+			method:actions.what_career
+		},
+		{
+			contexts: [['career'],['what','department','career'],
+			['where','department','career']],
+			method:actions.info_department
 		}
 	]
 };
