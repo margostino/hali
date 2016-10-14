@@ -159,8 +159,6 @@ const actions = {
     telegram.sendBroadcast(to_users, msg, telegram.opts)
     var message_status = "Mensaje enviado OK. Remitente: " + name;
     message_status += ". Destinatarios: " + JSON.stringify(to_users);
-    telegram.sendMessage(id, message_status);
-
     return Q(message_status);
   },
   walpha: (id, message) => {
@@ -168,16 +166,6 @@ const actions = {
     walpha.query(message, function (err, result) {
       walpha.response(err, result)
         .then(function(response){
-          /*if(response){
-            telegram.sendMessage(id, response)
-            setTimeout(function(){
-              telegram.sendMessage(id, entity_cfg.ADVICE);
-            }, 1000);
-          }else{
-            response = entity_cfg.WALPHA_REFORM;
-            telegram.sendMessage(id, response)
-          }*/
-
           deferred.resolve(response);
         })
     });

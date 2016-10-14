@@ -16,6 +16,46 @@ function setCache(id, message, data){
   }
 }
 
+//Valida reglas para forzar Wit process
+function forceWit(message){
+  var force = false;
+  switch (true) {
+      case (message.trim()=='ping'):
+        force = true;
+        break;
+    default:
+        force = false;
+        break;
+  }
+
+  if(force) console.log('Wit forced.')
+
+  return force;
+}
+
+function isEnglish(message_lang){
+  return (message_lang=='english')? true:false;
+}
+
+function detect_language(message){
+  var lang_l1 = '';
+  var langs_detected = lngDetector.detect(message);
+  var langs_scores = _.jsu.filter(langs_detected, function(el){return (el[0]=="english" || el[0]=="spanish")});
+  console.log('Lang Score: ' + JSON.stringify(langs_scores));
+  if (langs_scores.length>0){
+    lang_l1 = langs_scores[0][0]
+    var score_l1 = langs_scores[0][1]
+    var score_l2 = (langs_scores.length>1)? langs_scores[1][1]:0;
+    var diff_scores = score_l1 - score_l2;
+    _.logger.session.info("<Score Lang Detector> " + lang_l1 + "," + diff_scores);
+  }
+  return lang_l1;
+}
+
+function isStopWord(message){
+  return _.jsu.contains(_.stopwords, message);
+}
+
 function processWitMessage(cb, id, username, context, entities, message){
   processWitMessage(cb, id, username, context, entities, message, null);
 }
@@ -179,7 +219,6 @@ function processTaggedMessage(id, username, message){
       //Es flujo traductor
       _.actions.translate(id, message)
           .then(function(response){
-            //_.logger.session.info("<Response> " + id+":"+response);
             deferred.resolve(response);
           });
       break;
@@ -188,7 +227,9 @@ function processTaggedMessage(id, username, message){
       //Es flujo WAlpha
       _.actions.walpha(id, message)
         .then(function(response){
-          //_.logger.session.info("<Response> " + id+":"+response);
+          if(!response){
+            response = entity_cfg.WALPHA_REFORM;
+          }
           deferred.resolve(response);
         });
       break;
@@ -198,7 +239,6 @@ function processTaggedMessage(id, username, message){
       var msg_broadcast = username + " te envia el mensaje: " + message;
       _.actions.broadcast(id, msg_broadcast)
         .then(function(response){
-          //_.logger.session.info("<Response> " + id+":"+response);
           deferred.resolve(response);
         });
       break;
@@ -207,7 +247,6 @@ function processTaggedMessage(id, username, message){
         //Es flujo ticket
         _.actions.ticket(id, message)
           .then(function(response){
-            //_.logger.session.info("<Response> " + id+":"+response);
             deferred.resolve(response);
           });
       break;
@@ -219,46 +258,6 @@ function processTaggedMessage(id, username, message){
   }
 
   return deferred.promise;
-}
-
-//Valida reglas para forzar Wit process
-function forceWit(message){
-  var force = false;
-  switch (true) {
-      case (message.trim()=='ping'):
-        force = true;
-        break;
-    default:
-        force = false;
-        break;
-  }
-
-  if(force) console.log('Wit forced.')
-
-  return force;
-}
-
-function isEnglish(message_lang){
-  return (message_lang=='english')? true:false;
-}
-
-function detect_language(message){
-  var lang_l1 = '';
-  var langs_detected = lngDetector.detect(message);
-  var langs_scores = _.jsu.filter(langs_detected, function(el){return (el[0]=="english" || el[0]=="spanish")});
-  console.log('Lang Score: ' + JSON.stringify(langs_scores));
-  if (langs_scores.length>0){
-    lang_l1 = langs_scores[0][0]
-    var score_l1 = langs_scores[0][1]
-    var score_l2 = (langs_scores.length>1)? langs_scores[1][1]:0;
-    var diff_scores = score_l1 - score_l2;
-    _.logger.session.info("<Score Lang Detector> " + lang_l1 + "," + diff_scores);
-  }
-  return lang_l1;
-}
-
-function isStopWord(message){
-  return _.jsu.contains(_.stopwords, message);
 }
 
 function processMessage(id, username, msg){
@@ -298,7 +297,7 @@ function processMessage(id, username, message, response_cached, cached_hash){
           deferred.resolve(response);
         });
     }else{
-      //Es un mensaje para _.wit.ai
+      //Es un mensaje para WIT.ai
       console.log('Se detecto idioma ESPAÑOL: mensaje para Wit.ai');
       var message_sanitized = _.telegram.sanitizeMessage(message);
       if (message_sanitized){
