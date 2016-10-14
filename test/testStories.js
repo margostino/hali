@@ -85,61 +85,35 @@ describe('Test stories from Wit.ai', function () {
     message['text'] = 'hola';
     var response = "Hola, que bueno encontrarte por aca. ¿como estás?";
     assertStory(message, response, done);
-
-    /*server.fn_bot(message)
-      .then(function(response){
-        var ok = "Hola, que bueno encontrarte por aca. ¿como estás?";
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);*/
   });
 
   it('Bye Story: should return an answer', function(done){
     message['text'] = 'chau';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = "Hasta pronto!";
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var response = "Hasta pronto!";
+    assertStory(message, response, done);
   });
 
   it('Greeting How Story: should return an answer', function(done){
     message['text'] = 'como estas?';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = "Estoy muy bien. Gracias!";
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var response = "Estoy muy bien. Gracias!";
+    assertStory(message, response, done);
   });
 
   it('Thanks Story: should return an answer', function(done){
     message['text'] = 'gracias';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = "De nada!";
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var reponse = "De nada!";
+    assertStory(message, response, done);
   });
 
   it('Wifi Story: should return an answer', function(done){
     message['text'] = 'cual es la contraseña de wifi?';
-    server.fn_bot(message)
-      .then(function(response){
-        assert.equal(response, wifi_password_api);
-        done();
-      })
-      .fail(console.log);
+    var response = wifi_password_api;
+    assertStory(message, response, done);
   });
 
   it('Weather Story: should return an answer', function(done){
     message['text'] = 'como esta el tiempo?';
+    assertStory(message, response, done);
     server.fn_bot(message)
       .then(function(response){
         assert.notEqual(response.indexOf('Actual'), -1);
@@ -150,25 +124,8 @@ describe('Test stories from Wit.ai', function () {
 
   it('Info Course Story: should return an answer', function(done){
     message['text'] = 'donde curso hoy?';
-    var ok = "Cursas IA en aula 518 a las 19hs en Medrano";
-
-    loop(server.fn_bot(message), function (response) {
-      console.log("Interacción response: " + response);
-      return {
-        done: response == ok,
-        value: ok
-      };
-    }).done(function () {
-      done();
-    });
-
-    /*server.fn_bot(message)
-        .then(function(response){
-          var ok = "Cursas IA en aula 518 a las 19hs en Medrano";
-          assert.equal(response, ok);
-          done();
-        })
-        .fail(console.log);*/
+    var response = "Cursas IA en aula 518 a las 19hs en Medrano";
+    assertStory(message, response, done);
   });
 
   it('Translate Story: should return an answer', function(done){
@@ -235,13 +192,8 @@ describe('Test stories from Wit.ai', function () {
 
   it('WAlpha Skills Story: should return an answer', function(done){
     message['text'] = 'que puede hacer walpha?';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = entity_cfg.WALPHA_SKILLS;
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var response = entity_cfg.WALPHA_SKILLS;
+    assertStory(message, response, done);
   });
 
   it('Datetime Story: should return an answer', function(done){
@@ -257,156 +209,86 @@ describe('Test stories from Wit.ai', function () {
 
   it('Hali Languages Story: should return an answer', function(done){
     message['text'] = 'que idiomas sabes hablar?';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = entity_cfg.HALI_LANGUAGES
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var reponse = entity_cfg.HALI_LANGUAGES;
+    assertStory(message, response, done);
   });
 
   it('Hali Sex Story: should return an answer', function(done){
     message['text'] = 'sos humana?';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = "Soy un robot pero me siento muy humana.";
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var reponse = "Soy un robot pero me siento muy humana.";
+    assertStory(message, response, done);
   });
 
   it('Hali Location Story: should return an answer', function(done){
     message['text'] = 'donde estas?';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = "Estoy en un bonito servidor y uso la lectora de living comedor.";
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var reponse = "Estoy en un bonito servidor y uso la lectora de living comedor.";
+    assertStory(message, response, done);
   });
 
   it('Hali Arq Story: should return an answer', function(done){
     message['text'] = 'cual es tu IP?';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = "No puedo darte esta información";
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var reponse = "No puedo darte esta información";
+    assertStory(message, response, done);
   });
 
   it('Hali AboutME Story: should return an answer', function(done){
     message['text'] = 'quien sos?';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = entity_cfg.ABOUT_ME;
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var reponse = entity_cfg.ABOUT_ME;
+    assertStory(message, response, done);
   });
 
   it('Hali Skills Story: should return an answer', function(done){
     message['text'] = 'que podes hacer?';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = entity_cfg.HALI_SKILLS;
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var reponse = entity_cfg.HALI_SKILLS;
+    assertStory(message, response, done);
   });
 
   it('Hali Birthday Story: should return an answer', function(done){
     message['text'] = 'cuando es tu cumpleaños?';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = "Nací el 18 de Abril de 2016. Mi peso al nacer fue de tan solo 56kb.";
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var reponse = "Nací el 18 de Abril de 2016. Mi peso al nacer fue de tan solo 56kb.";
+    assertStory(message, response, done);
   });
 
   it('Hali Colour Story: should return an answer', function(done){
     message['text'] = 'de que color sos?';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = "Azul.";
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var reponse = "Azul.";
+    assertStory(message, response, done);
   });
 
   it('Hali Years Old Story: should return an answer', function(done){
     message['text'] = 'cuantos años tenes?';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = "Tengo tan solo unos meses pero me siento pleno como un adolescente";
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var reponse = "Tengo tan solo unos meses pero me siento pleno como un adolescente";
+    assertStory(message, response, done);
   });
 
   it('Insulto Story: should return an answer', function(done){
     message['text'] = 'esta es una puta prueba';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = "No seas mal educado queres!";
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var reponse = "No seas mal educado queres!";
+    assertStory(message, response, done);
   });
 
   it('Who User Story: should return an answer', function(done){
     message['text'] = 'sabes quien soy?';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = 'The Genius';
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var response = 'The Genius';
+    assertStory(message, response, done);
   });
 
   it('Book Availability Story: should return an answer', function(done){
     message['text'] = 'esta disponible el libro de Silberschatz?';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = 'El libro esta disponible';
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var response = 'El libro esta disponible';
+    assertStory(message, response, done);
   });
 
   it('Book Advice Story: should return an answer', function(done){
     message['text'] = 'que libro me recomendas para Sistemas Operativos??';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = 'Los libros disponibles: William Stallings 5ta Edición, Abraham Silberschatz.';
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var response = 'Los libros disponibles: William Stallings 5ta Edición, Abraham Silberschatz.';
+    assertStory(message, response, done);
   });
 
   it('Info Department Story: should return an answer', function(done){
     message['text'] = 'donde el departamento de sistemas';
-    server.fn_bot(message)
-      .then(function(response){
-        var ok = "Tu departamento esta en Medrano, oficina 318 (piso 3)";
-        assert.equal(response, ok);
-        done();
-      })
-      .fail(console.log);
+    var response = "Tu departamento esta en Medrano, oficina 318 (piso 3)";
+    assertStory(message, response, done);
   });
 
   it('Info Department Story (with ask): should return an answer', function(done){
