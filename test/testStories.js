@@ -273,7 +273,7 @@ describe('Test stories from Wit.ai', function () {
     assertStory(message, response, done, equal);
     message['text'] = 'sistemas';
     response = "Tu departamento esta en Medrano, oficina 318 (piso 3)";
-    assertStory(message, response, done, equal);
+    setTimeout(assertStory(message, response, done, equal),5000);
   });
 
   it('Info Course Story (with ask): should return an answer', function(done){
@@ -282,7 +282,7 @@ describe('Test stories from Wit.ai', function () {
     assertStory(message, response, done, equal);
     message['text'] = 'hoy';
     response = "¿cuando?";
-    assertStory(message, response, done, equal);
+    setTimeout(assertStory(message, response, done, equal),5000);
   });
 
 });

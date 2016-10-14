@@ -287,7 +287,6 @@ function processMessage(id, username, message, response_cached, cached_hash){
         });
     }else if(_.isSEmoji(message)){
       //Si envia un emoji se responde lo mismo
-      _.telegram.sendMessage(id, message)
       deferred.resolve(message);
     }else if(isEnglish(message_lang) && !forceWit(message)){
       console.log('Se detecto idioma INGLES.');
@@ -311,7 +310,6 @@ function processMessage(id, username, message, response_cached, cached_hash){
           .fail(deferred.reject);
       }else{
         //Como no pudo sanitazar mensaje envía lo mismo que recibió
-        _.telegram.sendMessage(id, message)
         deferred.resolve(message);
       }
     }
@@ -392,6 +390,7 @@ function fn_bot (msg) {
                       if (response)
                         _.logger.session.info("<Response> " + chatId+":"+response);
 
+                      _.telegram.sendMessage(chatId, response);
                       deferred.resolve(response);
                     }).fail(deferred.reject);
             });
@@ -404,6 +403,7 @@ function fn_bot (msg) {
               if (response)
                 _.logger.session.info("<Response> " + chatId+":"+response);
 
+              _.telegram.sendMessage(chatId, response);
               deferred.resolve(response);
             }).fail(deferred.reject);
           }
