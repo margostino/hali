@@ -19,7 +19,7 @@ No llego el mensaje. ¿podrías repetirlo?
 	*/}),
 	API_ERROR: multiline(function(){/*
 Ups!, Al parecer tengo un tornillo desajustado y no puedo responder eso.
-En breve ya voy a restablecer contacto y así poder ayudarte. Perdón!		
+En breve ya voy a restablecer contacto y así poder ayudarte. Perdón!
 	*/}),
 	PONG: "Pong!",
 	HALI_LANGUAGES: multiline(function(){/*
@@ -56,10 +56,10 @@ Mensaje: "la facultad va a estar cerrada hoy"
 Me estas confundiendo. Pregunta concreta. ¿En que puedo ayudarte?
 	*/}),
 	NOT_STORY: multiline(function(){/*
-¿En que puedo ayudarte?
 Algunas preguntas o comentarios no los entiendo todavía.
 Necesito información adicional para entenderte.
 Proba preguntandome de otras formas, quizas comprenda.
+¿En que puedo ayudarte?
 	*/}),
 	START: multiline(function(){/*
 Hola!!!. Necesito que comprobar tu identidad.

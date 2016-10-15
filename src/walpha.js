@@ -33,7 +33,6 @@ var walpha = {
     client.query(query, fn);
   },
   response: (error, result) => {
-    //console.log(JSON.stringify(result));
     var deferred = Q.defer();
     var response = '';
     if (error) deferred.reject(err);
@@ -62,7 +61,7 @@ var walpha = {
           }
       });
     }else {
-      //response = entity_cfg.WALPHA_REFORM;
+      response = entity_cfg.NOT_STORY;
     }
     deferred.resolve(response);
     return deferred.promise;

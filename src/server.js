@@ -218,37 +218,26 @@ function processTaggedMessage(id, username, message){
       console.log('Es mensaje tipo tag traductor.');
       //Es flujo traductor
       _.actions.translate(id, message)
-          .then(function(response){
-            deferred.resolve(response);
-          });
+          .then(deferred.resolve);
       break;
     case 'w':
       console.log('Es mensaje tipo tag WAlpha.');
       //Es flujo WAlpha
       _.actions.walpha(id, message)
-        .then(function(response){
-          if(!response){
-            response = entity_cfg.WALPHA_REFORM;
-          }
-          deferred.resolve(response);
-        });
+        .then(deferred.resolve);
       break;
     case 'b':
       console.log('Es mensaje tipo tag broadcast.');
       //Es flujo broadcast
       var msg_broadcast = username + " te envia el mensaje: " + message;
       _.actions.broadcast(id, msg_broadcast)
-        .then(function(response){
-          deferred.resolve(response);
-        });
+        .then(deferred.resolve);
       break;
     case 'm':
         console.log('Es mensaje tipo tag ticket.');
         //Es flujo ticket
         _.actions.ticket(id, message)
-          .then(function(response){
-            deferred.resolve(response);
-          });
+          .then(deferred.resolve);
       break;
     default:
       response = 'Es mensaje tageado pero no es un tag valido.'
@@ -273,6 +262,7 @@ function processMessage(id, username, message, response_cached, cached_hash){
       _.telegram.sendMessage(id, response_cached)
       deferred.resolve(response_cached);
   }else{
+    //Respuesta no cacheada
     var message_lang = ''
     //Verify if it is stopword
     if (!isStopWord(message))
@@ -281,13 +271,11 @@ function processMessage(id, username, message, response_cached, cached_hash){
     if(_.utils.isTagged(message)){
       //Es un mensaje tageado -> Busca su respuesta según corresponda
       processTaggedMessage(id, username, message)
-        .then(function(response){
-          deferred.resolve(response);
-        });
+        .then(deferred.resolve);
     }else if(_.isSEmoji(message)){
       //Si envia un emoji se responde lo mismo
       deferred.resolve(message);
-    }else if(isEnglish(message_lang) && !forceWit(message)){
+    }else{ /*if(isEnglish(message_lang) && !forceWit(message)){
       console.log('Se detecto idioma INGLES.');
       console.log('Se taggea mensaje original para procesarlo como tipo WAlpha...');
       //Detecto ingles, entonces lo transforma en mensaje tageado WAlpha
@@ -307,6 +295,49 @@ function processMessage(id, username, message, response_cached, cached_hash){
             deferred.resolve(context.response);
           })
           .fail(deferred.reject);
+      }else{
+        //Como no pudo sanitazar mensaje envía lo mismo que recibió
+        deferred.resolve(message);
+      }
+    }*/
+
+      //TODO: Testing para evaluar factibilidad de siempre dar respuesta
+      //Primero intenta buscar en Wit:
+      var message_sanitized = _.telegram.sanitizeMessage(message);
+      if (message_sanitized){
+        //Ejecuto _.wit.ai para obtener la respuesta de la historia
+        runWit(id, username, message_sanitized)
+          .then(function(context){
+      if (!_.utils.isNotStory(context.response)){
+        console.log('Wit exitoso!!!');
+        deferred.resolve(context.response);
+      }else{
+        console.log('Wit NO exitoso!!!');
+        console.log('Buscar respuesta en WAlpha...');
+        message_sanitized = 'w:' + message_sanitized;
+        processTaggedMessage(id, username, message_sanitized)
+          .then(function(response_walpha){
+
+            if(!_.utils.isNotStory(response_walpha)){
+              console.log('WAlpha exitoso!!!')
+              deferred.resolve(response_walpha);
+            }else{
+              console.log('WAlpha NO exitoso!!!')
+              console.log('Traduce a ingles e intenta...');
+              message_sanitized = message_sanitized.replace('w:','');
+              message_sanitized = 't:' + message_sanitized;
+              processTaggedMessage(id, username, message_sanitized)
+                .then(function(response_translate){
+                  console.log('Buscar respuesta en WAlpha...');
+                  response_translate = 'w:' + response_translate;
+                  processTaggedMessage(id, username, response_translate)
+                    .then(deferred.resolve);
+                });
+
+            }
+          });
+        }
+     }).fail(deferred.reject);
       }else{
         //Como no pudo sanitazar mensaje envía lo mismo que recibió
         deferred.resolve(message);
