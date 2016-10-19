@@ -197,7 +197,6 @@ function runWit(chatId, username, message){
           _.wit.restart(_.datetime.create(Date.now()), wit_actions);
           //Siempre responde. Modela una respuesta aún fallando
           _.telegram.sendMessage(chatId, _.entity_cfg.NOT_WORKED)
-                  //.then(deferred.reject);
                   .then(deferred.resolve)
         } else {
           deferred.resolve(context);
@@ -417,10 +416,10 @@ function fn_bot (msg) {
                         if(!_.utils.isNotStory(response))
                           setCache(chatId, message, response);
 
-                      if (response)
+                      if (response){
                         _.logger.session.info("<Response> " + chatId+":"+response);
-
-                      _.telegram.sendMessage(chatId, response);
+                        _.telegram.sendMessage(chatId, response);
+                      }                      
                       deferred.resolve(response);
                     }).fail(deferred.reject);
             });

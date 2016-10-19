@@ -12,8 +12,8 @@ var translate = {
     var url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl="
               + sourceLang + "&tl=" + targetLang + "&dt=t&q=" + encodeURI(text);
 
-    console.log("Request a GoogleApis-Translator:");
-    console.log(url);
+    //console.log("Request a GoogleApis-Translator");
+    //console.log(url);
     request(url, function (error, response, body) {
       if (!error && response.statusCode == 200) {
         var res = body.replace('[[[','');

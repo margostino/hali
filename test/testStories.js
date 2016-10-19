@@ -36,30 +36,37 @@ var contact = {
 var wifi_password_api = "joke";
 
 //Function to Assert
-function notEqualIndex(value_to_check, value_ok){
-    return (value_to_check.indexOf(value_ok)!=-1)
-}
-function equal(value_to_check, value_ok){
-    return (value_to_check == value_ok)
+function equalIndex(value_to_check, value_ok){
+    assert(value_to_check.indexOf(value_ok)!=-1);
 }
 
+function equal(value_to_check, value_ok){
+    assert(value_to_check == value_ok)
+}
 
 //Function for looping Promises results in case that restart server
-function loop(promise, fn) {
+function loop(promise, iteration, fn) {
   return promise.then(fn).then(function (wrapper) {
-    return !wrapper.done ? loop(Q(wrapper.value), fn) : wrapper.value;
+    return !wrapper.done ? loop(server.fn_bot(wrapper.value), wrapper.iteration, fn) : wrapper.value;
   });
 }
 
 function assertStory(message, response, done, assertFunction){
-  loop(server.fn_bot(message), function (response_to_check) {
-    console.log("Interacción response: " + response_to_check);
+  var iteration = 0;
+  loop(server.fn_bot(message), iteration, function (response_to_check) {
+    console.log("Response interaction to check: " + response_to_check);
+    console.log("Valid interaction Response: " + response);
+    console.log("Valid interaction #" + iteration);
+    if(response_to_check){
+      assertFunction(response_to_check, response);
+    }
     return {
-      done: assertFunction(response_to_check, response),
-      value: response
-    };
+        done: response_to_check,
+        iteration: iteration++,
+        value: message
+      };
   }).done(function () {
-    done();
+    if(done) done();
   });
 }
 
@@ -84,7 +91,7 @@ describe('Test stories from Wit.ai', function () {
         console.log(e)
         done();
       });
-      this.timeout(5000);
+      this.timeout(10000);
       //done();
   });
 
@@ -123,7 +130,7 @@ describe('Test stories from Wit.ai', function () {
   it('Weather Story: should return an answer', function(done){
     message['text'] = 'como esta el tiempo?';
     var response = 'Actual';
-    assertStory(message, response, done, notEqualIndex);
+    assertStory(message, response, done, equalIndex);
   });
 
   it('Info Course Story: should return an answer', function(done){
@@ -141,25 +148,25 @@ describe('Test stories from Wit.ai', function () {
   it('WAlpha Story: should return an answer', function(done){
     message['text'] = 'w:what is the meaning of life?';
     var response = '42';
-    assertStory(message, response, done, notEqualIndex);
+    assertStory(message, response, done, equalIndex);
   });
 
   it('Broadcast Story: should return an answer', function(done){
     message['text'] = 'b:Hola es un test broadcast';
     var response = 'Mensaje enviado OK';
-    assertStory(message, response, done, notEqualIndex);
+    assertStory(message, response, done, equalIndex);
   });
 
   it('Ticket Story: should return an answer', function(done){
     message['text'] = 'm:Hola es un test ticket';
     var response = 'Ticket enviado OK';
-    assertStory(message, response, done, notEqualIndex);
+    assertStory(message, response, done, equalIndex);
   });
 
   it('Not Story: should return an answer', function(done){
     message['text'] = 'dklfmnkdlsnfgkldsngklfdsngklvmafn dk';
     var response = 'Necesito información adicional';
-    assertStory(message, response, done, notEqualIndex);
+    assertStory(message, response, done, equalIndex);
   });
 
   it('WAlpha Skills Story: should return an answer', function(done){
@@ -267,7 +274,7 @@ describe('Test stories from Wit.ai', function () {
     assertStory(message, response, done, equal);
   });
 
-  it('Info Department Story (with ask): should return an answer', function(done){
+  it('Info Department Story with ask: should return an answer', function(done){
     message['text'] = 'donde esta mi departamento?';
     var response = "¿especialidad/carrera?";
     assertStory(message, response, done, equal);
@@ -276,13 +283,20 @@ describe('Test stories from Wit.ai', function () {
     setTimeout(assertStory(message, response, done, equal),5000);
   });
 
-  it('Info Course Story (with ask): should return an answer', function(done){
+  it('Multiple Info Course Story with ask: should return an answer', function(done){
     message['text'] = 'donde curso?';
     var response = "¿cuando?";
-    assertStory(message, response, done, equal);
-    message['text'] = 'hoy';
-    response = "¿cuando?";
-    setTimeout(assertStory(message, response, done, equal),5000);
+    assertStory(message, response, null, equal);
+    setTimeout(function(){
+      message['text'] = 'hoy';
+      response = "Cursas IA en aula 518 a las 19hs en Medrano";
+      assertStory(message, response, done, equal)
+    },10000);
   });
 
+  it('retry with Translate Story', function(done){
+    message['text'] = 'quien fue el ganador del ganador del Mundial de 2014?';
+    var response = "Germany";
+    assertStory(message, response, done, equalIndex);
+  });
 });
