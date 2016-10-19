@@ -12,6 +12,9 @@ var assert = require('assert'),
     telegram = require('../src/telegram');
 
 var api_url = "http://"+app_cfg.api_host+":"+app_cfg.api_port;
+var TIMEOUT_BT_FLOW = 10000;
+var TIMEOUT_BEFORE = 10000;
+var TIMEOUT_TESTS_MAIN = 20000;
 
 var message = {
   "message_id": 6875,
@@ -37,10 +40,12 @@ var wifi_password_api = "joke";
 
 //Function to Assert
 function equalIndex(value_to_check, value_ok){
+    console.log('ASSERT-EQUALINDEX: ' + (value_to_check.indexOf(value_ok)!=-1));
     assert(value_to_check.indexOf(value_ok)!=-1);
 }
 
 function equal(value_to_check, value_ok){
+    console.log('ASSERT-EQUAL: ' + (value_to_check == value_ok));
     assert(value_to_check == value_ok)
 }
 
@@ -54,6 +59,8 @@ function loop(promise, iteration, fn) {
 function assertStory(message, response, done, assertFunction){
   var iteration = 0;
   loop(server.fn_bot(message), iteration, function (response_to_check) {
+    response_to_check = response_to_check.toLowerCase();
+    response = response.toLowerCase();
     console.log("Response interaction to check: " + response_to_check);
     console.log("Valid interaction Response: " + response);
     console.log("Valid interaction #" + iteration);
@@ -91,11 +98,11 @@ describe('Test stories from Wit.ai', function () {
         console.log(e)
         done();
       });
-      this.timeout(10000);
+      this.timeout(TIMEOUT_BEFORE);
       //done();
   });
 
-  this.timeout(20000);
+  this.timeout(TIMEOUT_TESTS_MAIN);
 
   it('Greeting Story: should return an answer', function(done){
     message['text'] = 'hola';
@@ -117,7 +124,7 @@ describe('Test stories from Wit.ai', function () {
 
   it('Thanks Story: should return an answer', function(done){
     message['text'] = 'gracias';
-    var reponse = "De nada!";
+    var response = "De nada!";
     assertStory(message, response, done, equal);
   });
 
@@ -192,61 +199,61 @@ describe('Test stories from Wit.ai', function () {
 
   it('Hali Languages Story: should return an answer', function(done){
     message['text'] = 'que idiomas sabes hablar?';
-    var reponse = entity_cfg.HALI_LANGUAGES;
+    var response = entity_cfg.HALI_LANGUAGES;
     assertStory(message, response, done, equal);
   });
 
   it('Hali Sex Story: should return an answer', function(done){
     message['text'] = 'sos humana?';
-    var reponse = "Soy un robot pero me siento muy humana.";
+    var response = "Soy un robot pero me siento muy humana.";
     assertStory(message, response, done, equal);
   });
 
   it('Hali Location Story: should return an answer', function(done){
     message['text'] = 'donde estas?';
-    var reponse = "Estoy en un bonito servidor y uso la lectora de living comedor.";
+    var response = "Estoy en un bonito servidor y uso la lectora de living comedor.";
     assertStory(message, response, done, equal);
   });
 
   it('Hali Arq Story: should return an answer', function(done){
     message['text'] = 'cual es tu IP?';
-    var reponse = "No puedo darte esta información";
+    var response = "No puedo darte esta información";
     assertStory(message, response, done, equal);
   });
 
   it('Hali AboutME Story: should return an answer', function(done){
     message['text'] = 'quien sos?';
-    var reponse = entity_cfg.ABOUT_ME;
+    var response = entity_cfg.ABOUT_ME;
     assertStory(message, response, done, equal);
   });
 
   it('Hali Skills Story: should return an answer', function(done){
     message['text'] = 'que podes hacer?';
-    var reponse = entity_cfg.HALI_SKILLS;
+    var response = entity_cfg.HALI_SKILLS;
     assertStory(message, response, done, equal);
   });
 
   it('Hali Birthday Story: should return an answer', function(done){
     message['text'] = 'cuando es tu cumpleaños?';
-    var reponse = "Nací el 18 de Abril de 2016. Mi peso al nacer fue de tan solo 56kb.";
+    var response = "Nací el 18 de Abril de 2016. Mi peso al nacer fue de tan solo 56kb.";
     assertStory(message, response, done, equal);
   });
 
   it('Hali Colour Story: should return an answer', function(done){
     message['text'] = 'de que color sos?';
-    var reponse = "Azul.";
+    var response = "Azul.";
     assertStory(message, response, done, equal);
   });
 
   it('Hali Years Old Story: should return an answer', function(done){
     message['text'] = 'cuantos años tenes?';
-    var reponse = "Tengo tan solo unos meses pero me siento pleno como un adolescente";
+    var response = "Tengo tan solo unos meses pero me siento pleno como un adolescente";
     assertStory(message, response, done, equal);
   });
 
   it('Insulto Story: should return an answer', function(done){
     message['text'] = 'esta es una puta prueba';
-    var reponse = "No seas mal educado queres!";
+    var response = "No seas mal educado queres!";
     assertStory(message, response, done, equal);
   });
 
@@ -277,13 +284,15 @@ describe('Test stories from Wit.ai', function () {
   it('Info Department Story with ask: should return an answer', function(done){
     message['text'] = 'donde esta mi departamento?';
     var response = "¿especialidad/carrera?";
-    assertStory(message, response, done, equal);
-    message['text'] = 'sistemas';
-    response = "Tu departamento esta en Medrano, oficina 318 (piso 3)";
-    setTimeout(assertStory(message, response, done, equal),5000);
+    assertStory(message, response, null, equal);
+    setTimeout(function(){
+      message['text'] = 'sistemas';
+      response = "Tu departamento esta en Medrano, oficina 318 (piso 3)";
+      assertStory(message, response, done, equal);
+    },TIMEOUT_BT_FLOW);
   });
 
-  it('Multiple Info Course Story with ask: should return an answer', function(done){
+  it('Info Course Story with ask: should return an answer', function(done){
     message['text'] = 'donde curso?';
     var response = "¿cuando?";
     assertStory(message, response, null, equal);
@@ -291,10 +300,10 @@ describe('Test stories from Wit.ai', function () {
       message['text'] = 'hoy';
       response = "Cursas IA en aula 518 a las 19hs en Medrano";
       assertStory(message, response, done, equal)
-    },10000);
+    },TIMEOUT_BT_FLOW);
   });
 
-  it('retry with Translate Story', function(done){
+  it('Multiple retry with Translate Story', function(done){
     message['text'] = 'quien fue el ganador del ganador del Mundial de 2014?';
     var response = "Germany";
     assertStory(message, response, done, equalIndex);
