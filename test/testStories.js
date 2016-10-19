@@ -52,14 +52,17 @@ function equal(value_to_check, value_ok){
 //Function for looping Promises results in case that restart server
 function loop(promise, iteration, fn) {
   return promise.then(fn).then(function (wrapper) {
-    return !wrapper.done ? loop(server.fn_bot(wrapper.value), wrapper.iteration, fn) : wrapper.value;
+    return !wrapper.done ?
+      loop(server.fn_bot(wrapper.value), wrapper.iteration, fn) : wrapper.value;
   });
 }
 
 function assertStory(message, response, done, assertFunction){
   var iteration = 0;
   loop(server.fn_bot(message), iteration, function (response_to_check) {
-    response_to_check = response_to_check.toLowerCase();
+    if(response_to_check)
+      response_to_check = response_to_check.toLowerCase();
+
     response = response.toLowerCase();
     console.log("Response interaction to check: " + response_to_check);
     console.log("Valid interaction Response: " + response);
