@@ -56,6 +56,13 @@ var telegram = {
 		else
 			return bot.sendMessage(user, message);
 	},
+	sendPhoto: (user, message, options) => {
+		console.log('Envia respuesta imagen TELEGRAM...')
+		if(options)
+			return bot.sendPhoto(user, message, options);
+		else
+			return bot.sendPhoto(user, message);
+	},
 	sanitizeMessage: (message) => {
 	  var message_sanitized = message;
 	  var message_converted = emojize(message);

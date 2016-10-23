@@ -14,9 +14,9 @@ Consulta
     Contactos
 
 Mensajería
-  Institucional
-  Académica
-  Alumnos
+  Institucional (a todos los alumnos)
+  Académica (a toda X especialidad)
+  Alumnos (docente a sus alumnos)
 
 Proceso
   Consulta Académicos
@@ -28,7 +28,6 @@ Proceso
 Biblioteca
   Consulta disponibilidad
   Renovación de préstamos
-
 
 Servicio
   Pedido soporte Técnico
@@ -47,6 +46,8 @@ Recomendar acciones
 Feedback
 
 Mejoras:
+Utilizar un mapa contexto para encapsular y centralizar parametros.
+Incluir como parametro nuevo en las actions ademas del ID, el contexto de la pregunta.
 Cantidad de parametros en las functions de process Message (contexto con parametros)
 Mejoras de logging en cuanto a reutilización y encapsulamiento
 Enviar en un solo lugar la respuesta para telegram y no en cada story

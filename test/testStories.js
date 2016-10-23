@@ -311,4 +311,53 @@ describe('Test stories from Wit.ai', function () {
     var response = "Germany";
     assertStory(message, response, done, equalIndex);
   });
+
+  it('Room Magna availability Story', function(done){
+    message['text'] = 'esta disponible el aula magna?';
+    var response = "El aula esta disponible!";
+    assertStory(message, response, done, equal);
+  });
+
+  it('Room Audiovisual availability Story', function(done){
+    message['text'] = 'esta disponible el aula Audiovisual?';
+    var response = "El aula esta disponible!";
+    assertStory(message, response, done, equal);
+  });
+
+  it('Contact/Phone of Medrano University Story', function(done){
+    message['text'] = 'cual es el telefono de Medrano?';
+    var response = "4867-7500";
+    assertStory(message, response, done, equalIndex);
+  });
+
+  it('Contact/Phone of Campus University Story', function(done){
+    message['text'] = 'cual es el telefono de Campus?';
+    var response = "4867-7500";
+    assertStory(message, response, done, equalIndex);
+  });
+
+  it('Calendar 2016 Story', function(done){
+    message['text'] = 'calendario de este año?';
+    var response = "Académico";
+    assertStory(message, response, done, equalIndex);
+  });
+
+  it('Beginners 2017 Story', function(done){
+    message['text'] = 'como es el proceso de ingresantes?';
+    var response = "ya se encuentra publicada";
+    assertStory(message, response, done, equalIndex);
+  });
+
+  it('Special Exams Story', function(done){
+    message['text'] = 'como son las mesas especiales?';
+    var response = "Solo se inscriben los alumnos que abren mesa";
+    assertStory(message, response, done, equalIndex);
+  });
+
+  it('Exceptions Story', function(done){
+    message['text'] = 'como puedo pedir una excepción de correlativas';
+    var response = "EXCEPCION DE CORRELATIVAS";
+    assertStory(message, response, done, equalIndex);
+  });
+
 });

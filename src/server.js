@@ -419,7 +419,7 @@ function fn_bot (msg) {
                       if (response){
                         _.logger.session.info("<Response> " + chatId+":"+response);
                         _.telegram.sendMessage(chatId, response);
-                      }                      
+                      }
                       deferred.resolve(response);
                     }).fail(deferred.reject);
             });

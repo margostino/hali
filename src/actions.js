@@ -6,7 +6,8 @@ var Q = require("q"),
     translate = require('./translate'),
     walpha = require('../src/walpha'),
     utils = require('./utils'),
-    _ = require('underscore');
+    _ = require('underscore'),
+    multiline = require('multiline');
 
 var api_url = "http://"+app_cfg.api_host+":"+app_cfg.api_port;
 
@@ -195,6 +196,66 @@ const actions = {
   },
   book_advice: (id) =>{
     response = "Los libros disponibles: William Stallings 5ta Edición, Abraham Silberschatz.";
+    return Q(response);
+  },
+  room_availability: (id) =>{
+    response = "El aula esta disponible!";
+    return Q(response);
+  },
+  location_university: (id) =>{
+    response = multiline(function(){/*
+Dirección Sede Medrano: Medrano 951. (C1179AAQ) Ciudad Autónoma de Buenos Aires
+Dirección: Mozart 2300. Ciudad Autónoma de Buenos Aires
+    */})
+    return Q(response);
+  },
+  contact_university: (id) =>{
+    response = multiline(function(){/*
+Teléfono: (011) 4867-7500
+Sitio Web http://www.frba.utn.edu.ar/
+E-Mail decanato@frba.utn.edu.ar
+    */})
+    return Q(response);
+  },
+  calendar: (id) =>{
+    var url_calendar = "http://siga.frba.utn.edu.ar/up/docs/CalendarioAcademico2016.jpg";
+    telegram.sendPhoto(id, url_calendar)
+    response = "Calendario Académico 2016";//TODO: facilitar alternativas de recurso enviado por telegram
+    return Q(response);
+  },
+  beginners_process: (id) =>{
+    var response = multiline(function(){/*
+INGRESO 2017
+La inscripción para el Ingreso 2017 ya se encuentra publicada.
+Para conocer el Seminario Universitario (requisito para ingresar a la Facultad) te sugiero leer las premisas básicas.
+En el siguiente instructivo encontrarás también en forma detalla las etapas de la inscripción para el Ingreso 2017
+
+En los meses de Septiembre y Octubre de 2016 se desarrollaran charlas informativas sobre las carreras.
+También en el menu principal están publicados los programas de las materias de Ingreso.
+Cualquier consulta podes escribir a ingreso@siga.frba.utn.edu.ar
+    */})
+    return Q(response);
+  },
+  academica_special_exams: (id) =>{
+    var response = multiline(function(){/*
+Nuevo procedimiento para los alumnos de Ing Química e Ing. Industrial
+Solo se inscriben los alumnos que abren mesa (Alumnos que ya firmaron todas las materias de su plan de estudios y solo adeudan finales).
+Fechas de Inscripción del 7 al 12 de Octubre
+
+Los alumnos que desean acoplarse a las mesas especiales se inscribirán de la siguiente manera :
+Alumnos de Ing Química del 19 al 24 de Octubre.
+Alumnos de Ing Industrial del 14 al 18 de Octubre.
+Las Inscripciones para los alumnos que desean acoplarse a los finales se realizará unicamente por la web del Siga desde Inscripción a finales.
+    */})
+    return Q(response);
+  },
+  academica_exceptions: (id) =>{
+    var response = multiline(function(){/*
+EXCEPCION DE CORRELATIVAS TODAS LAS ESPECIALIDADES DESDE EL 01/08/2016 al 12/08/2016
+Formulario completo
+Fotocopias de las hoja de los datos personales de la Libreta Universitaria
+Historial Consolidado (El alumno debe verificar que el historial se encuentre completo, de lo contrario deberá indicar los datos faltantes y adjuntar fotocopias de las hojas de su libreta que acrediten la información omitida.)
+    */})
     return Q(response);
   }
 };

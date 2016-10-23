@@ -141,6 +141,37 @@ var stories = {
 			contexts: [['career'],['what','department','career'],
 			['where','department','career']],
 			method:actions.info_department
+		},
+		{
+			contexts: [['availability','aula','room']],
+			method:actions.room_availability
+		},
+		{
+			contexts: [['what','address','sede'],['where','university'],['where','sede'],
+		['what','address','university']],
+			method:actions.location_university
+		},
+		{
+			contexts: [['phone','sede'],['contact','medrano'],['contact','campus'],
+			['contact','university'],['what','phone','sede'],['contact','administration']],
+			method:actions.contact_university
+		},
+		{
+			contexts: [['what','calendario'],['calendario'],['calendario','año']],
+			method:actions.calendar
+		},
+		{
+			contexts: [['how','facultad','start'],['how','proceso','ingreso'],
+			['how','proceso','beginners']],
+			method:actions.beginners_process
+		},
+		{
+			contexts: [['how','mesas','especiales']],
+			method:actions.academica_special_exams
+		},
+		{
+			contexts: [['how','exception'],['how','can','correlativas','exception']],
+			method:actions.academica_exceptions
 		}
 	]
 };
