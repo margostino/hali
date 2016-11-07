@@ -41,7 +41,8 @@ var stories = {
 			method:actions.greeting_how
 		},
 		{
-			contexts: [['how','time'],['what','time'],['what','weather']],
+			contexts: [['how','time'],['what','time'],['what','weather'],['how','weather'],
+			['how','weather','when'],['weather']],
 			method:actions.weather
 		},
 		{
