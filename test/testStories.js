@@ -236,6 +236,18 @@ describe('Test stories from Wit.ai', function () {
     assertStory(message, response, done, equal);
   });
 
+  it('Translator Skills Story: should return an answer', function(done){
+    message['text'] = 'ayudame traductor';
+    var response = entity_cfg.TRANSLATOR_SKILLS;
+    assertStory(message, response, done, equal);
+  });
+
+  it('Broadcast Skills Story: should return an answer', function(done){
+    message['text'] = 'ayudame mensajeria';
+    var response = entity_cfg.BROADCAST_SKILLS;
+    assertStory(message, response, done, equal);
+  });
+
   it('Hali Birthday Story: should return an answer', function(done){
     message['text'] = 'cuando es tu cumpleaños?';
     var response = "Nací el 18 de Abril de 2016. Mi peso al nacer fue de tan solo 56kb.";
