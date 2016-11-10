@@ -91,12 +91,24 @@ var stories = {
 			method:actions.datetime
 		},
 		{
-			contexts: [['walpha','what','skills']],
+			contexts: [['walpha','what','skills'],['help','walpha']],
 			method:actions.walpha_skills
 		},
 		{
-			contexts: [['can','what','help'],['can','where','help'],
-			['what','information','know'],['what','information','know'],
+			contexts: [['help','translator']],
+			method:actions.translator_skills
+		},
+		{
+			contexts: [['help','ticket']],
+			method:actions.ticket_skills
+		},
+		{
+			contexts: [['help','broadcast']],
+			method:actions.broadcast_skills
+		},
+		{
+			contexts: [['can','what','help'],['can','where','help'],['help'],
+			['what','information','know'],['what','information','know'],['help','hali'],
 			['what','can','do'],['what','know'],['how','can','help'],['what','do'],
 			['what','information','can','ask'],['what','can','do'],['what','can','tell'],
 			['what','know'],['what','can','ask'],['what','know','do'],['what','skills']],
@@ -173,6 +185,10 @@ var stories = {
 		{
 			contexts: [['how','exception'],['how','can','correlativas','exception']],
 			method:actions.academica_exceptions
+		},
+		{
+			contexts: [['thanks']],
+			method:actions.thanks
 		}
 	]
 };

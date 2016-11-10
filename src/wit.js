@@ -214,7 +214,7 @@ var wit = {
 			id: chatId,
 			username: username,
 			message: message
-		};*/
+		};*/		
 	  client(actions).runActions(wit.session, message, context, (error, context1) => {
 	  		fn(error, context1);
 	  });

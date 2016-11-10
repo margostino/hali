@@ -106,7 +106,6 @@ const actions = {
   info_wifi: (id) =>{
     var deferred = Q.defer();
     request(api_url+"/has/wifi", function (error, response, body) {
-      console.log(error);
       if (!error && response.statusCode == 200) {
         response = JSON.parse(body).password;
       }else{
@@ -128,7 +127,7 @@ const actions = {
       var deferred = Q.defer();
       var ticket_data = {
         "user": "legajoTIPO1110009",
-        "subject": "Pedido de mantenimiento",
+        "subject": "Pedido de Soporte/Mantenimiento",
         "location": "Medrano",
         "description": message
       }
@@ -223,6 +222,10 @@ E-Mail decanato@frba.utn.edu.ar
     response = "Calendario Académico 2016";//TODO: facilitar alternativas de recurso enviado por telegram
     return Q(response);
   },
+  thanks: (id) =>{
+    response = "De nada!";
+    return Q(response);
+  },
   beginners_process: (id) =>{
     var response = multiline(function(){/*
 INGRESO 2017
@@ -256,6 +259,18 @@ Formulario completo
 Fotocopias de las hoja de los datos personales de la Libreta Universitaria
 Historial Consolidado (El alumno debe verificar que el historial se encuentre completo, de lo contrario deberá indicar los datos faltantes y adjuntar fotocopias de las hojas de su libreta que acrediten la información omitida.)
     */})
+    return Q(response);
+  },
+  translator_skills: (id) =>{
+    response = entity_cfg.TRANSLATOR_SKILLS;
+    return Q(response);
+  },
+  ticket_skills: (id) =>{
+    response = entity_cfg.TICKET_SKILLS;
+    return Q(response);
+  },
+  broadcast_skills: (id) =>{
+    response = entity_cfg.BROADCAST_SKILLS;
     return Q(response);
   }
 };

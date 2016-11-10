@@ -62,3 +62,32 @@ Mejorar interaccion por idioma y flujo de procesamiento de mensaje:
 
 Console: node
 > require("./underscore").include(test,"ping")
+
+BOTANIo: @Botaniobot
+> day
+
+
+Rutina de preguntas Demo:
+
+UTN:
+cual es la contraseña de wifi?
+cuando son los próximos finales?
+m: necesito instalar en las maquinas del Laborario Rojo el software packet tracer de Cisco
+esta disponible el libro de Silberschatz?
+que libro me recomendas para Sistemas Operativos??
+donde el departamento de sistemas?
+donde esta mi departamento? / sistemas
+donde curso? / hoy
+esta disponible el aula magna?
+cual es el telefono de Medrano?
+me mostras el calendario academico de este año?
+como son las mesas especiales?
+como puedo pedir una excepción de correlativas?
+como se ingresa a la facu?
+
+GENERALES:
+como esta el tiempo?
+donde curso hoy?
+que dia es hoy?
+
+TRANSLATE:

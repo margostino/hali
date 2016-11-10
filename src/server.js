@@ -11,7 +11,7 @@ if (_.app_cfg.cache_enable){
 function setCache(id, message, data){
   if (redis && data){
     var data_hash = _.utils.generateHash(id, message);
-    console.log('HASH SET: ' + data_hash)
+    //console.log('HASH SET: ' + data_hash)
     redis.set(data_hash, data);
   }
 }
@@ -98,7 +98,7 @@ function processWitMessage(cb, id, username, context, entities, message, context
     if (redis) redis.set(id,JSON.stringify(context));
 
     //Si hay story configurada ejecuto su method
-    if(story)
+    if(story){
       story.method(id)
         .then(function(response){
           //_.logger.session.info("<Response> " + id+":"+response);
@@ -106,7 +106,7 @@ function processWitMessage(cb, id, username, context, entities, message, context
         }).fail(function(error){
               //TODO: evaluar error de telegram en el envio
         })
-    else{
+    }else{
       console.log('There is no story');
       _.actions.not_story(id)
         .then(function(response){
@@ -131,6 +131,7 @@ const wit_actions = {
       });
     else
       processWitMessage(cb, chatId, username, context, entities, message);
+
 
   },
   error(sessionId, context, error) {
@@ -307,7 +308,7 @@ function processMessage(id, username, message, response_cached, cached_hash){
         //Ejecuto _.wit.ai para obtener la respuesta de la historia
         runWit(id, username, message_sanitized)
           .then(function(context){
-      if (!_.utils.isNotStory(context.response)){
+            if (!_.utils.isNotStory(context.response)){
         console.log('Wit exitoso!!!');
         deferred.resolve(context.response);
       }else{
@@ -400,7 +401,7 @@ function fn_bot (msg) {
             message = msg.text;
             _.logger.session.info(_.logger.genInitial({id:chatId, name:msg.from.first_name}, message));
             var message_hash = _.utils.generateHash(chatId, message);
-            console.log('HASH GET: ' + message_hash)
+            //console.log('HASH GET: ' + message_hash)
             console.log('Busca mensaje en cache...');
             redis.get(message_hash, function(error,response_cached){
 
@@ -456,9 +457,9 @@ function fn_bot (msg) {
     console.log('Autenticación exitosa!');
     console.log("Phone number:  " + msg.contact.phone_number);
     message = "Bienvenido " + username + " ¿en que puedo ayudarte?";
-
+    
     var options ={
-      reply_markup:{"keyboard":[["Hi!"]],"resize_keyboard": true,"one_time_keyboard":true}
+      reply_markup:{"keyboard":_.app_cfg.commands,"resize_keyboard": true,"one_time_keyboard":true}
     }
     _.telegram.sendMessage(chatId, message, options)
           .then(deferred.resolve);

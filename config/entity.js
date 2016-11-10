@@ -47,6 +47,28 @@ Y más....!!!!
 Dia a dia voy agregando nuevos skills.
 Arriba esas palmas!! Clap clap!
 	*/}),
+	TRANSLATOR_SKILLS: multiline(function(){/*
+Por el momento las traducciones son de idioma Español a Ingles.
+Para traducir enviame un mensaje taggeado con "t:" como prefijo.
+Ejemplos:
+> t: ¿Cuales son los algoritmos más eficientes de Inteligencia Artificial?
+> t: ¿Cual es el Teorema de Gauss?
+
+	*/}),
+	BROADCAST_SKILLS: multiline(function(){/*
+Para enviar un mensaje broadcast enviame un mensaje taggeado con "b:" como prefijo.
+Ejemplos:
+> b: Hola!!, ¿cuando es el parcial de Analisis Matematico II?
+> b: Hoy no hay clase, por un inconveniente personal
+
+	*/}),
+	TICKET_SKILLS: multiline(function(){/*
+Para enviar un ticket de mantenimiento/soporte enviame un mensaje taggeado con "m:" como prefijo.
+Ejemplos:
+> m: Hola!!, Por favor instalar el Autocad en el Laboratorio Azul, para el Viernes 3.
+> m: Hola el baño de hombres del 3er piso esta perdiendo agua
+
+	*/}),
 	BROADCAST_CONFUSE: multiline(function(){/*
 Me estas confundiendo. Si queres enviar un mensaje a los alumnos, enviame:
 Ejemplo:
