@@ -30,7 +30,6 @@ function isResultImage(subpods){
 
 var walpha = {
   query: (query, fn) => {
-    console.log(query);    
     client.query(query, fn);
   },
   response: (error, result) => {
