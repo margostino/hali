@@ -30,6 +30,7 @@ function isResultImage(subpods){
 
 var walpha = {
   query: (query, fn) => {
+    console.log(query);    
     client.query(query, fn);
   },
   response: (error, result) => {
@@ -63,6 +64,11 @@ var walpha = {
     }else {
       response = entity_cfg.NOT_STORY;
     }
+
+    if(!response){
+      response = entity_cfg.NOT_STORY;
+    }
+
     deferred.resolve(response);
     return deferred.promise;
   }

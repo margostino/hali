@@ -80,8 +80,7 @@ Me estas confundiendo. Pregunta concreta. ¿En que puedo ayudarte?
 	NOT_STORY: multiline(function(){/*
 Algunas preguntas o comentarios no los entiendo todavía.
 Necesito información adicional para entenderte.
-Proba preguntandome de otras formas, quizas comprenda.
-¿En que puedo ayudarte?
+Vuelve a intentar planteando la pregunta de otras formas, quizas comprenda.
 	*/}),
 	START: multiline(function(){/*
 Hola!!!. Necesito que comprobar tu identidad.

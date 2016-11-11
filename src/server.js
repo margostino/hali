@@ -11,7 +11,6 @@ if (_.app_cfg.cache_enable){
 function setCache(id, message, data){
   if (redis && data){
     var data_hash = _.utils.generateHash(id, message);
-    //console.log('HASH SET: ' + data_hash)
     redis.set(data_hash, data);
   }
 }
@@ -28,7 +27,7 @@ function forceWit(message){
         break;
   }
 
-  if(force) console.log('Wit forced.')
+  if(force) _.logger.app.info('Wit forced')
 
   return force;
 }
@@ -61,10 +60,8 @@ function processWitMessage(cb, id, username, context, entities, message){
 }
 
 function processWitMessage(cb, id, username, context, entities, message, context_cached){
-    //console.log(JSON.stringify(context));
     var story = {};
     var pre_context = [];
-
     //Asigno el contexto previo
     if(redis && context_cached)
       pre_context = JSON.parse(context_cached);
@@ -87,11 +84,9 @@ function processWitMessage(cb, id, username, context, entities, message, context
     story = _.wit.matchStory(current_context)
     if(story){
       context = current_context;
-      //console.log("Evalua contexto actual.")
     }else{
       story = _.wit.matchStory(context_merged)
       context = context_merged;
-      //console.log("Evalua contexto mergeado.")
     }
 
     //Se cachea el contexto para validar continuaciones en el flujo
@@ -101,13 +96,11 @@ function processWitMessage(cb, id, username, context, entities, message, context
     if(story){
       story.method(id)
         .then(function(response){
-          //_.logger.session.info("<Response> " + id+":"+response);
           cb({response: response});
         }).fail(function(error){
               //TODO: evaluar error de telegram en el envio
         })
     }else{
-      //console.log('There is no story');
       _.actions.not_story(id)
         .then(function(response){
           cb({response: response});
@@ -135,8 +128,7 @@ const wit_actions = {
 
   },
   error(sessionId, context, error) {
-    _.logger.error.error(error);
-    console.log("Error Wit: " + error);
+    _.logger.error.error("Error Wit: " + error);
   }/*,
   get_departamento(sessionId, context, cb) {
     context.oficina = "322";
@@ -193,7 +185,6 @@ function runWit(chatId, username, message){
 
   _.wit.runActions(wit_actions, chatId, username, message, function(error, context){
         if (error) {
-          //console.log('Oops! Got an error: ' + error);
           _.logger.error.error(error);
           _.wit.restart(_.datetime.create(Date.now()), wit_actions);
           //Siempre responde. Modela una respuesta aún fallando
@@ -211,7 +202,6 @@ function processTaggedMessage(id, username, message){
   var deferred = _.Q.defer();
   var tag = _.utils.getTag(message);
   message = _.utils.getTaggedMessage(message);
-  _.logger.app.info('Mensaje taggeado <tag>: ' + tag);
   switch (tag) {
     case 't':
       _.logger.app.info('Mensaje taggeado tipo Traductor');
@@ -273,32 +263,7 @@ function processMessage(id, username, message, response_cached, cached_hash){
     }else if(_.isSEmoji(message)){
       //Si envia un emoji se responde lo mismo
       deferred.resolve(message);
-    }else{ /*if(isEnglish(message_lang) && !forceWit(message)){
-      console.log('Se detecto idioma INGLES.');
-      console.log('Se taggea mensaje original para procesarlo como tipo WAlpha...');
-      //Detecto ingles, entonces lo transforma en mensaje tageado WAlpha
-      message = 'w:' + message;
-      processTaggedMessage(id, username, message)
-        .then(function(response){
-          deferred.resolve(response);
-        });
     }else{
-      //Es un mensaje para WIT.ai
-      console.log('Se detecto idioma ESPAÑOL: mensaje para Wit.ai');
-      var message_sanitized = _.telegram.sanitizeMessage(message);
-      if (message_sanitized){
-        //Ejecuto _.wit.ai para obtener la respuesta de la historia
-        runWit(id, username, message_sanitized)
-          .then(function(context){
-            deferred.resolve(context.response);
-          })
-          .fail(deferred.reject);
-      }else{
-        //Como no pudo sanitazar mensaje envía lo mismo que recibió
-        deferred.resolve(message);
-      }
-    }*/
-
       //TODO: Testing para evaluar factibilidad de siempre dar respuesta
       //Primero intenta buscar en Wit:
       var message_sanitized = _.telegram.sanitizeMessage(message);
@@ -319,10 +284,13 @@ function processMessage(id, username, message, response_cached, cached_hash){
                     .then(function(response_walpha){
                       if(!_.utils.isNotStory(response_walpha)){
                         _.logger.app.info('Walpha exitoso');
+                        deferred.resolve(response_walpha);
                       }else{
-                        _.logger.app.info('Walpha no exitoso -> No se encuentra respuesta');
+                        _.logger.app.info('Walpha no exitoso -> Mensaje original a Walpha');
+                        message_sanitized = message_sanitized.replace('t:','w:');
+                        processTaggedMessage(id, username, message_sanitized)
+                          .then(deferred.resolve);
                       }
-                      deferred.resolve(response_walpha);
                     });
                 });
               }
@@ -343,7 +311,6 @@ function isAuthenticated(hash){
       if (error) deferred.reject(error);
 
       if(value){
-        console.log();
         _.logger.session.trace('Estado de sesión: Autenticado');
         deferred.resolve(true);
       }else{
@@ -356,9 +323,8 @@ function isAuthenticated(hash){
 
 function fn_bot (msg) {
 
-  //console.log("Raw message: ");
-  //console.log(JSON.stringify(msg));
-  //console.log(("document" in msg)? true:false);
+  //TODO: validar si el mensaje es un adjunto mediante <document>
+  //Ahora si envian adjunto falla
 
   var deferred = _.Q.defer();
   var chatId = msg.chat.id;
@@ -366,7 +332,6 @@ function fn_bot (msg) {
   var from = JSON.stringify(msg.from);
   var username = msg.from.first_name;
   var authenticate = false;
-  //var start_hash = hash({chatId:chatId, start:"start"}, _.app_cfg.hash);
   var start_hash = 'auth_'+chatId;
   var message = "";
 
@@ -386,8 +351,7 @@ function fn_bot (msg) {
             message = msg.text;
             _.logger.session.info(_.logger.genInitial({id:chatId, name:msg.from.first_name}, message));
             var message_hash = _.utils.generateHash(chatId, message);
-            //console.log('HASH GET: ' + message_hash)
-            //console.log('Busca mensaje en cache...');
+            //Busca mensaje en cache
             redis.get(message_hash, function(error,response_cached){
 
                   if(response_cached)
@@ -447,7 +411,6 @@ function fn_bot (msg) {
     _.telegram.sendMessage(chatId, message, options)
           .then(deferred.resolve);
 
-    //console.log('HASH Authentication: ' + start_hash);
     redis.set(start_hash, "OK");
   }
 
@@ -457,7 +420,7 @@ function fn_bot (msg) {
 //botan.track(msg, 'Start');
 if (redis)
   redis.on("error", function (err) {
-      console.log("Error Redis: " + err);
+      _.logger.error.error("Error Redis: " + err);
   });
 
 exports.fn_bot = fn_bot;
