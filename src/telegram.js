@@ -49,8 +49,7 @@ var telegram = {
 			bot.sendMessage(u.id, message);
 		});
 	},
-	sendMessage: (user, message, options) => {
-		console.log('Envia respuesta TELEGRAM...')
+	sendMessage: (user, message, options) => {		
 		if(options)
 			return bot.sendMessage(user, message, options);
 		else

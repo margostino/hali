@@ -1,19 +1,20 @@
 var log4js = require('log4js'),
     _ = require('underscore');
 
-const PATH = './logs/hali.log';
+const PATH_APP = './logs/app.log';
 const PATH_SESSION = './logs/session.log';
 const PATH_ERROR = './logs/error.log';
-const APP = 'hali';
+const APP = 'app';
 const SESSION = 'session';
 const ERROR = 'error';
 
-var log_app = log4js.getLogger(APP);
 var log_session = log4js.getLogger(SESSION);
+var log_app = log4js.getLogger(APP);
 var log_error = log4js.getLogger(ERROR);
 
 log_app.setLevel('INFO'); //TRACE, INFO, WARN, ERROR, FATAL, DEBUG
 log_session.setLevel('INFO');
+log_session.setLevel('TRACE');
 log_error.setLevel('ERROR');
 
 const configureLogs = (logger, path, app) => {
@@ -29,12 +30,12 @@ const configureLogs = (logger, path, app) => {
   });
 };
 
-//configureLogs(log_app, PATH, APP);
+configureLogs(log_app, PATH_APP, APP);
 configureLogs(log_session, PATH_SESSION, SESSION);
-//configureLogs(log_error, PATH_ERROR, ERROR);
+configureLogs(log_error, PATH_ERROR, ERROR);
 
 var logger = {
-	app: log_app,
+  app: log_app,
 	session: log_session,
   error: log_error,
   genInitial: (chat,message) => {

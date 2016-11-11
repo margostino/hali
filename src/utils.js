@@ -49,7 +49,8 @@ var utils = {
     message_len = message_split.length
     tag = message_split[0]
 
-    return (message_len>1 && utils.isValidTag(tag))? tag:'';
+    //return (message_len>1 && utils.isValidTag(tag))? tag:'';
+    return (message_len>1)? tag:'';
   },
   isTagged: (message) => {
     return (utils.getTag(message))? true:false;

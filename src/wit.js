@@ -112,7 +112,7 @@ var wit = {
 	restart: (id, actions) => {
 		client = new Wit(TOKEN, actions);
 		wit.session = hash(id, app_cfg.hash);
-		console.log("Renew Wit Session: " + wit.session);
+		logger.app.info("Renew Wit Session: " + wit.session);
 	},
 	logger: new logger_wit(levels.DEBUG),
 	interactive: (actions) => {
@@ -205,16 +205,14 @@ var wit = {
 	},
 	runActions: (actions, chatId, username, message, fn) => {
     //session = session + chatId;
-	  console.log("Ejecuta Wit.ai");
-	  console.log('Wit User Session: ' + wit.session);
-
+	  logger.app.info('Wit User Session: ' + wit.session);
 		context.chatId = chatId;
 		context.username = username;
 		/*var msg_data = {
 			id: chatId,
 			username: username,
 			message: message
-		};*/		
+		};*/
 	  client(actions).runActions(wit.session, message, context, (error, context1) => {
 	  		fn(error, context1);
 	  });

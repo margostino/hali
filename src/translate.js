@@ -1,5 +1,6 @@
 var request = require('request'),
-    Q = require("q");
+    Q = require("q"),
+    logger = require('./logger');
 
 //Al momento solo traducciones de Español a Ingles
 var translate = {
@@ -22,7 +23,7 @@ var translate = {
         res = res.replace('"','');
         res = res.split(',')[0];
 
-        console.log("Traducción: " + res);
+        logger.app.info("Traducción: " + res);
         deferred.resolve(res);
       }else{
         deferred.resolve("No puedo traducir eso. Reformula por favor!");
