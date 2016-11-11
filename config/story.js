@@ -170,7 +170,8 @@ var stories = {
 			method:actions.contact_university
 		},
 		{
-			contexts: [['what','calendario'],['calendario'],['calendario','año']],
+			contexts: [['what','calendario'],['calendario'],['calendario','año'],
+		['calendario','when']],
 			method:actions.calendar
 		},
 		{
@@ -181,6 +182,10 @@ var stories = {
 		{
 			contexts: [['how','mesas','especiales']],
 			method:actions.academica_special_exams
+		},
+		{
+			contexts: [['when','next','final_exams']],
+			method:actions.when_next_final_exams
 		},
 		{
 			contexts: [['how','exception'],['how','can','correlativas','exception']],

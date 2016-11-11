@@ -272,6 +272,10 @@ Historial Consolidado (El alumno debe verificar que el historial se encuentre co
   broadcast_skills: (id) =>{
     response = entity_cfg.BROADCAST_SKILLS;
     return Q(response);
+  },
+  when_next_final_exams: (id) =>{
+    response = "Del 1 al 20 de Diciembre";
+    return Q(response);
   }
 };
 
