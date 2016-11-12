@@ -372,4 +372,78 @@ describe('Test stories from Wit.ai', function () {
     assertStory(message, response, done, equalIndex);
   });
 
+  /** Rutina DEMO **/
+  it('DEMO Stories: should works PERFECT!!!', function(done){
+    message['text'] = 'cual es la contraseña de wifi?';
+    var response = wifi_password_api;
+    assertStory(message, response, done, equal);
+
+    message['text'] = 'cuando son los próximos finales?';
+    response = "Del 1 al 20 de Diciembre";
+    assertStory(message, response, done, equal);
+
+    message['text'] = 'esta disponible el libro de Silberschatz?';
+    response = 'El libro esta disponible';
+    assertStory(message, response, done, equal);
+
+    message['text'] = 'que libro me recomendas para Sistemas Operativos??';
+    response = 'Los libros disponibles: William Stallings 5ta Edición, Abraham Silberschatz.';
+    assertStory(message, response, done, equal);
+
+    message['text'] = 'donde el departamento de sistemas?';
+    response = 'Tu departamento esta en Medrano, oficina 318 (piso 3)';
+    assertStory(message, response, done, equal);
+
+    message['text'] = 'donde curso?';
+    response = "¿cuando?";
+    assertStory(message, response, null, equal);
+    setTimeout(function(){
+      message['text'] = 'hoy';
+      response = "Cursas IA en aula 518 a las 19hs en Medrano";
+      assertStory(message, response, done, equal)
+    },TIMEOUT_BT_FLOW);
+
+    message['text'] = 'esta disponible el aula magna?';
+    response = "El aula esta disponible!";
+    assertStory(message, response, done, equal);
+
+    message['text'] = 'cual es el telefono de Medrano?';
+    response = "4867-7500";
+    assertStory(message, response, done, equalIndex);
+
+    message['text'] = 'me mostras el calendario academico de este año?';
+    response = "Académico";
+    assertStory(message, response, done, equalIndex);
+
+    message['text'] = 'como son las mesas especiales?';
+    response = "Solo se inscriben los alumnos que abren mesa";
+    assertStory(message, response, done, equalIndex);
+
+    message['text'] = 'como puedo pedir una excepción de correlativas?';
+    response = "Formulario completo";
+    assertStory(message, response, done, equalIndex);
+
+    message['text'] = 'como se ingresa a la facu?';
+    response = "INGRESO 2017";
+    assertStory(message, response, done, equalIndex);
+
+    message['text'] = 'como esta el tiempo?';
+    response = 'Actual';
+    assertStory(message, response, done, equalIndex);
+
+    message['text'] = 'que dia es hoy?';
+    response = utils.now().substring(2,0).trim();
+    var assertFunction = function(value_to_check, response){
+      return (value_to_check.substring(2,0).trim()==response);
+    }
+    assertStory(message, response, done, assertFunction);
+
+    message['text'] = 't: cuales son los algoritmos más eficientes de inteligencia artificial?';
+    var response = 'What are the most efficient artificial intelligence algorithms?';
+    assertStory(message, response.toLowerCase(), done, equal);
+    
+  });
+
+
+
 });

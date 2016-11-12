@@ -204,27 +204,19 @@ function processTaggedMessage(id, username, message){
   message = _.utils.getTaggedMessage(message);
   switch (tag) {
     case 't':
-      _.logger.app.info('Mensaje taggeado tipo Traductor');
-      //Es flujo traductor
       _.actions.translate(id, message)
           .then(deferred.resolve);
       break;
     case 'w':
-      _.logger.app.info('Mensaje taggeado tipo Walpha');
-      //Es flujo WAlpha
       _.actions.walpha(id, message)
         .then(deferred.resolve);
       break;
     case 'b':
-      _.logger.app.info('Mensaje taggeado tipo Broadcast');
-      //Es flujo broadcast
       var msg_broadcast = username + " te envia el mensaje: " + message;
       _.actions.broadcast(id, msg_broadcast)
         .then(deferred.resolve);
       break;
     case 'm':
-        _.logger.app.info('Mensaje taggeado tipo Ticket');
-        //Es flujo ticket
         _.actions.ticket(id, message)
           .then(deferred.resolve);
       break;

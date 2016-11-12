@@ -30,21 +30,29 @@ Materiales, Ciencias de la vida (anatomía, plantas, animales, ADN, Genética, e
 Ciencias de la computación.....etc etc....
 	*/}),
 	HALI_SKILLS: multiline(function(){/*
-De momento estoy preparada para lo siguiente:
-1) Buscar respuestas en diferentes tópicos en ingles.
-(comenzar la pregunta con "w:". Ejemplo: "w: who is Obama?")
-2) Traducir texto de español a ingles.
-(comenzar la pregunta con "t:". Ejemplo: "t: hola como estas?")
-3) Decirte la temperatura actual.
-4) Decirte hora y fecha actual.
-5) De dominio academico puedo:
-	Contarte si el aula Magna esta disponible o no.
-	Contarte acerca de mi, mi historia.
-	Contarte donde esta tu departamento.
-	Contarte libros disponibles.
-Y más....!!!!
+Por el momento estoy preparada resolver consultar académicas y de tópicos
+relacionados a Ingenieria en Sistemas de Información:
+De dominio académico:
 
-Dia a dia voy agregando nuevos skills.
+1) Disponibilidad de aula Magna/Audiovisual
+2) Información de contactos/telefonocs/ubicaciones
+3) Brindar la contraseña de invitado de wifi
+4) Informar fecha de próximos finales
+5) Crear y enviar tickets de mantenimiento/soporte
+6) Disponibilidad de libros concretos
+7) Recomendaciones de libros para materias concretas
+8) Ubicación/Información de tu departamento
+9) Información de tu curso actual
+10) Compartir el calendario académico actual
+11) Información acerca de las mesas especiales
+12) Información acerca de excepción de correlativas
+13) Información de ingreso a la facultad
+
+De interes general:
+
+14) Temperatura y hora actual
+
+Por día aprendo algún conocimiento nuevo.
 Arriba esas palmas!! Clap clap!
 	*/}),
 	TRANSLATOR_SKILLS: multiline(function(){/*
