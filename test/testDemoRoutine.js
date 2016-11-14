@@ -116,7 +116,7 @@ describe('Test stories from Wit.ai', function () {
 
   it('DEMO Next Exams Stories: should works PERFECT!!!', function(done){
     message['text'] = 'cuando son los próximos finales?';
-    var response = "Del 1 al 20 de Diciembre";
+    var response = "Del 1 al 28 de Diciembre";
     assertStory(message, response, done, equal);
   });
 
@@ -127,9 +127,9 @@ describe('Test stories from Wit.ai', function () {
   });
 
   it('DEMO Book Recommendation Stories: should works PERFECT!!!', function(done){
-    message['text'] = 'que libro me recomendas para Sistemas Operativos??';
-    var response = 'Los libros disponibles: William Stallings 5ta Edición, Abraham Silberschatz.';
-    assertStory(message, response, done, equal);
+    message['text'] = 'que libro me recomendas para Inteligencia Artificial??';
+    var response = 'Te recomiendo Ingeniería de Sistemas Expertos';
+    assertStory(message, response, done, equalIndex);
   });
 
   it('DEMO Department Stories: should works PERFECT!!!', function(done){

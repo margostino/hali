@@ -194,7 +194,10 @@ const actions = {
     return Q(response);
   },
   book_advice: (id) =>{
-    response = "Los libros disponibles: William Stallings 5ta Edición, Abraham Silberschatz.";
+    response = multiline(function(){/*
+Te recomiendo Ingeniería de Sistemas Expertos. Editorial
+Nueva Librería, García Martínez, R. y Britos, P. (2004).
+    */})
     return Q(response);
   },
   room_availability: (id) =>{
@@ -274,7 +277,7 @@ Historial Consolidado (El alumno debe verificar que el historial se encuentre co
     return Q(response);
   },
   when_next_final_exams: (id) =>{
-    response = "Del 1 al 20 de Diciembre";
+    response = "Del 1 al 28 de Diciembre";
     return Q(response);
   }
 };
