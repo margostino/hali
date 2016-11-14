@@ -44,7 +44,7 @@ const actions = {
     return Q(response);
   },
   info_course: (id) =>{
-    response = "Cursas IA en aula 518 a las 19hs en Medrano";
+    response = "Cursas Proyecto final en el Lab K a las 19hs en Medrano";
     return Q(response);
   },
   where_course: (id) =>{

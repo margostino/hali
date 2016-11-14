@@ -144,7 +144,7 @@ describe('Test stories from Wit.ai', function () {
     assertStory(message, response, null, equal);
     setTimeout(function(){
       message['text'] = 'hoy';
-      response = "Cursas IA en aula 518 a las 19hs en Medrano";
+      response = "Cursas Proyecto final en el Lab K a las 19hs en Medrano";
       assertStory(message, response, done, equal)
     },TIMEOUT_BT_FLOW);
   });
