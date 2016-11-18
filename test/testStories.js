@@ -145,7 +145,7 @@ describe('Test stories from Wit.ai', function () {
 
   it('Info Course Story: should return an answer', function(done){
     message['text'] = 'donde curso hoy?';
-    var response = "Cursas IA en aula 518 a las 19hs en Medrano";
+    var response = "Cursas Proyecto final en el Lab K a las 19hs en Medrano";
     assertStory(message, response, done, equal);
   });
 
@@ -285,9 +285,9 @@ describe('Test stories from Wit.ai', function () {
   });
 
   it('Book Advice Story: should return an answer', function(done){
-    message['text'] = 'que libro me recomendas para Sistemas Operativos??';
-    var response = 'Los libros disponibles: William Stallings 5ta Edición, Abraham Silberschatz.';
-    assertStory(message, response, done, equal);
+    message['text'] = 'que libro me recomendas para Inteligencia Artificial??';
+    var response = 'Te recomiendo Ingeniería de Sistemas Expertos';
+    assertStory(message, response, done, equalIndex);
   });
 
   it('Info Department Story: should return an answer', function(done){
@@ -313,7 +313,7 @@ describe('Test stories from Wit.ai', function () {
     assertStory(message, response, null, equal);
     setTimeout(function(){
       message['text'] = 'hoy';
-      response = "Cursas IA en aula 518 a las 19hs en Medrano";
+      response = "Cursas Proyecto final en el Lab K a las 19hs en Medrano";
       assertStory(message, response, done, equal)
     },TIMEOUT_BT_FLOW);
   });
