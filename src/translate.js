@@ -23,7 +23,7 @@ var translate = {
         res = res.replace('"','');
         res = res.split(',')[0];
 
-        logger.app.info("Traducción: " + res);
+        logger.app.info("Normalización: " + res);
         deferred.resolve(res);
       }else{
         deferred.resolve("No puedo traducir eso. Reformula por favor!");

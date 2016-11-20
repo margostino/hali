@@ -91,7 +91,7 @@ Necesito información adicional para entenderte.
 Vuelve a intentar planteando la pregunta de otras formas, quizas comprenda.
 	*/}),
 	START: multiline(function(){/*
-Hola!!!. Necesito que comprobar tu identidad.
+Hola!!!. Necesito comprobar tu identidad.
 Autenticate presionando el comando de abajo porfa :)
 	*/}),
 	ADVICE: multiline(function(){/*
