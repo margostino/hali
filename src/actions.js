@@ -208,7 +208,7 @@ Nueva Librería, García Martínez, R. y Britos, P. (2004).
     response = multiline(function(){/*
 Dirección Sede Medrano: Medrano 951. (C1179AAQ) Ciudad Autónoma de Buenos Aires
 Dirección: Mozart 2300. Ciudad Autónoma de Buenos Aires
-    */})
+    */})    
     return Q(response);
   },
   contact_university: (id) =>{

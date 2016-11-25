@@ -42,7 +42,7 @@ var stories = {
 		},
 		{
 			contexts: [['how','time'],['what','time'],['what','weather'],['how','weather'],
-			['how','weather','when'],['weather']],
+			['how','weather','when'],['weather'],['how','time','when']],
 			method:actions.weather
 		},
 		{
