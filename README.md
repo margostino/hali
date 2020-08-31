@@ -11,3 +11,7 @@ Run Test:
 
 Run Test X:
 > mocha test --grep "Greeting Story"
+
+
+# License
+Distribuido bajo Apache License. Más información en [LICENSE](https://github.com/margostino/hali/blob/master/LICENSE).
